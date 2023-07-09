@@ -1,0 +1,1 @@
+// Stateless Widget for Event Screen
