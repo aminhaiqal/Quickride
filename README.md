@@ -27,7 +27,7 @@ Quickride is an e-hailing service provided by students, for students. This platf
 
 ## Getting Started
 
-To get started with the Student Grab app, follow these steps:
+To get started with the Quickride app, follow these steps:
 
 1. Clone the repository:
     ``git clone https://github.com/aminhaiqal/Quickride.git``
@@ -41,7 +41,7 @@ To get started with the Student Grab app, follow these steps:
 
 ## Feedback
 
-We welcome feedback from our users to improve the Student Grab experience. If you encounter any issues or have suggestions for new features, please [submit an issue](https://github.com/aminhaiqal/Quickride/issues).
+We welcome feedback from our users to improve the Quickride experience. If you encounter any issues or have suggestions for new features, please [submit an issue](https://github.com/aminhaiqal/Quickride/issues).
 
 
 ## Future Enhancements
