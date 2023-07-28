@@ -43,9 +43,10 @@ To get started with the Student Grab app, follow these steps:
 
 We welcome feedback from our users to improve the Student Grab experience. If you encounter any issues or have suggestions for new features, please [submit an issue](https://github.com/aminhaiqal/Quickride/issues).
 
+
 ## Future Enhancements
 
-This is the initial version of Student Grab, and we plan to enhance the platform based on user feedback and needs. Some of the planned future enhancements include:
+This is the initial version of Quickride, and we plan to enhance the platform based on user feedback and needs. Some of the planned future enhancements include:
 
 - Integration with popular payment gateways for cashless transactions.
 - Implementing a rating and feedback system for students to review their ride experiences.
@@ -53,6 +54,7 @@ This is the initial version of Student Grab, and we plan to enhance the platform
 - Expanding the service area to cover more campuses and nearby regions.
 
 Stay tuned for updates as we continue to improve and grow the Student Grab service.
+
 
 ## License
 
