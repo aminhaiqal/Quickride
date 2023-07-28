@@ -53,7 +53,7 @@ This is the initial version of Quickride, and we plan to enhance the platform ba
 - Adding safety features like driver and passenger identity verification.
 - Expanding the service area to cover more campuses and nearby regions.
 
-Stay tuned for updates as we continue to improve and grow the Student Grab service.
+Stay tuned for updates as we continue to improve and grow the Quickride service.
 
 
 ## License
