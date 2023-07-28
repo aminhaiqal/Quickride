@@ -1,16 +1,24 @@
-# quickride
+# Quickride - v1.0.0
 
-A new Flutter project.
+Quickride is an e-hailing service provided by students, for students. This platform allows student passengers to book rides with student drivers, making it convenient and safe for students to travel within their campus or nearby areas.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+1. **User Registration and Login**
+   - Students can sign up and create accounts.
+   - Existing users can log in securely.
 
-A few resources to get you started if this is your first Flutter project:
+2. **Ride Booking**
+   - Students can easily book rides to their desired destinations.
+   - Simple interface for specifying pickup and drop-off locations.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. **Real-Time Tracking**
+   - Students can track the location of their assigned driver in real-time.
+   - Estimated time of arrival (ETA) is provided to the student passenger.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+4. **Driver Profiles**
+   - Student drivers can create profiles with basic information (e.g., name, photo, car details).
+   - Students can view the driver's profile before booking a ride.
+
+5. **Notifications**
+   - Students receive real-time notifications about ride status, driver acceptance, and updates.
