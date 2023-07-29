@@ -11,11 +11,11 @@ class ColorTheme {
     secondary: Color(0xFF2978A0),
     surface: Colors.white,
     background: Colors.white,
-    error: Color(0xFFB00030),
+    error: Color(0xFFE12C2C),
     onPrimary: Colors.white,
-    onSecondary: Colors.black,
-    onSurface: Colors.black,
-    onBackground: Colors.black,
+    onSecondary: Color(0xFF121212),
+    onSurface: Color(0xFF121212),
+    onBackground: Color(0xFF121212),
     onError: Colors.white,
     brightness: Brightness.light,
   );
@@ -31,7 +31,7 @@ class ColorTheme {
     secondary: Color(0xFF3980A4),
     surface: Color(0xFF121212),
     background: Color(0xFF121212),
-    error: Colors.red,
+    error: Color(0xFFE64E4D),
     onPrimary: Colors.white,
     onSecondary: Colors.white,
     onSurface: Colors.white,
@@ -47,7 +47,7 @@ class ColorTheme {
 
 class TextTheme {
   static TextStyle get headline1 {
-    return GoogleFonts.poppins(
+    return GoogleFonts.montserrat(
       fontSize: 56,
       fontWeight: FontWeight.w600,
     );
@@ -61,17 +61,16 @@ class TextTheme {
   }
 
   static TextStyle get headline3 {
-    return GoogleFonts.poppins(
+    return GoogleFonts.montserrat(
       fontSize: 16,
       fontWeight: FontWeight.w600,
     );
   }
 
   static TextStyle get body1 {
-    return GoogleFonts.poppins(
+    return GoogleFonts.montserrat(
       fontSize: 14,
       fontWeight: FontWeight.w600,
-      letterSpacing: 0,
     );
   }
 
@@ -79,7 +78,13 @@ class TextTheme {
     return GoogleFonts.montserrat(
       fontSize: 12,
       fontWeight: FontWeight.w500,
-      letterSpacing: 0,
+    );
+  }
+
+    static TextStyle get body3 {
+    return GoogleFonts.montserrat(
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
     );
   }
 }
