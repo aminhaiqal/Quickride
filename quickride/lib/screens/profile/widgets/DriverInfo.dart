@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, library_prefixes
 
 import 'package:flutter/material.dart';
-import 'package:quickride/widgets/theme.dart' as theme;
 import 'package:quickride/widgets/text_style.dart' as textTheme;
 import 'package:quickride/screens/profile/widgets/DriverReview.dart' show Rating;
 
