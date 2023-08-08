@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/screens/splash/splash_view.dart';
-import 'package:quickride/screens/profile/profile_view.dart';
 import 'package:quickride/widgets/theme.dart' as theme;
 
 void main() {
