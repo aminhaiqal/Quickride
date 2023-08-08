@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quickride/screens/login/login_view.dart';
 import 'package:quickride/screens/splash/splash_view.dart';
 import 'package:quickride/widgets/theme.dart' as theme;
 
@@ -22,7 +23,7 @@ class _MyAppState extends State<MyApp> {
         theme: theme.ColorTheme.mainTheme,
         home: Scaffold(
           backgroundColor: theme.ColorTheme.mainTheme.colorScheme.background,
-          body: const Splash(),
+          body: const Login(),
         ),
     );
   }

@@ -19,7 +19,7 @@ class callToAction extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text('Make travelling by car most comfortable',
                       textAlign: TextAlign.center,
-                      style: textTheme.TextTheme.headline1.copyWith(
+                      style: textTheme.TextTheme.headline1(null).copyWith(
                         color:
                             theme.ColorTheme.mainTheme.colorScheme.onBackground,
                       )))),
@@ -29,7 +29,7 @@ class callToAction extends StatelessWidget {
               child: Text(
                   'Enjoy seamless ride experience without worrying about any obstacles.',
                   textAlign: TextAlign.center,
-                  style: textTheme.TextTheme.headline3.copyWith(
+                  style: textTheme.TextTheme.headline3(null).copyWith(
                     color: theme.ColorTheme.mainTheme.colorScheme.onBackground
                         .withOpacity(0.5),
                   ))),
@@ -43,13 +43,13 @@ class callToAction extends StatelessWidget {
               ),
               child: Center(
                   child: Text('Get Started',
-                      style: textTheme.TextTheme.headline3.copyWith(
+                      style: textTheme.TextTheme.headline3(null).copyWith(
                         color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
                       )))),
           const SizedBox(height: 16),
           RichText(
               text: TextSpan(
-                  style: textTheme.TextTheme.body1.copyWith(
+                  style: textTheme.TextTheme.body1(null).copyWith(
                       color:
                           theme.ColorTheme.mainTheme.colorScheme.onBackground),
                   children: const <TextSpan>[

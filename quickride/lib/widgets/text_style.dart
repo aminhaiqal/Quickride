@@ -2,45 +2,57 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextTheme {
-  static TextStyle get headline1 {
+  static TextStyle headline1(FontWeight? fontWeight) {
+    fontWeight ??= FontWeight.w500;
+    
     return GoogleFonts.montserrat(
       fontSize: 32,
-      fontWeight: FontWeight.w500,
+      fontWeight: fontWeight,
     );
   }
 
-  static TextStyle get headline2 {
+  static TextStyle headline2(FontWeight? fontWeight) {
+    fontWeight ??= FontWeight.w500;
+
     return GoogleFonts.montserrat(
       fontSize: 20,
-      fontWeight: FontWeight.w500,
+      fontWeight: fontWeight,
     );
   }
 
-  static TextStyle get headline3 {
+  static TextStyle headline3(FontWeight? fontWeight) {
+    fontWeight ??= FontWeight.w500;
+
     return GoogleFonts.montserrat(
       fontSize: 16,
-      fontWeight: FontWeight.w500,
+      fontWeight: fontWeight,
     );
   }
 
-  static TextStyle get body1 {
+  static TextStyle body1(FontWeight? fontWeight) {
+    fontWeight ??= FontWeight.w500;
+
     return GoogleFonts.montserrat(
       fontSize: 14,
-      fontWeight: FontWeight.w500,
+      fontWeight: fontWeight,
     );
   }
 
-  static TextStyle get body2 {
+  static TextStyle body2(FontWeight? fontWeight) {
+    fontWeight ??= FontWeight.w500;
+
     return GoogleFonts.montserrat(
       fontSize: 12,
-      fontWeight: FontWeight.w500,
+      fontWeight: fontWeight,
     );
   }
 
-    static TextStyle get body3 {
+  static TextStyle body3(FontWeight? fontWeight) {
+    fontWeight ??= FontWeight.w500;
+
     return GoogleFonts.montserrat(
       fontSize: 10,
-      fontWeight: FontWeight.w500,
+      fontWeight: fontWeight,
     );
   }
 }

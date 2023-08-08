@@ -17,17 +17,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          Text(
-            title,
-            style: textTheme.TextTheme.headline2.copyWith(
-              color: theme.ColorTheme.mainTheme.colorScheme.surface,
-            ),
-          ),
-        ],
-      ),
-    );
+        child: Column(children: [
+      Text(title,
+          style: textTheme.TextTheme.headline2(null).copyWith(
+            color: theme.ColorTheme.mainTheme.colorScheme.surface,
+          ))
+    ]));
   }
 
   @override
