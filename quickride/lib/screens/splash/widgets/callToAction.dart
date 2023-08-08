@@ -15,7 +15,7 @@ class callToAction extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                width: 380,
+                width: MediaQuery.of(context).size.width - 24 * 2,
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
@@ -30,7 +30,7 @@ class callToAction extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               SizedBox(
-                width: 380,
+                width: MediaQuery.of(context).size.width - 24 * 2,
                 child: Text(
                   'Enjoy seamless ride experience without worrying about any obstacles.',
                   textAlign: TextAlign.center,
@@ -43,7 +43,7 @@ class callToAction extends StatelessWidget {
               const SizedBox(height: 80),
               Container(
                 height: 54,
-                width: 380,
+                width: MediaQuery.of(context).size.width - 24 * 2,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: theme.ColorTheme.mainTheme.colorScheme.primary,
@@ -60,7 +60,9 @@ class callToAction extends StatelessWidget {
               const SizedBox(height: 16),
               RichText(
                 text: TextSpan(
-                  style: textTheme.TextTheme.body1,
+                  style: textTheme.TextTheme.body1.copyWith(
+                    color: theme.ColorTheme.mainTheme.colorScheme.onBackground
+                  ),
                   children: const <TextSpan>[
                     TextSpan(text: 'Already have an account? '),
                     TextSpan(

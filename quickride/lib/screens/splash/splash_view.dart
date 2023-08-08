@@ -7,29 +7,34 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Image.asset(
-        '/images/grid-background.png',
-        fit: BoxFit.cover,
-        height: 496,
-        width: 428,
-        alignment: Alignment.center,
-      ),
-      const Padding(
-          padding: EdgeInsets.only(top: 52),
-          child: CustomAppBar(title: 'Quickride')),
-      Padding(
-        padding: const EdgeInsets.only(top: 200),
-        child: Image.asset(
-          '/images/car-model.png',
-          fit: BoxFit.cover,
-          height: 278,
-          width: 459,
-        ),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(top: 548), 
-        child: callToAction()),
-    ]);
+    return SingleChildScrollView(
+        child: Column(
+      children: [
+        Stack(children: [
+          Image.asset(
+            '/images/grid-background.png',
+            fit: BoxFit.cover,
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: MediaQuery.of(context).size.width,
+            alignment: Alignment.center,
+          ),
+          const Padding(
+              padding: EdgeInsets.only(top: 52),
+              child: CustomAppBar(title: 'Quickride')),
+          Positioned(
+            top: 200,
+            right: 0,
+            child: Image.asset(
+              '/images/car-model.png',
+              fit: BoxFit.cover,
+              height: 236,
+              width: 390,
+            ),
+          ),
+        ]),
+        const SizedBox(height: 52),
+        const callToAction(),
+      ],
+    ));
   }
 }
