@@ -26,11 +26,11 @@ class Rating extends StatelessWidget {
         children: [
           const Icon(Icons.star, size: 16.0),
           const SizedBox(width: 4.0),
-          Text('4.5', style: textTheme.TextTheme.body2),
+          Text('4.5', style: textTheme.TextTheme.body2(null)),
           const SizedBox(width: 2.0),
-          Text('•', style: textTheme.TextTheme.body2),
+          Text('•', style: textTheme.TextTheme.body2(null)),
           const SizedBox(width: 2.0),
-          Text('16 Reviews', style: textTheme.TextTheme.body2),
+          Text('16 Reviews', style: textTheme.TextTheme.body2(null)),
         ]
       );
     });

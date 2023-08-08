@@ -20,12 +20,12 @@ class DriverInfo extends StatelessWidget {
               backgroundImage: AssetImage('/images/persona1.png'),
             ),
             const SizedBox(height: 16.0),
-            Text('Amin Haiqal', style: textTheme.TextTheme.body1.copyWith(color: activeTheme.colorScheme.onBackground)),
+            Text('Amin Haiqal', style: textTheme.TextTheme.body1(null).copyWith(color: activeTheme.colorScheme.onBackground)),
             const SizedBox(height: 4.0),
-            Text('@aiman_aniq', style: textTheme.TextTheme.body3.copyWith(color: activeTheme.colorScheme.onBackground)),
+            Text('@aiman_aniq', style: textTheme.TextTheme.body3(null).copyWith(color: activeTheme.colorScheme.onBackground)),
             const SizedBox(height: 12.0),
             Text('Top Driver for Quickride. Great!!!!',
-                style: textTheme.TextTheme.body2.copyWith()),
+                style: textTheme.TextTheme.body2(null).copyWith()),
             const SizedBox(height: 4.0),
             Center(
               child: Row(
