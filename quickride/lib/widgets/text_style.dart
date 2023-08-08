@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class TextTheme {
   static TextStyle get headline1 {
     return GoogleFonts.montserrat(
-      fontSize: 56,
-      fontWeight: FontWeight.w600,
+      fontSize: 32,
+      fontWeight: FontWeight.w500,
     );
   }
 
@@ -19,14 +19,14 @@ class TextTheme {
   static TextStyle get headline3 {
     return GoogleFonts.montserrat(
       fontSize: 16,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
     );
   }
 
   static TextStyle get body1 {
     return GoogleFonts.montserrat(
       fontSize: 14,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
     );
   }
 

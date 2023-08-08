@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quickride/screens/splash/splash_view.dart';
 import 'package:quickride/widgets/theme_provider.dart';
 import 'package:quickride/screens/profile/profile_view.dart';
 import 'package:quickride/widgets/theme.dart' as theme;
@@ -35,7 +36,7 @@ class _MyAppState extends State<MyApp> {
         theme: activeTheme,
         home: Scaffold(
           backgroundColor: backgroundColor,
-          body: const DriverProfile(),
+          body: const Splash(),
         ),
     );
   }
