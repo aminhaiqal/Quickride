@@ -12,70 +12,54 @@ class callToAction extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 24 * 2,
-                child: Align(
+            child: Column(children: [
+          SizedBox(
+              width: MediaQuery.of(context).size.width - 24 * 2,
+              child: Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    'Make travelling by car most comfortable',
-                    textAlign: TextAlign.center,
-                    style: textTheme.TextTheme.headline1.copyWith(
-                      color:
-                          theme.ColorTheme.mainTheme.colorScheme.onBackground,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 24 * 2,
-                child: Text(
+                  child: Text('Make travelling by car most comfortable',
+                      textAlign: TextAlign.center,
+                      style: textTheme.TextTheme.headline1.copyWith(
+                        color:
+                            theme.ColorTheme.mainTheme.colorScheme.onBackground,
+                      )))),
+          const SizedBox(height: 24),
+          SizedBox(
+              width: MediaQuery.of(context).size.width - 24 * 2,
+              child: Text(
                   'Enjoy seamless ride experience without worrying about any obstacles.',
                   textAlign: TextAlign.center,
                   style: textTheme.TextTheme.headline3.copyWith(
                     color: theme.ColorTheme.mainTheme.colorScheme.onBackground
                         .withOpacity(0.5),
-                  ),
-                ),
+                  ))),
+          const SizedBox(height: 80),
+          Container(
+              height: 54,
+              width: MediaQuery.of(context).size.width - 24 * 2,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: theme.ColorTheme.mainTheme.colorScheme.primary,
               ),
-              const SizedBox(height: 80),
-              Container(
-                height: 54,
-                width: MediaQuery.of(context).size.width - 24 * 2,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: theme.ColorTheme.mainTheme.colorScheme.primary,
-                ),
-                child: Center(
-                  child: Text(
-                    'Get Started',
-                    style: textTheme.TextTheme.body1.copyWith(
-                      color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              RichText(
-                text: TextSpan(
+              child: Center(
+                  child: Text('Get Started',
+                      style: textTheme.TextTheme.headline3.copyWith(
+                        color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
+                      )))),
+          const SizedBox(height: 16),
+          RichText(
+              text: TextSpan(
                   style: textTheme.TextTheme.body1.copyWith(
-                    color: theme.ColorTheme.mainTheme.colorScheme.onBackground
-                  ),
+                      color:
+                          theme.ColorTheme.mainTheme.colorScheme.onBackground),
                   children: const <TextSpan>[
-                    TextSpan(text: 'Already have an account? '),
-                    TextSpan(
-                      text: 'Sign In',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ));
+                TextSpan(text: 'Already have an account? '),
+                TextSpan(
+                    text: 'Sign In',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ))
+              ]))
+        ])));
   }
 }
