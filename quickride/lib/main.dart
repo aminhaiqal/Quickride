@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quickride/screens/login/login_view.dart';
 import 'package:quickride/screens/splash/splash_view.dart';
+import 'package:quickride/screens/login/login_view.dart';
+import 'package:quickride/screens/register/register_view.dart';
 import 'package:quickride/widgets/theme.dart' as theme;
 
 void main() {
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
         theme: theme.ColorTheme.mainTheme,
         home: Scaffold(
           backgroundColor: theme.ColorTheme.mainTheme.colorScheme.background,
-          body: const Login(),
+          body: const Register(),
         ),
     );
   }
