@@ -34,7 +34,7 @@ class Login extends StatelessWidget {
                     const SizedBox(height: 8),
                     const textField.PasswordTextField(),
                     const SizedBox(height: 8),
-                    const actionButton.ActionButton(label: 'Sign In', onPressed: null),
+                    const actionButton.PrimaryButton(label: 'Sign In', width: 380, onPressed: null),
                   ],
                 ))));
   }
