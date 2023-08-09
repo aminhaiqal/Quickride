@@ -20,12 +20,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Quickride',
-        theme: theme.ColorTheme.mainTheme,
-        home: Scaffold(
-          backgroundColor: theme.ColorTheme.mainTheme.colorScheme.background,
-          body: const Register(),
-        ),
+      title: 'Quickride',
+      theme: theme.ColorTheme.mainTheme,
+      initialRoute: '/',
+      routes: {
+        '': (context) => const Splash(),
+        'login': (context) => const Login(),
+        '/register': (context) => const Register(),
+      },
+      home: Scaffold(
+        backgroundColor: theme.ColorTheme.mainTheme.colorScheme.background,
+        body: const Splash(),
+      ),
     );
   }
 }

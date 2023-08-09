@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, library_prefixes, file_names
 
 import 'package:flutter/material.dart';
+import 'package:quickride/screens/register/register_view.dart';
 import 'package:quickride/widgets/text_style.dart' as textTheme;
 import 'package:quickride/widgets/theme.dart' as theme;
 
@@ -34,18 +35,24 @@ class callToAction extends StatelessWidget {
                         .withOpacity(0.5),
                   ))),
           const SizedBox(height: 80),
-          Container(
-              height: 54,
-              width: MediaQuery.of(context).size.width - 24 * 2,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: theme.ColorTheme.mainTheme.colorScheme.primary,
-              ),
-              child: Center(
-                  child: Text('Get Started',
-                      style: textTheme.TextTheme.headline3(null).copyWith(
-                        color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
-                      )))),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/register');
+            },
+            child: Container(
+                height: 54,
+                width: MediaQuery.of(context).size.width - 24 * 2,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: theme.ColorTheme.mainTheme.colorScheme.primary,
+                ),
+                child: Center(
+                    child: Text('Get Started',
+                        style: textTheme.TextTheme.headline3(null).copyWith(
+                          color:
+                              theme.ColorTheme.mainTheme.colorScheme.onPrimary,
+                        )))),
+          ),
           const SizedBox(height: 16),
           RichText(
               text: TextSpan(
