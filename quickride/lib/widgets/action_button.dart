@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/widgets/text_style.dart' as textStyle;
+import 'package:quickride/widgets/theme.dart' as theme;
 
-class ActionButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
+  final double? width;
 
-  const ActionButton ({required this.label, required this.onPressed, Key? key})
+  const PrimaryButton({required this.label, required this.width, this.onPressed, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
         height: 52,
-        width: 380,
-        child: ElevatedButton(
-          // ignore: sort_child_properties_last
-          child: Text(label, style: textStyle.TextTheme.body1(null).copyWith(
-            color: Colors.white,
-          )),
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8)
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-          ),
-        ));
+        width: width,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Center(
+          child: Text(
+            label,
+            style: textStyle.TextTheme.body1(null).copyWith(
+              color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
+            )
+          )
+        )
+        )
+    );
   }
 }
