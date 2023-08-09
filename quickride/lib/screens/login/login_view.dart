@@ -32,7 +32,7 @@ class Login extends StatelessWidget {
                   const SizedBox(height: 48),
                   const textField.TextField(
                       label: 'Email', prefixIcon: Icon(Icons.email)),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 12),
                   const textField.PasswordTextField(),
                   const SizedBox(height: 28),
                   const actionButton.PrimaryButton(
