@@ -12,7 +12,7 @@ class ImageWidget extends StatefulWidget {
 }
 
 class _ImageWidgetState extends State<ImageWidget> {
-  String _imageUrl = '';
+  String? _imageUrl;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _ImageWidgetState extends State<ImageWidget> {
   void loadImageUrl() async {
     String? imageUrl = await widget.imageUrlFuture;
     setState(() {
-      _imageUrl = imageUrl!;
+      _imageUrl = imageUrl;
     });
   }
 
@@ -34,10 +34,10 @@ class _ImageWidgetState extends State<ImageWidget> {
       right: 0,
       child: _imageUrl != null
           ? Image.network(
-              _imageUrl,
+              _imageUrl as String,
               fit: BoxFit.cover,
-              height: 236,
-              width: 390,
+              cacheHeight: 284,
+              cacheWidth: 399,
             )
           : const CircularProgressIndicator(),
     );
