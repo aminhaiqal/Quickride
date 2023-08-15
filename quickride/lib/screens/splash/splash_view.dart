@@ -20,14 +20,8 @@ class Splash extends StatelessWidget {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    stops: [
-                  0.026,
-                  1
-                ],
-                    colors: [
-                  Color(0xFF222222),
-                  Color(0xFF121212),
-                ]))),
+                    stops: [0.026,1],
+                    colors: [Color(0xFF222222),Color(0xFF121212),]))),
         const Padding(
             padding: EdgeInsets.only(top: 52),
             child: CustomAppBar(title: 'Quickride')),
