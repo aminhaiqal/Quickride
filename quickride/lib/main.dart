@@ -5,7 +5,7 @@ import 'package:quickride/screens/login/login_view.dart';
 import 'package:quickride/screens/register/register_view.dart';
 import 'package:quickride/widgets/theme.dart' as theme;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
