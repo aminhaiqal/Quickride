@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quickride/screens/splash/splash_viewmodel.dart';
 import 'package:quickride/screens/splash/widgets/callToAction.dart';
+import 'package:quickride/screens/splash/widgets/imageWidget.dart';
 import 'package:quickride/widgets/appBar.dart';
 
 class Splash extends StatelessWidget {
-  const Splash({Key? key}) : super(key: key);
+  final SplashViewModel _viewModel = SplashViewModel();
+  Splash({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,7 @@ class Splash extends StatelessWidget {
       Stack(children: [
         Container(
             width: double.infinity,
-            height: 464,
+            height: MediaQuery.of(context).size.height * 0.5,
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -28,15 +31,7 @@ class Splash extends StatelessWidget {
         const Padding(
             padding: EdgeInsets.only(top: 52),
             child: CustomAppBar(title: 'Quickride')),
-        Positioned(
-            top: 200,
-            right: 0,
-            child: Image.asset(
-              '/images/car-model.png',
-              fit: BoxFit.cover,
-              height: 236,
-              width: 390,
-            ))
+        ImageWidget(imageUrlFuture: _viewModel.getImageURL('car-model.png')),
       ]),
       const SizedBox(height: 64),
       const callToAction(),

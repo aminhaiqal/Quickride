@@ -1,10 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:quickride/screens/splash/splash_view.dart';
 import 'package:quickride/screens/login/login_view.dart';
 import 'package:quickride/screens/register/register_view.dart';
 import 'package:quickride/widgets/theme.dart' as theme;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -24,13 +27,13 @@ class _MyAppState extends State<MyApp> {
       theme: theme.ColorTheme.mainTheme,
       initialRoute: '/',
       routes: {
-        '': (context) => const Splash(),
+        '': (context) => Splash(),
         'login': (context) => const Login(),
         '/register': (context) => const Register(),
       },
       home: Scaffold(
         backgroundColor: theme.ColorTheme.mainTheme.colorScheme.background,
-        body: const Splash(),
+        body: Splash(),
       ),
     );
   }
