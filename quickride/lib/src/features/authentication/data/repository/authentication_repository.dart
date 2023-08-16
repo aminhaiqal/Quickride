@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+// compare with data on the firestore
 class AuthenticationRepository {
   Future<bool> login(String username, String password) async {
     // Simulate authentication logic

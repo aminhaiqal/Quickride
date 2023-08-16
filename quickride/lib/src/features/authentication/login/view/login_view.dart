@@ -8,6 +8,7 @@ import 'package:quickride/src/widgets/action_button.dart' as actionButton;
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
+  static String routeName = '/login';
 
   @override
   Widget build(BuildContext context) {
