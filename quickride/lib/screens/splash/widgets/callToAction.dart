@@ -36,7 +36,6 @@ class callToAction extends StatelessWidget {
           const SizedBox(height: 80),
           GestureDetector(
             onTap: () {
-              print('button pressed');
               Navigator.pushNamed(context, '/register');
             },
             child: Container(
