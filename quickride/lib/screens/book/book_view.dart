@@ -1,1 +1,0 @@
-// Stateless Widget for Book Screen
