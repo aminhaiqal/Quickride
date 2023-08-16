@@ -64,7 +64,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               child: TextButton(
                   onPressed: () {},
                   child: Text('Forgot Password?',
-                      style: textStyle.TextTheme.body2(null).copyWith(
+                      style: textStyle.TextTheme.body1(null).copyWith(
                         color: Colors.black.withOpacity(0.5),
                       ))))
         ]));

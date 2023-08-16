@@ -24,7 +24,7 @@ class TextTheme {
     fontWeight ??= FontWeight.w500;
 
     return GoogleFonts.montserrat(
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: fontWeight,
     );
   }
@@ -33,25 +33,16 @@ class TextTheme {
     fontWeight ??= FontWeight.w500;
 
     return GoogleFonts.montserrat(
+      fontSize: 16,
+      fontWeight: fontWeight,
+    );
+  }
+
+  static TextStyle description(FontWeight? fontWeight) {
+    fontWeight ??= FontWeight.w500;
+
+    return GoogleFonts.montserrat(
       fontSize: 14,
-      fontWeight: fontWeight,
-    );
-  }
-
-  static TextStyle body2(FontWeight? fontWeight) {
-    fontWeight ??= FontWeight.w500;
-
-    return GoogleFonts.montserrat(
-      fontSize: 12,
-      fontWeight: fontWeight,
-    );
-  }
-
-  static TextStyle body3(FontWeight? fontWeight) {
-    fontWeight ??= FontWeight.w500;
-
-    return GoogleFonts.montserrat(
-      fontSize: 10,
       fontWeight: fontWeight,
     );
   }

@@ -8,21 +8,21 @@ import 'package:quickride/widgets/action_button.dart' as actionButton;
 
 class Register extends StatelessWidget {
   const Register({Key? key}) : super(key: key);
+  static const String routeName = '/register';
 
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: Scaffold(
-            body: SingleChildScrollView(
+        child: SingleChildScrollView(
                 child: Center(
                     child: Padding(
                         padding: const EdgeInsets.fromLTRB(24, 68, 24, 86),
                         child: Column(children: <Widget>[
-                          Image.asset(
+                          /*Image.asset(
                             '/images/logo.png',
                             height: 100,
                             width: 100,
-                          ),
+                          ),*/
                           const SizedBox(height: 20),
                           Text('Sign Up',
                               style: textStyle.TextTheme.headline2(
@@ -63,6 +63,6 @@ class Register extends StatelessWidget {
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ]))
-                        ]))))));
+                        ])))));
   }
 }
