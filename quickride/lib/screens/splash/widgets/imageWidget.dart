@@ -30,14 +30,15 @@ class _ImageWidgetState extends State<ImageWidget> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 200,
+      top: 150,
       right: 0,
       child: _imageUrl != null
           ? Image.network(
               _imageUrl as String,
               fit: BoxFit.cover,
-              cacheHeight: 284,
-              cacheWidth: 399,
+              cacheHeight: (284*0.85).toInt(),
+              cacheWidth: (399*0.85).toInt(),
+              scale: 1.0,
             )
           : const CircularProgressIndicator(),
     );
