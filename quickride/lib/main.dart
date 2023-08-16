@@ -1,13 +1,14 @@
 // ignore_for_file: library_prefixes, no_leading_underscores_for_local_identifiers, avoid_print, library_private_types_in_public_api, camel_case_types
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/firebase_options.dart';
 import 'package:quickride/src/features/authentication/login/view/login_view.dart';
 import 'package:quickride/src/utils/text_style.dart' as textTheme;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
 import 'package:quickride/src/widgets/appBar.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,23 +43,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class FirebaseStorageService {
-  final String bucketURL = 'quickride-qr0103.appspot.com';
-
-  Future<String?> getImageURL(String imagePath) async {
-    try {
-      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
-          .ref()
-          .child('assets/$imagePath');
-      String downloadURL = await ref.getDownloadURL();
-      return downloadURL;
-    } catch (e) {
-      print('Error retrieving image URL: $e');
-      return null;
-    }
-  }
-}
-
 class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);
 
@@ -87,7 +71,7 @@ class Splash extends StatelessWidget {
             child: CustomAppBar(title: 'Quickride')),
         ImageWidget(
             imageUrlFuture:
-                FirebaseStorageService().getImageURL('car-model.png')),
+                firebase.AssetsFolder().getDownloadURL('car-model.png')),
       ]),
       const SizedBox(height: 64),
       const callToAction(),
@@ -200,6 +184,10 @@ class callToAction extends StatelessWidget {
                         color: theme
                             .ColorTheme.mainTheme.colorScheme.onBackground)),
                 TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.pushNamed(context, '/login');
+                      },
                     text: 'Sign In',
                     style: textTheme.TextTheme.description(null).copyWith(
                         color: theme.ColorTheme.mainTheme.colorScheme.primary))
