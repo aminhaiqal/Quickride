@@ -1,1 +1,0 @@
-// Statless widget to display user details
