@@ -1,7 +1,6 @@
 // ignore_for_file: camel_case_types, library_prefixes, file_names
 
 import 'package:flutter/material.dart';
-import 'package:quickride/screens/register/register_view.dart';
 import 'package:quickride/widgets/text_style.dart' as textTheme;
 import 'package:quickride/widgets/theme.dart' as theme;
 
@@ -37,6 +36,7 @@ class callToAction extends StatelessWidget {
           const SizedBox(height: 80),
           GestureDetector(
             onTap: () {
+              print('button pressed');
               Navigator.pushNamed(context, '/register');
             },
             child: Container(
@@ -59,13 +59,16 @@ class callToAction extends StatelessWidget {
                   style: textTheme.TextTheme.body1(null).copyWith(
                       color:
                           theme.ColorTheme.mainTheme.colorScheme.onBackground),
-                  children: const <TextSpan>[
-                TextSpan(text: 'Already have an account? '),
+                  children: <TextSpan>[
+                TextSpan(
+                    text: 'Already have an account? ',
+                    style: textTheme.TextTheme.description(null).copyWith(
+                        color: theme
+                            .ColorTheme.mainTheme.colorScheme.onBackground)),
                 TextSpan(
                     text: 'Sign In',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ))
+                    style: textTheme.TextTheme.description(null).copyWith(
+                        color: theme.ColorTheme.mainTheme.colorScheme.primary))
               ]))
         ])));
   }

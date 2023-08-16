@@ -31,8 +31,8 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '': (context) => Splash(),
-        'login': (context) => const Login(),
-        'register': (context) => const Register(),
+        '/login': (context) => const Login(),
+        '/register': (context) => const Register(),
       },
       home: Scaffold(
         backgroundColor: theme.ColorTheme.mainTheme.colorScheme.background,
