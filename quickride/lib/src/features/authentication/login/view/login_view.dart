@@ -10,6 +10,7 @@ class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
   static String routeName = '/login';
 
+// Change Image.asset to Image.network
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

@@ -1,38 +1,63 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../model/user_model.dart';
 
-// compare with data on the firestore
 class AuthenticationRepository {
-  Future<bool> login(String username, String password) async {
-    // Simulate authentication logic
-    if (username == 'validUsername' && password == 'validPassword') {
-      // Store user information, e.g., token
-      await _saveToken('userToken');
-      return true;
+    static FirebaseAuth auth = FirebaseAuth.instance;
+  static FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  static Future<String?> signIn(String email, String password) async {
+    try {
+      final UserCredential userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
+      userCredential.user!.getIdToken().then((value) async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('token', value!);
+      });
+      return 'Sign in successful';
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return 'No user found for that email';
+      } else if (e.code == 'wrong-password') {
+        return 'Wrong password provided for that user';
+      } else if (e.code == 'invalid-email') {
+        return 'Invalid email provided';
+      }
+      rethrow;
+    } catch (e) {
+      return e.toString();
     }
-    return false;
+  }
+  
+  static Future<String?> signUp(String email, String password, String username,
+      String firstname, String lastName) async {
+    try {
+      await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      // need something over here
+
+      return 'Sign up successful';
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        return 'The password provided is too weak';
+      } else if (e.code == 'email-already-in-use') {
+        return 'The account already exists for that email';
+      }
+      rethrow;
+    } catch (e) {
+      return 'Sign up failed. Please check your credentials';
+    }
   }
 
-  Future<void> logout() async {
-    // Clear user information
-    await _removeToken();
+  static Future<void> signOut() async {
+    await auth.signOut();
   }
 
-  Future<String?> getToken() async {
-    return await _loadToken();
-  }
+  /*static Future<User?> getCurrentUser() async {
+    return auth.currentUser;
+  }*/
 
-  Future<void> _saveToken(String token) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('userToken', token);
-  }
-
-  Future<String?> _loadToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('userToken');
-  }
-
-  Future<void> _removeToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('userToken');
+  static Future<void> sendPasswordResetEmail(String email) async {
+    await auth.sendPasswordResetEmail(email: email);
   }
 }
