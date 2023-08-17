@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class AssetsFolder {
@@ -16,5 +17,23 @@ class AssetsFolder {
       print('Error retrieving image URL: $e');
       return null;
     }
+  }
+}
+
+class UserCollection {
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  //add new document id
+  Future<void> addUser(String email, String name, int phone, String username) {
+    DocumentReference newDocRef = users.doc();
+    return users
+        .doc(newDocRef.id)
+        .set({
+          'email': email,
+          'name': name,
+          'phone': phone,
+          'username': username,
+        })
+        .then((value) => print('User added'))
+        .catchError((error) => print('Failed to add user: $error'));
   }
 }
