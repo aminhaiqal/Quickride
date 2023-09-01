@@ -2,82 +2,131 @@
 
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/text_style.dart' as textStyle;
+import 'package:quickride/src/widgets/image_retriever.dart';
 import 'package:quickride/src/widgets/text_field.dart' as textField;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
 import 'package:quickride/src/widgets/action_button.dart' as actionButton;
+import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
   static String routeName = '/login';
 
+// Change Image.asset to Image.network
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Material(
         child: Center(
             child: Padding(
-                padding: const EdgeInsets.only(top: 68),
+                padding: const EdgeInsets.only(top: 80),
                 child: Column(children: <Widget>[
-                  Image.asset(
-                    '/images/logo.png',
-                    height: 100,
-                    width: 100,
-                  ),
-                  const SizedBox(height: 20),
+                  ImageWidget(
+                      imageUrlFuture:
+                          firebase.AssetsFolder().getDownloadURL('logo.png'),
+                      width: 84,
+                      height: 84),
+                  const SizedBox(height: 24),
                   Text('Sign In',
                       style: textStyle.TextTheme.headline2(FontWeight.w600)),
-                  const SizedBox(height: 8),
                   Text('Access to your account',
-                      style: textStyle.TextTheme.body1(null).copyWith(
-                        color: Colors.black.withOpacity(0.5),
-                      )),
-                  const SizedBox(height: 48),
+                      style: textStyle.TextTheme.description(null)
+                          .copyWith(color: const Color(0xFF8C8C8C))),
+                  const SizedBox(height: 64),
                   const textField.TextField(
                       label: 'Email', prefixIcon: Icon(Icons.email)),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 16),
                   const textField.PasswordTextField(),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 48),
                   const actionButton.PrimaryButton(
                       label: 'Sign In', width: 380, onPressed: null),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
+                  Text('or Sign In with',
+                      style: textStyle.TextTheme.description(FontWeight.w500)
+                          .copyWith(
+                        color: Colors.black.withOpacity(0.5),
+                      )),
+                  const SizedBox(height: 24),
+                  Flex(
+                      direction: Axis.horizontal,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                            width: 182,
+                            height: 54,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFF5E6368),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ImageWidget(
+                                    imageUrlFuture: firebase.AssetsFolder()
+                                        .getDownloadURL('facebook.png'),
+                                    width: 24,
+                                    height: 24),
+                                const SizedBox(width: 16),
+                                Text('Facebook',
+                                    style: textStyle.TextTheme.description(
+                                        FontWeight.w500)),
+                              ],
+                            ),
+                            ) ),
+                        const SizedBox(width: 16),
+                        Container(
+                            width: 182,
+                            height: 54,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color(0xFF5E6368),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ImageWidget(
+                                    imageUrlFuture: firebase.AssetsFolder()
+                                        .getDownloadURL('google.png'),
+                                    width: 24,
+                                    height: 24),
+                                const SizedBox(width: 16),
+                                Text('Google',
+                                    style: textStyle.TextTheme.description(
+                                        FontWeight.w500)),
+                              ],
+                            ),
+                            )),
+                      ]),
+                  const SizedBox(height: 48),
                   RichText(
                       text: TextSpan(
                           style: textStyle.TextTheme.body1(null).copyWith(
                               color: theme.ColorTheme.mainTheme.colorScheme
                                   .onBackground),
-                          children: const <TextSpan>[
-                        TextSpan(text: 'Create a new account? '),
+                          children: <TextSpan>[
+                        TextSpan(
+                            text: 'Create an account? ',
+                            style:
+                                textStyle.TextTheme.description(FontWeight.w400)
+                                    .copyWith(
+                                        color: theme.ColorTheme.mainTheme
+                                            .colorScheme.onBackground
+                                            .withOpacity(0.5))),
                         TextSpan(
                             text: 'Sign Up',
-                            style: TextStyle(fontWeight: FontWeight.bold))
+                            style:
+                                textStyle.TextTheme.description(FontWeight.w500)
+                                    .copyWith(
+                                        color: theme.ColorTheme.mainTheme
+                                            .colorScheme.primary))
                       ])),
-                  const SizedBox(height: 86),
-                  Text('or Sign In with',
-                      style: textStyle.TextTheme.body1(null).copyWith(
-                        color: Colors.black.withOpacity(0.5),
-                      )),
-                  const SizedBox(height: 16),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image.asset(
-                          '/images/google.png',
-                          height: 40,
-                          width: 40,
-                        ),
-                        const SizedBox(width: 24),
-                        Image.asset(
-                          '/images/facebook.png',
-                          height: 40,
-                          width: 40,
-                        ),
-                        const SizedBox(width: 24),
-                        Image.asset(
-                          '/images/apple.png',
-                          height: 40,
-                          width: 40,
-                        )
-                      ]),
-                  const SizedBox(height: 84)
                 ]))));
   }
 }

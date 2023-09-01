@@ -11,16 +11,27 @@ class TextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: 380,
-        child: TextFormField(
-            decoration: InputDecoration(
-                labelText: label,
-                prefixIcon: prefixIcon,
-                labelStyle: textStyle.TextTheme.body1(null),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ))));
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        label!,
+        style: textStyle.TextTheme.description(null)
+            .copyWith(color: const Color(0xFF5F5F5F)),
+      ),
+      const SizedBox(height: 4),
+      SizedBox(
+          width: MediaQuery.of(context).size.width - 24 * 2,
+          height: 52,
+          child: TextFormField(
+              decoration: InputDecoration(
+                  hintText: 'Enter your email',
+                  prefixIcon: prefixIcon,
+                  labelStyle: textStyle.TextTheme.body1(FontWeight.w400),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12, horizontal: 16))))
+    ]);
   }
 }
 
@@ -37,13 +48,20 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: 380,
-        child: Column(children: [
-          TextFormField(
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        'Password',
+        style: textStyle.TextTheme.description(null)
+            .copyWith(color: const Color(0xFF5F5F5F)),
+      ),
+      const SizedBox(height: 4),
+      SizedBox(
+          width: MediaQuery.of(context).size.width - 24 * 2,
+          height: 52,
+          child: TextFormField(
             decoration: InputDecoration(
-                labelText: 'Password',
-                labelStyle: textStyle.TextTheme.body1(null),
+                hintText: 'Enter your password',
+                labelStyle: textStyle.TextTheme.body1(FontWeight.w400),
                 prefixIcon: const Icon(Icons.key),
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -55,18 +73,14 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                       _obscureText ? Icons.visibility : Icons.visibility_off),
                 ),
                 border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(6))),
             obscureText: _obscureText,
-          ),
-          const SizedBox(height: 8),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton(
-                  onPressed: () {},
-                  child: Text('Forgot Password?',
-                      style: textStyle.TextTheme.body1(null).copyWith(
-                        color: Colors.black.withOpacity(0.5),
-                      ))))
-        ]));
+          )),
+      TextButton(
+          onPressed: () {},
+          child: Text('Forgot Password?',
+              style: textStyle.TextTheme.description(null)
+                  .copyWith(color: const Color(0xFFF37629))))
+    ]);
   }
 }

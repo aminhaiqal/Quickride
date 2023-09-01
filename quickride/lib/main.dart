@@ -9,6 +9,7 @@ import 'package:quickride/src/utils/text_style.dart' as textTheme;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
 import 'package:quickride/src/widgets/appBar.dart';
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
+import 'package:quickride/src/widgets/image_retriever.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,10 +36,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => const Login(),
         '/register': (context) => const Login(),
       },
-      home: Scaffold(
-        backgroundColor: theme.ColorTheme.mainTheme.colorScheme.background,
-        body: const Splash(),
-      ),
+      home: const Splash()
     );
   }
 }
@@ -48,77 +46,23 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(children: [
-      Stack(children: [
-        Container(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.5,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [
-                  0.026,
-                  1
-                ],
-                    colors: [
-                  Color(0xFF222222),
-                  Color(0xFF121212),
-                ]))),
-        const Padding(
-            padding: EdgeInsets.only(top: 52),
-            child: CustomAppBar(title: 'Quickride')),
-        ImageWidget(
-            imageUrlFuture:
-                firebase.AssetsFolder().getDownloadURL('car-model.png')),
-      ]),
-      const SizedBox(height: 64),
-      const callToAction(),
-      const SizedBox(height: 40),
-    ]));
-  }
-}
-
-class ImageWidget extends StatefulWidget {
-  final Future<String?> imageUrlFuture;
-
-  const ImageWidget({super.key, required this.imageUrlFuture});
-
-  @override
-  _ImageWidgetState createState() => _ImageWidgetState();
-}
-
-class _ImageWidgetState extends State<ImageWidget> {
-  String? _imageUrl;
-
-  @override
-  void initState() {
-    super.initState();
-    loadImageUrl();
-  }
-
-  void loadImageUrl() async {
-    String? imageUrl = await widget.imageUrlFuture;
-    setState(() {
-      _imageUrl = imageUrl;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: 150,
-      right: 0,
-      child: _imageUrl != null
-          ? Image.network(
-              _imageUrl as String,
-              fit: BoxFit.cover,
-              cacheHeight: (284 * 0.85).toInt(),
-              cacheWidth: (399 * 0.85).toInt(),
-              scale: 1.0,
-            )
-          : const CircularProgressIndicator(),
+    return Scaffold(
+        backgroundColor:
+            const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, stops: [0.026, 1], colors: [Color(0xFF222222), Color(0xFF121212)]).colors[0],
+        body: Column(
+          children: [
+            const Padding(
+                padding: EdgeInsets.only(top: 52),
+                child: CustomAppBar(title: 'Quickride')),
+            const SizedBox(height: 111),
+            ImageWidget(
+              imageUrlFuture:
+                  firebase.AssetsFolder().getDownloadURL('tesla.png'),width: 380,height: 245
+            ),
+            const SizedBox(height: 64),
+            const callToAction(),
+          ],
+        )
     );
   }
 }
@@ -140,19 +84,19 @@ class callToAction extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: textTheme.TextTheme.headline1(null).copyWith(
                         color:
-                            theme.ColorTheme.mainTheme.colorScheme.onBackground,
+                            theme.ColorTheme.mainTheme.colorScheme.surface,
                       )))),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
           SizedBox(
               width: MediaQuery.of(context).size.width - 24 * 2,
               child: Text(
                   'Enjoy seamless ride experience without worrying about any obstacles.',
                   textAlign: TextAlign.center,
-                  style: textTheme.TextTheme.headline3(null).copyWith(
-                    color: theme.ColorTheme.mainTheme.colorScheme.onBackground
+                  style: textTheme.TextTheme.headline3(FontWeight.w400).copyWith(
+                    color: theme.ColorTheme.mainTheme.colorScheme.surface
                         .withOpacity(0.5),
                   ))),
-          const SizedBox(height: 80),
+          const SizedBox(height: 64),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, '/register');
@@ -161,7 +105,7 @@ class callToAction extends StatelessWidget {
                 height: 54,
                 width: MediaQuery.of(context).size.width - 24 * 2,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(6),
                   color: theme.ColorTheme.mainTheme.colorScheme.primary,
                 ),
                 child: Center(
@@ -180,16 +124,16 @@ class callToAction extends StatelessWidget {
                   children: <TextSpan>[
                 TextSpan(
                     text: 'Already have an account? ',
-                    style: textTheme.TextTheme.description(null).copyWith(
+                    style: textTheme.TextTheme.description(FontWeight.w400).copyWith(
                         color: theme
-                            .ColorTheme.mainTheme.colorScheme.onBackground)),
+                            .ColorTheme.mainTheme.colorScheme.surface.withOpacity(0.5))),
                 TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         Navigator.pushNamed(context, '/login');
                       },
                     text: 'Sign In',
-                    style: textTheme.TextTheme.description(null).copyWith(
+                    style: textTheme.TextTheme.description(FontWeight.w500).copyWith(
                         color: theme.ColorTheme.mainTheme.colorScheme.primary))
               ]))
         ])));
