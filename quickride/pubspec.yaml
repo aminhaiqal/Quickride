@@ -41,7 +41,7 @@ dependencies:
   firebase_core: ^2.15.0
   firebase_storage: ^11.2.5
   shared_preferences: ^2.2.0
-  cloud_firestore: ^4.8.5
+  cloud_firestore: ^4.9.1
   firebase_auth: ^4.7.3
   firebase_auth_mocks: ^0.12.0
   fake_cloud_firestore: ^2.4.1+1
