@@ -14,7 +14,7 @@ class TextTheme {
   static TextStyle headline2(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
 
-    return GoogleFonts.montserrat(
+    return GoogleFonts.poppins(
       fontSize: 20,
       fontWeight: fontWeight,
     );

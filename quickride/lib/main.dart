@@ -48,12 +48,41 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(children: [
+    return Scaffold(
+        backgroundColor:
+            const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, stops: [0.026, 1], colors: [Color(0xFF222222), Color(0xFF121212)]).colors[0],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Flexible(
+                flex: 1,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 24 * 2,
+                  height: (MediaQuery.of(context).size.height - 24 * 2)*2.026,
+                  child: const Padding(
+                    padding: EdgeInsets.only(top: 52),
+                    child: CustomAppBar(title: 'Quickride'))),
+              ),
+              const SizedBox(height: 123),
+              Flexible(
+                flex: 1,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 24 * 2,
+                  height: (MediaQuery.of(context).size.height - 24 * 2)*1.623,
+                  child: ImageWidget(
+                    imageUrlFuture: firebase.AssetsFolder().getDownloadURL('tesla.png'),
+                  )
+                ))
+            ],
+          ),
+        )
+        /*child: Column(children: [
       Stack(children: [
         Container(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: double.infinity,
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -71,12 +100,13 @@ class Splash extends StatelessWidget {
             child: CustomAppBar(title: 'Quickride')),
         ImageWidget(
             imageUrlFuture:
-                firebase.AssetsFolder().getDownloadURL('car-model.png')),
+                firebase.AssetsFolder().getDownloadURL('tesla.png')),
       ]),
       const SizedBox(height: 64),
       const callToAction(),
       const SizedBox(height: 40),
-    ]));
+    ])*/
+    );
   }
 }
 
@@ -107,9 +137,7 @@ class _ImageWidgetState extends State<ImageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 150,
-      right: 0,
+    return Center(
       child: _imageUrl != null
           ? Image.network(
               _imageUrl as String,
