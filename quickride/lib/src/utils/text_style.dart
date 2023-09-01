@@ -5,7 +5,7 @@ class TextTheme {
   static TextStyle headline1(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
     
-    return GoogleFonts.montserrat(
+    return GoogleFonts.poppins(
       fontSize: 32,
       fontWeight: fontWeight,
     );
@@ -23,7 +23,7 @@ class TextTheme {
   static TextStyle headline3(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
 
-    return GoogleFonts.montserrat(
+    return GoogleFonts.poppins(
       fontSize: 18,
       fontWeight: fontWeight,
     );
@@ -32,7 +32,7 @@ class TextTheme {
   static TextStyle body1(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
 
-    return GoogleFonts.montserrat(
+    return GoogleFonts.poppins(
       fontSize: 16,
       fontWeight: fontWeight,
     );
@@ -41,7 +41,7 @@ class TextTheme {
   static TextStyle description(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
 
-    return GoogleFonts.montserrat(
+    return GoogleFonts.poppins(
       fontSize: 14,
       fontWeight: fontWeight,
     );

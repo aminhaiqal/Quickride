@@ -35,10 +35,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => const Login(),
         '/register': (context) => const Login(),
       },
-      home: Scaffold(
-        backgroundColor: theme.ColorTheme.mainTheme.colorScheme.background,
-        body: const Splash(),
-      ),
+      home: const Splash()
     );
   }
 }
@@ -51,61 +48,20 @@ class Splash extends StatelessWidget {
     return Scaffold(
         backgroundColor:
             const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, stops: [0.026, 1], colors: [Color(0xFF222222), Color(0xFF121212)]).colors[0],
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Flexible(
-                flex: 1,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 24 * 2,
-                  height: (MediaQuery.of(context).size.height - 24 * 2)*2.026,
-                  child: const Padding(
-                    padding: EdgeInsets.only(top: 52),
-                    child: CustomAppBar(title: 'Quickride'))),
-              ),
-              const SizedBox(height: 123),
-              Flexible(
-                flex: 1,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 24 * 2,
-                  height: (MediaQuery.of(context).size.height - 24 * 2)*1.623,
-                  child: ImageWidget(
-                    imageUrlFuture: firebase.AssetsFolder().getDownloadURL('tesla.png'),
-                  )
-                ))
-            ],
-          ),
+        body: Column(
+          children: [
+            const Padding(
+                padding: EdgeInsets.only(top: 52),
+                child: CustomAppBar(title: 'Quickride')),
+            const SizedBox(height: 111),
+            ImageWidget(
+              imageUrlFuture:
+                  firebase.AssetsFolder().getDownloadURL('tesla.png'),
+            ),
+            const SizedBox(height: 64),
+            const callToAction(),
+          ],
         )
-        /*child: Column(children: [
-      Stack(children: [
-        Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [
-                  0.026,
-                  1
-                ],
-                    colors: [
-                  Color(0xFF222222),
-                  Color(0xFF121212),
-                ]))),
-        const Padding(
-            padding: EdgeInsets.only(top: 52),
-            child: CustomAppBar(title: 'Quickride')),
-        ImageWidget(
-            imageUrlFuture:
-                firebase.AssetsFolder().getDownloadURL('tesla.png')),
-      ]),
-      const SizedBox(height: 64),
-      const callToAction(),
-      const SizedBox(height: 40),
-    ])*/
     );
   }
 }
@@ -142,8 +98,8 @@ class _ImageWidgetState extends State<ImageWidget> {
           ? Image.network(
               _imageUrl as String,
               fit: BoxFit.cover,
-              cacheHeight: (284 * 0.85).toInt(),
-              cacheWidth: (399 * 0.85).toInt(),
+              cacheHeight: (284).toInt(),
+              cacheWidth: (399).toInt(),
               scale: 1.0,
             )
           : const CircularProgressIndicator(),
@@ -168,19 +124,19 @@ class callToAction extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: textTheme.TextTheme.headline1(null).copyWith(
                         color:
-                            theme.ColorTheme.mainTheme.colorScheme.onBackground,
+                            theme.ColorTheme.mainTheme.colorScheme.surface,
                       )))),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
           SizedBox(
               width: MediaQuery.of(context).size.width - 24 * 2,
               child: Text(
                   'Enjoy seamless ride experience without worrying about any obstacles.',
                   textAlign: TextAlign.center,
-                  style: textTheme.TextTheme.headline3(null).copyWith(
-                    color: theme.ColorTheme.mainTheme.colorScheme.onBackground
+                  style: textTheme.TextTheme.headline3(FontWeight.w400).copyWith(
+                    color: theme.ColorTheme.mainTheme.colorScheme.surface
                         .withOpacity(0.5),
                   ))),
-          const SizedBox(height: 80),
+          const SizedBox(height: 64),
           GestureDetector(
             onTap: () {
               Navigator.pushNamed(context, '/register');
@@ -189,7 +145,7 @@ class callToAction extends StatelessWidget {
                 height: 54,
                 width: MediaQuery.of(context).size.width - 24 * 2,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(12),
                   color: theme.ColorTheme.mainTheme.colorScheme.primary,
                 ),
                 child: Center(
@@ -208,9 +164,9 @@ class callToAction extends StatelessWidget {
                   children: <TextSpan>[
                 TextSpan(
                     text: 'Already have an account? ',
-                    style: textTheme.TextTheme.description(null).copyWith(
+                    style: textTheme.TextTheme.description(FontWeight.w400).copyWith(
                         color: theme
-                            .ColorTheme.mainTheme.colorScheme.onBackground)),
+                            .ColorTheme.mainTheme.colorScheme.surface.withOpacity(0.5))),
                 TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
