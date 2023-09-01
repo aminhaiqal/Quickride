@@ -39,7 +39,7 @@ class TextTheme {
   }
 
   static TextStyle description(FontWeight? fontWeight) {
-    fontWeight ??= FontWeight.w500;
+    fontWeight ??= FontWeight.w400;
 
     return GoogleFonts.poppins(
       fontSize: 14,

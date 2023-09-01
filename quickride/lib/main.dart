@@ -9,6 +9,7 @@ import 'package:quickride/src/utils/text_style.dart' as textTheme;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
 import 'package:quickride/src/widgets/appBar.dart';
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
+import 'package:quickride/src/widgets/image_retriever.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,53 +57,12 @@ class Splash extends StatelessWidget {
             const SizedBox(height: 111),
             ImageWidget(
               imageUrlFuture:
-                  firebase.AssetsFolder().getDownloadURL('tesla.png'),
+                  firebase.AssetsFolder().getDownloadURL('tesla.png'),width: 380,height: 245
             ),
             const SizedBox(height: 64),
             const callToAction(),
           ],
         )
-    );
-  }
-}
-
-class ImageWidget extends StatefulWidget {
-  final Future<String?> imageUrlFuture;
-
-  const ImageWidget({super.key, required this.imageUrlFuture});
-
-  @override
-  _ImageWidgetState createState() => _ImageWidgetState();
-}
-
-class _ImageWidgetState extends State<ImageWidget> {
-  String? _imageUrl;
-
-  @override
-  void initState() {
-    super.initState();
-    loadImageUrl();
-  }
-
-  void loadImageUrl() async {
-    String? imageUrl = await widget.imageUrlFuture;
-    setState(() {
-      _imageUrl = imageUrl;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: _imageUrl != null
-          ? Image.network(
-              _imageUrl as String,
-              fit: BoxFit.cover,
-              cacheHeight: (284).toInt(),
-              cacheWidth: (399).toInt(),
-              scale: 1.0,
-            )
-          : const CircularProgressIndicator(),
     );
   }
 }
@@ -145,7 +105,7 @@ class callToAction extends StatelessWidget {
                 height: 54,
                 width: MediaQuery.of(context).size.width - 24 * 2,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(6),
                   color: theme.ColorTheme.mainTheme.colorScheme.primary,
                 ),
                 child: Center(
@@ -173,7 +133,7 @@ class callToAction extends StatelessWidget {
                         Navigator.pushNamed(context, '/login');
                       },
                     text: 'Sign In',
-                    style: textTheme.TextTheme.description(null).copyWith(
+                    style: textTheme.TextTheme.description(FontWeight.w500).copyWith(
                         color: theme.ColorTheme.mainTheme.colorScheme.primary))
               ]))
         ])));

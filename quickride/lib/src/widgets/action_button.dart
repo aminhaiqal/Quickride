@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes
+
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/text_style.dart' as textStyle;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
@@ -15,10 +17,10 @@ class PrimaryButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: 52,
+        height: 56,
         width: width,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: const Color(0xFF212121),
           borderRadius: BorderRadius.circular(8),
         ),
         padding: const EdgeInsets.symmetric(vertical: 16),
