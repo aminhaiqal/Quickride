@@ -17,9 +17,29 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> login() async {
+  Future<bool> FirebaseLogin() async {
     try{
       await firebaseAuth.SignInWithFirebase().signInWithEmailAndPassword(username, password);
+    } catch (e) {
+      print(e);
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> FacebookLogin() async {
+    try{
+      await firebaseAuth.SignInWithFacebook().signInWithFacebook();
+    } catch (e) {
+      print(e);
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> GoogleLogin() async {
+    try{
+      await firebaseAuth.SignInWithGoogle().signInWithGoogle();
     } catch (e) {
       print(e);
       return false;

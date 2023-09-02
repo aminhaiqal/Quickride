@@ -60,7 +60,11 @@ class Login extends StatelessWidget {
                           direction: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Container(
+                            GestureDetector(
+                              onTap: () {
+                                viewModel.FacebookLogin();
+                              },
+                              child: Container(
                                 width: 182,
                                 height: 54,
                                 decoration: BoxDecoration(
@@ -87,10 +91,13 @@ class Login extends StatelessWidget {
                                               textStyle.TextTheme.description(
                                                   FontWeight.w500)),
                                     ],
-                                  ),
-                                )),
+                                  )))),
                             const SizedBox(width: 16),
-                            Container(
+                            GestureDetector(
+                              onTap: () {
+                                viewModel.GoogleLogin();
+                              },
+                              child: Container(
                                 width: 182,
                                 height: 54,
                                 decoration: BoxDecoration(
@@ -116,8 +123,7 @@ class Login extends StatelessWidget {
                                               textStyle.TextTheme.description(
                                                   FontWeight.w500)),
                                     ],
-                                  ),
-                                )),
+                                  )))) 
                           ]),
                       const SizedBox(height: 48),
                       RichText(
