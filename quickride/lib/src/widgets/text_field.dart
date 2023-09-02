@@ -20,7 +20,7 @@ class TextField extends StatelessWidget {
       const SizedBox(height: 4),
       SizedBox(
           width: MediaQuery.of(context).size.width - 24 * 2,
-          height: 52,
+          height: 48, //adjust height of textfield
           child: TextFormField(
               decoration: InputDecoration(
                   hintText: 'Enter your email',
@@ -57,7 +57,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       const SizedBox(height: 4),
       SizedBox(
           width: MediaQuery.of(context).size.width - 24 * 2,
-          height: 52,
+          height: 48, //adjust height of textfield
           child: TextFormField(
             decoration: InputDecoration(
                 hintText: 'Enter your password',
