@@ -1,32 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// ignore_for_file: avoid_print
 
-class LoginViewModel extends ChangeNotifier {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  bool rememberMe = false;
+import 'package:flutter/foundation.dart';
+import 'package:quickride/src/utils/firebaseAuth_repository.dart' as firebaseAuth;
 
-  void loadSavedLoginData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    rememberMe = prefs.getBool('rememberMe') ?? false;
-    if (rememberMe) {
-      usernameController.text = prefs.getString('username') ?? '';
-      passwordController.text = prefs.getString('password') ?? '';
-    }
+class LoginViewModel with ChangeNotifier {
+  String username = '';
+  String password = '';
+
+  void setUsername(String value) {
+    username = value;
     notifyListeners();
   }
 
-  void saveLoginData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (rememberMe) {
-      prefs.setString('username', usernameController.text);
-      prefs.setString('password', passwordController.text);
-    } else {
-      prefs.remove('username');
-      prefs.remove('password');
-    }
-    prefs.setBool('rememberMe', rememberMe);
+  void setPassword(String value) {
+    password = value;
+    notifyListeners();
   }
 
-  // Implement your login logic here
+  Future<bool> login() async {
+    try{
+      await firebaseAuth.SignInWithFirebase().signInWithEmailAndPassword(username, password);
+    } catch (e) {
+      print(e);
+      return false;
+    }
+    return true;
+  }
 }

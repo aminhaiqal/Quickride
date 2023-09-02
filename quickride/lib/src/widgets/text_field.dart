@@ -7,9 +7,9 @@ import 'package:quickride/src/utils/text_style.dart' as textStyle;
 class TextField extends StatefulWidget {
   final String? label;
   final Icon? prefixIcon;
-  final TextEditingController? controller;
+  final void Function(String)? onTextChanged;
 
-  const TextField({required this.label, this.prefixIcon, this.controller, Key? key})
+  const TextField({required this.label, this.prefixIcon, this.onTextChanged, Key? key})
       : super(key: key);
 
   @override
@@ -18,6 +18,20 @@ class TextField extends StatefulWidget {
 }
 
 class _TextFieldState extends State<TextField> {
+  final TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController.text = '';
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -31,8 +45,12 @@ class _TextFieldState extends State<TextField> {
           width: MediaQuery.of(context).size.width - 24 * 2,
           height: 48, //adjust height of textfield
           child: TextFormField(
+              controller: _textEditingController,
+              onChanged: (text) {
+                widget.onTextChanged?.call(text);
+              },
               decoration: InputDecoration(
-                  hintText: 'Enter your email',
+                  hintText: 'Enter your ${widget.label?.toLowerCase()}',
                   prefixIcon: widget.prefixIcon,
                   labelStyle: textStyle.TextTheme.body1(FontWeight.w400),
                   border: OutlineInputBorder(
