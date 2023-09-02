@@ -1,7 +1,5 @@
 // ignore_for_file: library_prefixes
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/text_style.dart' as textStyle;
 import 'package:quickride/src/widgets/image_retriever.dart';
