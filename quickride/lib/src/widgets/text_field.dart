@@ -3,17 +3,26 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/text_style.dart' as textStyle;
 
-class TextField extends StatelessWidget {
+// change to stateful widget
+class TextField extends StatefulWidget {
   final String? label;
   final Icon? prefixIcon;
-  const TextField({required this.label, this.prefixIcon, Key? key})
+  final TextEditingController? controller;
+
+  const TextField({required this.label, this.prefixIcon, this.controller, Key? key})
       : super(key: key);
 
+  @override
+  // ignore: library_private_types_in_public_api
+  _TextFieldState createState() => _TextFieldState();
+}
+
+class _TextFieldState extends State<TextField> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-        label!,
+        widget.label!,
         style: textStyle.TextTheme.description(null)
             .copyWith(color: const Color(0xFF5F5F5F)),
       ),
@@ -24,7 +33,7 @@ class TextField extends StatelessWidget {
           child: TextFormField(
               decoration: InputDecoration(
                   hintText: 'Enter your email',
-                  prefixIcon: prefixIcon,
+                  prefixIcon: widget.prefixIcon,
                   labelStyle: textStyle.TextTheme.body1(FontWeight.w400),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6),

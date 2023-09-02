@@ -1,5 +1,7 @@
 // ignore_for_file: library_prefixes
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/text_style.dart' as textStyle;
 import 'package:quickride/src/widgets/image_retriever.dart';
@@ -11,6 +13,8 @@ import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
   static String routeName = '/login';
+  static TextEditingController emailController = TextEditingController();
+  static TextEditingController passwordController = TextEditingController();
 
 // Change Image.asset to Image.network
   @override
@@ -32,8 +36,8 @@ class Login extends StatelessWidget {
                       style: textStyle.TextTheme.description(null)
                           .copyWith(color: const Color(0xFF8C8C8C))),
                   const SizedBox(height: 64),
-                  const textField.TextField(
-                      label: 'Email', prefixIcon: Icon(Icons.email)),
+                  textField.TextField(
+                      label: 'Email', prefixIcon: const Icon(Icons.email), controller: emailController),
                   const SizedBox(height: 16),
                   const textField.PasswordTextField(),
                   const SizedBox(height: 48),
