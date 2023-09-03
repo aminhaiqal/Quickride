@@ -39,7 +39,7 @@ class AuthenticationRepository {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', value!);
       });
-      return 'Sign in successful';
+      return null;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return 'No user found for that email';

@@ -18,14 +18,14 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> FirebaseLogin() async {
+  Future<String?> FirebaseLogin() async {
     try{
       String? message = await auth_repo.AuthenticationRepository.FirebaseSignIn(email, password);
+      return message;
     } catch (e) {
       print(e);
-      return false;
+      return e.toString();
     }
-    return true;
   }
 
   Future<bool> FacebookLogin() async {

@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quickride/src/utils/text_style.dart' as textStyle;
 import 'package:quickride/src/widgets/image_retriever.dart';
-import 'package:quickride/src/widgets/text_field.dart' as textField;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
-import 'package:quickride/src/widgets/action_button.dart' as actionButton;
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 import '../viewmodel/login_viewmodel.dart';
+import '../../widgets/user_credential.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -37,17 +36,9 @@ class Login extends StatelessWidget {
                           style: textStyle.TextTheme.description(null)
                               .copyWith(color: const Color(0xFF8C8C8C))),
                       const SizedBox(height: 64),
-                      textField.TextField(
-                          label: 'Email',
-                          prefixIcon: const Icon(Icons.email),
-                          onTextChanged: (text) {
-                            viewModel.setUsername(text);
-                          }),
-                      const SizedBox(height: 16),
-                      const textField.PasswordTextField(),
-                      const SizedBox(height: 48),
-                      const actionButton.PrimaryButton(
-                          label: 'Sign In', width: 380, onPressed: null),
+
+                      UserCredential(viewModel: viewModel),
+
                       const SizedBox(height: 24),
                       Text('or Sign In with',
                           style:
@@ -61,69 +52,72 @@ class Login extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             GestureDetector(
-                              onTap: () {
-                                viewModel.FacebookLogin();
-                              },
-                              child: Container(
-                                width: 182,
-                                height: 54,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(0xFF5E6368),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ImageWidget(
-                                          imageUrlFuture:
-                                              firebase.AssetsFolder()
-                                                  .getDownloadURL(
-                                                      'facebook.png'),
-                                          width: 24,
-                                          height: 24),
-                                      const SizedBox(width: 16),
-                                      Text('Facebook',
-                                          style:
-                                              textStyle.TextTheme.description(
-                                                  FontWeight.w500)),
-                                    ],
-                                  )))),
+                                onTap: () {
+                                  viewModel.FacebookLogin();
+                                },
+                                child: Container(
+                                    width: 182,
+                                    height: 54,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: const Color(0xFF5E6368),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Center(
+                                        child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        ImageWidget(
+                                            imageUrlFuture:
+                                                firebase.AssetsFolder()
+                                                    .getDownloadURL(
+                                                        'facebook.png'),
+                                            width: 24,
+                                            height: 24),
+                                        const SizedBox(width: 16),
+                                        Text('Facebook',
+                                            style:
+                                                textStyle.TextTheme.description(
+                                                    FontWeight.w500)),
+                                      ],
+                                    )))),
                             const SizedBox(width: 16),
                             GestureDetector(
-                              onTap: () {
-                                viewModel.GoogleLogin();
-                              },
-                              child: Container(
-                                width: 182,
-                                height: 54,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(0xFF5E6368),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ImageWidget(
-                                          imageUrlFuture:
-                                              firebase.AssetsFolder()
-                                                  .getDownloadURL('google.png'),
-                                          width: 24,
-                                          height: 24),
-                                      const SizedBox(width: 16),
-                                      Text('Google',
-                                          style:
-                                              textStyle.TextTheme.description(
-                                                  FontWeight.w500)),
-                                    ],
-                                  )))) 
+                                onTap: () {
+                                  viewModel.GoogleLogin();
+                                },
+                                child: Container(
+                                    width: 182,
+                                    height: 54,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: const Color(0xFF5E6368),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Center(
+                                        child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        ImageWidget(
+                                            imageUrlFuture:
+                                                firebase.AssetsFolder()
+                                                    .getDownloadURL(
+                                                        'google.png'),
+                                            width: 24,
+                                            height: 24),
+                                        const SizedBox(width: 16),
+                                        Text('Google',
+                                            style:
+                                                textStyle.TextTheme.description(
+                                                    FontWeight.w500)),
+                                      ],
+                                    ))))
                           ]),
                       const SizedBox(height: 48),
                       RichText(
