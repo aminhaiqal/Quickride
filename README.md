@@ -7,8 +7,8 @@ Quickride is an e-hailing service provided by students, for students. This platf
 
 1. **User Registration and Login** <br>
    ***Status: In Development***
-   - Students can sign up and create accounts.
-   - Existing users can log in securely.
+   - Students can sign up and create Quickride's accounts.
+   - Existing users can log in securely via Quickride, Facebook or Google account.
 
 2. **Ride Booking** <br>
    ***Status: On Schedule***
