@@ -1,12 +1,13 @@
 class User {
-  final String? email;
-  final String? name;
-  final int? phone;
-  final String? username;
+  final String uid;
+  final String email;
+  final String phoneNumber;
+  final String username;
 
   User(
-      {this.email,
-      this.name,
-      this.phone,
-      this.username});
+      {
+      required this.uid,
+      required this.email,
+      required this.phoneNumber,
+      required this.username});
 }
