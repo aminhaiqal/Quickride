@@ -6,7 +6,7 @@ Quickride is an e-hailing service provided by students, for students. This platf
 ## Features
 
 1. **User Registration and Login** <br>
-   **Status: In Development***
+   **Status: In Development** <br>
    **Start Date: 1 Sept 2023 | End Date: 7 Sept 2023**
    - Students can sign up and create Quickride's accounts.
    - Existing users can log in securely via Quickride, Facebook or Google account.
