@@ -1,14 +1,15 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, non_constant_identifier_names
 
 import 'package:flutter/foundation.dart';
 import 'package:quickride/src/utils/firebaseAuth_repository.dart' as firebaseAuth;
+import 'package:quickride/src/features/authentication/data/repository/authentication_repository.dart' as auth_repo;
 
 class LoginViewModel with ChangeNotifier {
-  String username = '';
+  String email = '';
   String password = '';
 
   void setUsername(String value) {
-    username = value;
+    email = value;
     notifyListeners();
   }
 
@@ -19,7 +20,7 @@ class LoginViewModel with ChangeNotifier {
 
   Future<bool> FirebaseLogin() async {
     try{
-      await firebaseAuth.SignInWithFirebase().signInWithEmailAndPassword(username, password);
+      String? message = await auth_repo.AuthenticationRepository.FirebaseSignIn(email, password);
     } catch (e) {
       print(e);
       return false;
