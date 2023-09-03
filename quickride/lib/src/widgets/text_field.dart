@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/text_style.dart' as textStyle;
 
-// change to stateful widget
 class TextField extends StatefulWidget {
   final String? label;
   final Icon? prefixIcon;
