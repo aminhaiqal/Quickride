@@ -4,6 +4,11 @@
         android:label="quickride"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- Facebook config -->
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -31,4 +36,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
+        
 </manifest>
