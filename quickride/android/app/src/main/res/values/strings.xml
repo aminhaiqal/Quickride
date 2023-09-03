@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quickride Auth</string>
+    <string name="facebook_app_id">6783445875040774</string>
+    <string name="facebook_login_protocol_scheme">fb6783445875040774</string>
+    <string name="facebook_client_token">ef4830df52ed6639eae451e8efcff7be</string>
+</resources>
