@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/text_style.dart' as text_style;
-import 'package:quickride/src/widgets/input_field_variation.dart';
 import 'package:quickride/src/utils/color_theme.dart' as color_theme;
 
 class TextField extends StatefulWidget {
@@ -66,8 +65,8 @@ class _TextFieldState extends State<TextField> {
       const SizedBox(height: 4),
       Text(
         widget.helperText ?? '',
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+        style: text_style.TextTheme.description(null).copyWith(
+            color: color_theme.ColorTheme.mainTheme.colorScheme.error),
       ),
     ]);
   }
