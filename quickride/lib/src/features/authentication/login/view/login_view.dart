@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quickride/src/utils/text_style.dart' as text_style;
-import 'package:quickride/src/widgets/image_retriever.dart';
 import 'package:quickride/src/utils/color_theme.dart' as theme;
-import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 import '../../widgets/auth_method.dart';
 import '../viewmodel/login_viewmodel.dart';
 import '../../widgets/user_credential.dart';
