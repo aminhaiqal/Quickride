@@ -48,12 +48,12 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
-        backgroundColor: const LinearGradient(
+        backgroundGradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           stops: [0.026, 1],
           colors: [Color(0xFF222222), Color(0xFF121212)],
-        ).colors[0],
+          ).colors[0],
         child: SingleChildScrollView(
             child: Column(
           children: [

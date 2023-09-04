@@ -15,6 +15,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
+      backgroundGradient: theme.ColorTheme.mainTheme.colorScheme.background,
         child: ChangeNotifierProvider<LoginViewModel>(
             create: (_) => LoginViewModel(),
             child: Consumer<LoginViewModel>(builder: (context, viewModel, _) {
