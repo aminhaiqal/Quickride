@@ -5,14 +5,11 @@ import 'package:quickride/src/utils/image_ratio.dart';
 
 class ImageWidget extends StatefulWidget {
   final Future<String?> imageUrlFuture;
-  double? width;
+  double width;
   double? aspectRatio;
 
   ImageWidget(
-      {Key? key,
-      required this.imageUrlFuture,
-      this.width,
-      this.aspectRatio})
+      {Key? key, required this.imageUrlFuture, required this.width, this.aspectRatio})
       : super(key: key);
 
   @override
@@ -41,8 +38,8 @@ class _ImageWidgetState extends State<ImageWidget> {
     return Center(
       child: _imageUrl != null
           ? AspectRatioImage(
+              customWidth: widget.width,
               imageUrl: _imageUrl as String,
-              width: widget.width!,
               aspectRatio: widget.aspectRatio!,
             )
           : const CircularProgressIndicator(),
