@@ -23,12 +23,7 @@ class Register extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 80),
                       child: Column(
                         children: <Widget>[
-                          ImageWidget(
-                              imageUrlFuture: firebase.AssetsFolder()
-                                  .getDownloadURL('logo.png'),
-                              width: 84,
-                              height: 84),
-                          const SizedBox(height: 24),
+                          
                         ],
                       )));
             })));

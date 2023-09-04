@@ -23,12 +23,6 @@ class Login extends StatelessWidget {
                     child: Padding(
                         padding: const EdgeInsets.only(top: 80),
                         child: Column(children: <Widget>[
-                          ImageWidget(
-                              imageUrlFuture: firebase.AssetsFolder()
-                                  .getDownloadURL('logo.png'),
-                              width: 84,
-                              aspectRatio: 1/1),
-                          const SizedBox(height: 24),
                           Text('Sign In',
                               style: text_style.TextTheme.headline2(
                                   FontWeight.w600)),

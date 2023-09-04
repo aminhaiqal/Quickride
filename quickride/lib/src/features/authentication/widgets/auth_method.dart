@@ -37,7 +37,7 @@ class AuthMethodButton extends StatelessWidget {
                   imageUrlFuture:
                       firebase.AssetsFolder().getDownloadURL(imageUrl),
                   width: 24,
-                  height: 24,
+                  aspectRatio: 1/1,
                 ),
                 const SizedBox(width: 16),
                 Text(
