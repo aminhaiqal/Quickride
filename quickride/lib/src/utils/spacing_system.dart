@@ -1,30 +1,15 @@
-import 'package:flutter/widgets.dart';
-
 class Spacing {
-  static double small = 8.0;
-  static double medium = 16.0;
-  static double large = 24.0;
+  static double mobile_breakpoint_potrait = 480.0;
+  //static double mobile_breakpoint_landscape = 768.0;
+  //static double tablet_breakpoint = 768.0;
+  //static double small_desktop = 1440.0;
 
-  // Define methods to calculate spacing based on screen width or height
-  static double getHorizontalSpacing(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth >= 600) {
-      return large;
-    } else if (screenWidth >= 400) {
-      return medium;
-    } else {
-      return small;
-    }
-  }
-
-  static double getVerticalSpacing(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    if (screenHeight >= 600) {
-      return large;
-    } else if (screenHeight >= 400) {
-      return medium;
-    } else {
-      return small;
-    }
-  }
+  static double spacing_none = 0.0;
+  static double spacing_xxs = 8.0;
+  static double spacing_xs = 16.0;
+  static double spacing_sm = 24.0;
+  static double spacing_md = 32.0;
+  static double spacing_lg = 40.0;
+  static double spacing_xl = 48.0;
+  static double spacing_xxl = 56.0;
 }
