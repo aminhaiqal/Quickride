@@ -8,13 +8,15 @@ class TextField extends StatefulWidget {
   final Icon? prefixIcon;
   final void Function(String)? onTextChanged;
   final String? helperText;
+  final OutlineInputBorder? errorBorder;
 
   const TextField(
       {required this.label,
       this.prefixIcon,
       this.onTextChanged,
       this.helperText,
-      Key? key})
+      Key? key,
+      this.errorBorder})
       : super(key: key);
 
   @override
@@ -24,7 +26,6 @@ class TextField extends StatefulWidget {
 
 class _TextFieldState extends State<TextField> {
   final TextEditingController _textEditingController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -59,7 +60,12 @@ class _TextFieldState extends State<TextField> {
                   hintText: 'Enter your ${widget.label.toLowerCase()}',
                   prefixIcon: widget.prefixIcon,
                   labelStyle: text_style.TextTheme.body1(FontWeight.w400),
-                  border: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (widget.helperText != null)
+                          ? color_theme.ColorTheme.mainTheme.colorScheme.error
+                          : color_theme.GreyShader.greyAccentLight,
+                    ),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   contentPadding: const EdgeInsets.symmetric(
@@ -74,13 +80,18 @@ class _TextFieldState extends State<TextField> {
   }
 }
 
-// password textfield
+// Password textfield
 class PasswordTextField extends StatefulWidget {
   final String label;
   final Icon? prefixIcon;
   final void Function(String)? onTextChanged;
+
   const PasswordTextField(
-      {required this.label, this.prefixIcon, this.onTextChanged, Key? key})
+      {required this.label,
+      this.prefixIcon,
+      this.onTextChanged,
+      Key? key,
+      required OutlineInputBorder errorBorder})
       : super(key: key);
 
   @override
@@ -141,8 +152,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       TextButton(
           onPressed: () {},
           child: Text('Forgot Password?',
-              style: text_style.TextTheme.description(null)
-                  .copyWith(color: const Color(0xFFF37629))))
+              style: text_style.TextTheme.description(null).copyWith(
+                  color: color_theme.ColorTheme.mainTheme.colorScheme.primary)))
     ]);
   }
 }
+
+// Phone number textfield
