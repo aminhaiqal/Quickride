@@ -27,7 +27,7 @@ class Login extends StatelessWidget {
                               imageUrlFuture: firebase.AssetsFolder()
                                   .getDownloadURL('logo.png'),
                               width: 84,
-                              height: 84),
+                              aspectRatio: 1/1),
                           const SizedBox(height: 24),
                           Text('Sign In',
                               style: text_style.TextTheme.headline2(

@@ -57,7 +57,7 @@ class Splash extends StatelessWidget {
             const SizedBox(height: 111),
             ImageWidget(
               imageUrlFuture:
-                  firebase.AssetsFolder().getDownloadURL('tesla.png'),width: 380,height: 245
+                  firebase.AssetsFolder().getDownloadURL('tesla.png'),width: 380, aspectRatio: 1/1,
             ),
             const SizedBox(height: 64),
             const callToAction(),
