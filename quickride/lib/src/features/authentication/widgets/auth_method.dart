@@ -20,7 +20,7 @@ class AuthMethodButton extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: Container(
-            width: 182,
+            width: MediaQuery.of(context).size.width / 2 - 32,
             height: 54,
             decoration: BoxDecoration(
               border: Border.all(

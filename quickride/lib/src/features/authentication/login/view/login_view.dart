@@ -21,6 +21,7 @@ class Login extends StatelessWidget {
               return SingleChildScrollView(
                 child: Center(
                     child: Column(children: <Widget>[
+                  const SizedBox(height: 48),
                   MarginContainer(
                       marginBottom: 64,
                       child: Column(
@@ -36,11 +37,13 @@ class Login extends StatelessWidget {
                   MarginContainer(
                       marginBottom: 24,
                       child: UserCredential(viewModel: viewModel)),
-                  Text('or Sign In with',
+                  MarginContainer(
+                    marginBottom: 24,
+                    child: Text('or Sign In with',
                       style: text_style.TextTheme.description(FontWeight.w500)
                           .copyWith(
                         color: Colors.black.withOpacity(0.5),
-                      )),
+                      ))),
                   MarginContainer(
                       marginBottom: 48.0,
                       child: Flex(

@@ -32,7 +32,7 @@ class UserCredentialState extends State<UserCredential> {
               },
               helperText: widget.emailErrorMessage,
             )),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
         Form(
             key: widget.passwordKey, // Assign the password field key
             child: text_field.PasswordTextField(
