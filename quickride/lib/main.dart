@@ -48,33 +48,32 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView(
-        child: Scaffold(
-            backgroundColor: const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.026, 1],
-                colors: [Color(0xFF222222), Color(0xFF121212)]).colors[0],
-            body: SingleChildScrollView(
-                child: Column(
-              children: [
-                const MarginContainer(
-                  marginBottom: 32.0,
-                  child: CustomAppBar(title: 'Quickride'),
-                ),
-                MarginContainer(
-                    marginBottom: 48.0,
-                    child: ImageWidget(
-                      imageUrlFuture:
-                          firebase.AssetsFolder().getDownloadURL('tesla.png'),
-                      width: 380,
-                      aspectRatio: 1 / 1,
-                    )),
-                const MarginContainer(
-                  marginBottom: 64.0,
-                  child: callToAction(),
-                )
-              ],
-            ))));
+        backgroundColor: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: [0.026, 1],
+          colors: [Color(0xFF222222), Color(0xFF121212)],
+        ).colors[0],
+        child: SingleChildScrollView(
+            child: Column(
+          children: [
+            const MarginContainer(
+              marginBottom: 32.0,
+              child: CustomAppBar(title: 'Quickride'),
+            ),
+            MarginContainer(
+                marginBottom: 16.0,
+                child: ImageWidget(
+                  imageUrlFuture:
+                      firebase.AssetsFolder().getDownloadURL('tesla.png'),
+                  width: 380,
+                  aspectRatio: 1 / 1,
+                )),
+            const MarginContainer(
+              child: callToAction(),
+            )
+          ],
+        )));
   }
 }
 
