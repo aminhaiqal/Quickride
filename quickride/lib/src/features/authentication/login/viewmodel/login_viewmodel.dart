@@ -1,7 +1,5 @@
-// ignore_for_file: avoid_print, non_constant_identifier_names
-
 import 'package:flutter/foundation.dart';
-import 'package:quickride/src/utils/firebaseAuth_repository.dart' as firebaseAuth;
+import 'package:quickride/src/utils/firebaseAuth_repository.dart' as firebase_auth;
 import 'package:quickride/src/features/authentication/data/repository/authentication_repository.dart' as auth_repo;
 
 class LoginViewModel with ChangeNotifier {
@@ -30,7 +28,7 @@ class LoginViewModel with ChangeNotifier {
 
   Future<bool> FacebookLogin() async {
     try{
-      await firebaseAuth.SignInWithFacebook().signInWithFacebook();
+      await firebase_auth.SignInWithFacebook().signInWithFacebook();
     } catch (e) {
       print(e);
       return false;
@@ -40,7 +38,7 @@ class LoginViewModel with ChangeNotifier {
 
   Future<bool> GoogleLogin() async {
     try{
-      await firebaseAuth.SignInWithGoogle().signInWithGoogle();
+      await firebase_auth.SignInWithGoogle().signInWithGoogle();
     } catch (e) {
       print(e);
       return false;
