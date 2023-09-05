@@ -11,7 +11,6 @@ import 'package:quickride/src/utils/color_theme.dart' as theme;
 import 'package:quickride/src/widgets/appBar.dart';
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 import 'package:quickride/src/widgets/image_retriever.dart';
-import 'package:quickride/src/widgets/margin_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,25 +52,23 @@ class Splash extends StatelessWidget {
           end: Alignment.bottomCenter,
           stops: [0.026, 1],
           colors: [Color(0xFF222222), Color(0xFF121212)],
-          ).colors[0],
+        ).colors[0],
         child: SingleChildScrollView(
             child: Column(
           children: [
-            const MarginContainer(
-              marginBottom: 32.0,
-              child: CustomAppBar(title: 'Quickride'),
+            Container(
+              margin: const EdgeInsets.only(bottom: 32),
+              child: const CustomAppBar(title: 'Quickride'),
             ),
-            MarginContainer(
-                marginBottom: 16.0,
+            Container(
+                margin: const EdgeInsets.only(bottom: 16.0),
                 child: ImageWidget(
                   imageUrlFuture:
                       firebase.AssetsFolder().getDownloadURL('tesla.png'),
                   width: 380,
                   aspectRatio: 1 / 1,
                 )),
-            const MarginContainer(
-              child: callToAction(),
-            )
+            const callToAction()
           ],
         )));
   }
@@ -84,17 +81,18 @@ class callToAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Column(children: [
-      MarginContainer(
-          marginBottom: 16.0,
-          child: Align(
-              alignment: Alignment.center,
-              child: Text('Make travelling by car most comfortable',
-                  textAlign: TextAlign.center,
-                  style: textTheme.TextTheme.headline1(null).copyWith(
-                    color: theme.ColorTheme.mainTheme.colorScheme.surface,
-                  )))),
-      MarginContainer(
-          marginBottom: 48.0,
+      Container(
+        margin: const EdgeInsets.only(bottom: 16.0),
+        child: Align(
+            alignment: Alignment.center,
+            child: Text('Make travelling by car most comfortable',
+                textAlign: TextAlign.center,
+                style: textTheme.TextTheme.headline1(null).copyWith(
+                  color: theme.ColorTheme.mainTheme.colorScheme.surface,
+                ))),
+      ),
+      Container(
+          margin: const EdgeInsets.only(bottom: 64.0),
           child: Text(
               'Enjoy seamless ride experience without worrying about any obstacles.',
               textAlign: TextAlign.center,
