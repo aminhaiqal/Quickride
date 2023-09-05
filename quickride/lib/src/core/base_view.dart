@@ -6,7 +6,7 @@ class BaseView extends StatelessWidget {
   final double marginHorizontal;
   final Color? backgroundGradient;
 
-  BaseView({super.key, 
+  const BaseView({super.key, 
     required this.child,
     this.marginHorizontal = 24.0,
     this.backgroundGradient,
@@ -17,7 +17,7 @@ class BaseView extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundGradient,
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: marginHorizontal, vertical: 52.0),
+        margin: EdgeInsets.fromLTRB(marginHorizontal, 52.0, marginHorizontal, 0.0),
         child: child)
     );
   }

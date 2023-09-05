@@ -60,14 +60,12 @@ class Splash extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 32),
               child: const CustomAppBar(title: 'Quickride'),
             ),
-            Container(
-                margin: const EdgeInsets.only(bottom: 16.0),
-                child: ImageWidget(
-                  imageUrlFuture:
-                      firebase.AssetsFolder().getDownloadURL('tesla.png'),
-                  width: 380,
-                  aspectRatio: 1 / 1,
-                )),
+            ImageWidget(
+              imageUrlFuture:
+                  firebase.AssetsFolder().getDownloadURL('tesla.png'),
+              width: 380,
+              aspectRatio: 1 / 1,
+            ),
             const callToAction()
           ],
         )));
@@ -92,7 +90,7 @@ class callToAction extends StatelessWidget {
                 ))),
       ),
       Container(
-          margin: const EdgeInsets.only(bottom: 64.0),
+          margin: const EdgeInsets.only(bottom: 72.0),
           child: Text(
               'Enjoy seamless ride experience without worrying about any obstacles.',
               textAlign: TextAlign.center,
@@ -105,9 +103,8 @@ class callToAction extends StatelessWidget {
           Navigator.pushNamed(context, '/register');
         },
         child: Container(
-            margin: const EdgeInsets.only(bottom: 16.0),
+            margin: const EdgeInsets.only(bottom: 24.0),
             height: 54,
-            width: MediaQuery.of(context).size.width - 24 * 2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               color: theme.ColorTheme.mainTheme.colorScheme.primary,
@@ -120,8 +117,6 @@ class callToAction extends StatelessWidget {
       ),
       RichText(
           text: TextSpan(
-              style: textTheme.TextTheme.body1(null).copyWith(
-                  color: theme.ColorTheme.mainTheme.colorScheme.onBackground),
               children: <TextSpan>[
             TextSpan(
                 text: 'Already have an account? ',
