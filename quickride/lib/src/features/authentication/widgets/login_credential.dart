@@ -6,18 +6,18 @@ import 'package:quickride/src/utils/input_validation.dart' as input_validation;
 import 'package:quickride/src/utils/color_theme.dart' as color_theme;
 
 // ignore: must_be_immutable
-class UserCredential extends StatefulWidget {
+class LoginCredential extends StatefulWidget {
   final LoginViewModel viewModel;
-  UserCredential({Key? key, required this.viewModel}) : super(key: key);
+  LoginCredential({Key? key, required this.viewModel}) : super(key: key);
 
   @override
-  UserCredentialState createState() => UserCredentialState();
+  LoginCredentialState createState() => LoginCredentialState();
   String? emailErrorMessage;
   GlobalKey<FormState> emailKey = GlobalKey<FormState>();
   GlobalKey<FormState> passwordKey = GlobalKey<FormState>();
 }
 
-class UserCredentialState extends State<UserCredential> {
+class LoginCredentialState extends State<LoginCredential> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,7 +32,7 @@ class UserCredentialState extends State<UserCredential> {
               },
               helperText: widget.emailErrorMessage,
             )),
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
         Form(
             key: widget.passwordKey, // Assign the password field key
             child: text_field.PasswordTextField(
@@ -63,10 +63,6 @@ class UserCredentialState extends State<UserCredential> {
                 });
                 widget.emailKey.currentState?.validate();
                 widget.passwordKey.currentState?.validate();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text('Please fix the errors in the form.')),
-                );
               } else {
                 // Navigate to home page
                 print('Login success');
