@@ -6,14 +6,14 @@ import 'package:quickride/src/utils/color_theme.dart' as color_theme;
 class TextField extends StatefulWidget {
   final String label;
   final Icon? prefixIcon;
-  final void Function(String)? onChanged;
+  final Function(String) onValueUpdated;
   final String? helperText;
   final OutlineInputBorder? errorBorder;
 
   const TextField(
       {required this.label,
       this.prefixIcon,
-      this.onChanged,
+      required this.onValueUpdated,
       this.helperText,
       Key? key,
       this.errorBorder})
@@ -24,13 +24,7 @@ class TextField extends StatefulWidget {
 }
 
 class TextFieldState extends State<TextField> {
-  final TextEditingController controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    controller.text = '';
-  }
+  final controller = TextEditingController();
 
   @override
   void dispose() {
@@ -48,10 +42,11 @@ class TextFieldState extends State<TextField> {
       ),
       Container(
           margin: const EdgeInsets.symmetric(vertical: 4),
-          height: 48, //adjust height of textfield
+          height: 48,
+
+          // Back to basic and understand the concept of controller
           child: TextFormField(
               controller: controller,
-              onChanged: widget.onChanged,
               decoration: InputDecoration(
                   hintText: 'Enter your ${widget.label.toLowerCase()}',
                   prefixIcon: widget.prefixIcon,
@@ -64,7 +59,10 @@ class TextFieldState extends State<TextField> {
                       ),
                       borderRadius: BorderRadius.circular(6)),
                   contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12, horizontal: 16)))),
+                      vertical: 12, horizontal: 16)),
+                  onSaved: (value){
+                    widget.onValueUpdated(value!);
+                  },)),
       Text(
         widget.helperText ?? '',
         style: text_style.TextTheme.description(null).copyWith(

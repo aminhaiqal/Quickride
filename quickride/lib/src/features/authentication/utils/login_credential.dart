@@ -14,7 +14,7 @@ class LoginCredential extends StatefulWidget {
   LoginCredentialState createState() => LoginCredentialState();
   String emailErrorMessage = '';
   String passwordErrorMessage = '';
-  GlobalKey<FormState> emailKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
   GlobalKey<FormState> passwordKey = GlobalKey<FormState>();
 }
 
@@ -30,13 +30,15 @@ class LoginCredentialState extends State<LoginCredential> {
     LoginViewModel viewModel = widget.viewModel;
 
     return Column(children: [
+      // Back to basic
       Form(
-          key: widget.emailKey, // Assign the email field key
+          key: widget._emailKey, // Assign the email field key
           child: text_field.TextField(
             label: 'Email',
             prefixIcon: const Icon(Icons.email_rounded),
-            onChanged: (value) {
+            onValueUpdated: (value) {
               viewModel.setEmail(value);
+              print('model: ${viewModel.email}');
             },
             helperText: widget.emailErrorMessage,
           )),
@@ -61,7 +63,7 @@ class LoginCredentialState extends State<LoginCredential> {
             validateAndSetError(
               viewModel.email,
               validateEmail,
-              widget.emailKey, // Global key for email field
+              widget._emailKey, // Global key for email field
               widget.emailErrorMessage,
               updateErrorMessage,
               context,

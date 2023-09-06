@@ -24,7 +24,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Form(
+        /*Form(
             key: widget.usernameKey, // Assign the email field key
             child: text_field.TextField(
               label: 'Username',
@@ -33,7 +33,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
                 RegisterViewModel().setUsername(text);
               },*/
               helperText: widget.emailErrorMessage,
-            )),
+            )),*/
         const SizedBox(height: 4),
         Form(
             key: widget.phoneNumberKey, // Assign the phone number field key
@@ -44,16 +44,16 @@ class RegisterCredentialState extends State<RegisterCredential> {
               },
               helperText: widget.emailErrorMessage,
             )),
-        Form(
+        /*Form(
             key: widget.emailKey, // Assign the phone number field key
             child: text_field.TextField(
               label: 'Email',
               prefixIcon: const Icon(Icons.email_rounded),
-              /*onTextChanged: (text) {
+              onTextChanged: (text) {
                 RegisterViewModel().setEmail(text);
-              },*/
+              },
               helperText: widget.emailErrorMessage,
-            )),
+            )),*/
         Form(
             key: widget.passwordKey, // Assign the password field key
             child: text_field.PasswordTextField(
