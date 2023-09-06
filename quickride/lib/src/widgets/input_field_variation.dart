@@ -48,7 +48,6 @@ class TextFieldState extends State<TextField> {
       ),
       const SizedBox(height: 4),
       SizedBox(
-          width: MediaQuery.of(context).size.width - 24 * 2,
           height: 48, //adjust height of textfield
           child: TextFormField(
               controller: _textEditingController,
@@ -65,7 +64,7 @@ class TextFieldState extends State<TextField> {
                           ? color_theme.ColorTheme.mainTheme.colorScheme.error
                           : color_theme.GreyShader.greyAccentLight,
                     ),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(6)
                   ),
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 12, horizontal: 16)))),
@@ -84,13 +83,16 @@ class PasswordTextField extends StatefulWidget {
   final String label;
   final Icon? prefixIcon;
   final void Function(String)? onTextChanged;
+  final String? helperText;
+  final OutlineInputBorder? errorBorder;
 
   const PasswordTextField(
       {required this.label,
       this.prefixIcon,
       this.onTextChanged,
+      this.helperText,
       Key? key,
-      required OutlineInputBorder errorBorder})
+      this.errorBorder})
       : super(key: key);
 
   @override
@@ -123,7 +125,6 @@ class PasswordTextFieldState extends State<PasswordTextField> {
       ),
       const SizedBox(height: 4),
       SizedBox(
-          width: MediaQuery.of(context).size.width - 24 * 2,
           height: 48, //adjust height of textfield
           child: TextFormField(
             controller: _textEditingController,
@@ -143,8 +144,14 @@ class PasswordTextFieldState extends State<PasswordTextField> {
                   child: Icon(
                       _obscureText ? Icons.visibility : Icons.visibility_off),
                 ),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(6))),
+                enabledBorder:  OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: (widget.helperText != null)
+                          ? color_theme.ColorTheme.mainTheme.colorScheme.error
+                          : color_theme.GreyShader.greyAccentLight),
+                  borderRadius: BorderRadius.circular(6)),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12, horizontal: 16)),
             obscureText: _obscureText,
           )),
       TextButton(
@@ -157,3 +164,111 @@ class PasswordTextFieldState extends State<PasswordTextField> {
 }
 
 // Phone number textfield
+class PhoneNumber extends StatefulWidget {
+  final String label;
+  final void Function(String)? onTextChanged;
+  final String? helperText;
+  final OutlineInputBorder? errorBorder;
+
+  const PhoneNumber(
+      {required this.label,
+      this.onTextChanged,
+      this.helperText,
+      Key? key,
+      this.errorBorder})
+      : super(key: key);
+
+  @override
+  PhoneNumberState createState() => PhoneNumberState();
+}
+
+class PhoneNumberState extends State<PhoneNumber> {
+  TextEditingController _countryCodeController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _countryCodeController.text = '';
+  }
+
+  @override
+  void dispose() {
+    _countryCodeController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        widget.label,
+        style: text_style.TextTheme.description(null)
+            .copyWith(color: color_theme.GreyShader.greyAccent),
+      ),
+      const SizedBox(height: 4),
+      Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              height: 48,
+              child: TextFormField(
+                controller: _countryCodeController = TextEditingController(text: '+60'),
+                keyboardType: TextInputType.number,
+                onChanged: (text) {
+                  widget.onTextChanged?.call(text);
+                },
+                decoration: InputDecoration(
+                  hintText: _countryCodeController.text,
+                  labelStyle: text_style.TextTheme.body1(FontWeight.w400),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (widget.helperText != null)
+                          ? color_theme.ColorTheme.mainTheme.colorScheme.error
+                          : color_theme.GreyShader.greyAccentLight,
+                    ),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12, horizontal: 16),
+                ),
+              ),
+            )),
+            const SizedBox(width: 8),
+            Expanded(
+            flex: 4,
+            child: SizedBox(
+              height: 48,
+              child: TextFormField(
+                controller: _phoneNumberController,
+                keyboardType: TextInputType.number,
+                onChanged: (text) {
+                  widget.onTextChanged?.call(text);
+                },
+                decoration: InputDecoration(
+                  hintText: 'Enter your phone number',
+                  labelStyle: text_style.TextTheme.body1(FontWeight.w400),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: (widget.helperText != null)
+                          ? color_theme.ColorTheme.mainTheme.colorScheme.error
+                          : color_theme.GreyShader.greyAccentLight,
+                    ),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12, horizontal: 16),
+                ),
+              ),
+            )),
+        ],
+      ),
+      Text(
+      widget.helperText ?? '',
+      style: text_style.TextTheme.description(null).copyWith(
+          color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+    ),
+    ]);
+  }
+}
