@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:quickride/src/utils/firebaseAuth_repository.dart' as firebase_auth;
+import '../../data/repository/authentication_repository.dart';
 import 'package:quickride/src/features/authentication/data/repository/authentication_repository.dart' as auth_repo;
 
 class LoginViewModel with ChangeNotifier {
@@ -16,9 +16,9 @@ class LoginViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String?> FirebaseLogin() async {
+  Future<String?> firebaseLogin() async {
     try{
-      String? message = await auth_repo.AuthenticationRepository.FirebaseSignIn(email, password);
+      String? message = await auth_repo.AuthenticationRepository.firebaseSignIn(email, password);
       return message;
     } catch (e) {
       print(e);
@@ -26,9 +26,9 @@ class LoginViewModel with ChangeNotifier {
     }
   }
 
-  Future<bool> FacebookLogin() async {
+  Future<bool> facebookLogin() async {
     try{
-      await firebase_auth.SignInWithFacebook().signInWithFacebook();
+      await AuthenticationRepository.signInWithFacebook();
     } catch (e) {
       print(e);
       return false;
@@ -36,9 +36,9 @@ class LoginViewModel with ChangeNotifier {
     return true;
   }
 
-  Future<bool> GoogleLogin() async {
+  Future<bool> googleLogin() async {
     try{
-      await firebase_auth.SignInWithGoogle().signInWithGoogle();
+      await AuthenticationRepository.signInWithGoogle();
     } catch (e) {
       print(e);
       return false;

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:quickride/src/core/base_view.dart';
 import 'package:quickride/src/utils/text_style.dart' as text_style;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
-import '../../widgets/register_credential.dart';
+import '../../utils/register_credential.dart';
 import '../viewmodel/register_viewmodel.dart';
 
 class Register extends StatelessWidget {

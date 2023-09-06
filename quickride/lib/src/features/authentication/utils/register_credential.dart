@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/src/widgets/input_field_variation.dart' as text_field;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
-import 'package:quickride/src/utils/input_validation.dart' as input_validation;
 import 'package:quickride/src/utils/color_theme.dart' as color_theme;
 
 import '../register/viewmodel/register_viewmodel.dart';
@@ -30,9 +29,9 @@ class RegisterCredentialState extends State<RegisterCredential> {
             child: text_field.TextField(
               label: 'Username',
               prefixIcon: const Icon(Icons.person_rounded),
-              onTextChanged: (text) {
+              /*onTextChanged: (text) {
                 RegisterViewModel().setUsername(text);
-              },
+              },*/
               helperText: widget.emailErrorMessage,
             )),
         const SizedBox(height: 4),
@@ -50,9 +49,9 @@ class RegisterCredentialState extends State<RegisterCredential> {
             child: text_field.TextField(
               label: 'Email',
               prefixIcon: const Icon(Icons.email_rounded),
-              onTextChanged: (text) {
+              /*onTextChanged: (text) {
                 RegisterViewModel().setEmail(text);
-              },
+              },*/
               helperText: widget.emailErrorMessage,
             )),
         Form(
@@ -74,7 +73,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
             width: 380,
             onPressed: () {
               RegisterViewModel viewModel = widget.viewModel;
-              String? emailError =
+              /*String? emailError =
                   input_validation.validateEmail(viewModel.email);
               List<String?> passwordErrors =
                   input_validation.validatePassword(viewModel.password);
@@ -89,7 +88,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
                 // Navigate to home page
                 print('Login success');
                 //Navigator.pushNamed(context, Login.routeName);
-              }
+              }*/
             }),
       ],
     );

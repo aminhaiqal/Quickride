@@ -32,7 +32,7 @@ class RegisterViewModel with ChangeNotifier {
     user_model.User user = user_model.User(
         uid: '', username: username, email: email, phoneNumber: phoneNumber);
     String? result =
-        await auth_repo.AuthenticationRepository.FirebaseSignUp(user, password);
+        await auth_repo.AuthenticationRepository.firebaseSignUp(user, password);
     return result;
   }
 }

@@ -6,14 +6,14 @@ import 'package:quickride/src/utils/color_theme.dart' as color_theme;
 class TextField extends StatefulWidget {
   final String label;
   final Icon? prefixIcon;
-  final void Function(String)? onTextChanged;
+  final void Function(String)? onChanged;
   final String? helperText;
   final OutlineInputBorder? errorBorder;
 
   const TextField(
       {required this.label,
       this.prefixIcon,
-      this.onTextChanged,
+      this.onChanged,
       this.helperText,
       Key? key,
       this.errorBorder})
@@ -24,17 +24,17 @@ class TextField extends StatefulWidget {
 }
 
 class TextFieldState extends State<TextField> {
-  final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _textEditingController.text = '';
+    controller.text = '';
   }
 
   @override
   void dispose() {
-    _textEditingController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -46,34 +46,30 @@ class TextFieldState extends State<TextField> {
         style: text_style.TextTheme.description(null)
             .copyWith(color: color_theme.GreyShader.greyAccent),
       ),
-      const SizedBox(height: 4),
-      SizedBox(
+      Container(
+          margin: const EdgeInsets.symmetric(vertical: 4),
           height: 48, //adjust height of textfield
           child: TextFormField(
-              controller: _textEditingController,
-              onChanged: (text) {
-                widget.onTextChanged?.call(text);
-              },
+              controller: controller,
+              onChanged: widget.onChanged,
               decoration: InputDecoration(
                   hintText: 'Enter your ${widget.label.toLowerCase()}',
                   prefixIcon: widget.prefixIcon,
                   labelStyle: text_style.TextTheme.body1(FontWeight.w400),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: (widget.helperText != null)
-                          ? color_theme.ColorTheme.mainTheme.colorScheme.error
-                          : color_theme.GreyShader.greyAccentLight,
-                    ),
-                    borderRadius: BorderRadius.circular(6)
-                  ),
+                      borderSide: BorderSide(
+                        color: (widget.helperText != '')
+                            ? color_theme.ColorTheme.mainTheme.colorScheme.error
+                            : color_theme.GreyShader.greyAccentLight,
+                      ),
+                      borderRadius: BorderRadius.circular(6)),
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 12, horizontal: 16)))),
-      const SizedBox(height: 4),
       Text(
         widget.helperText ?? '',
         style: text_style.TextTheme.description(null).copyWith(
             color: color_theme.ColorTheme.mainTheme.colorScheme.error),
-      ),
+      )
     ]);
   }
 }
@@ -144,14 +140,14 @@ class PasswordTextFieldState extends State<PasswordTextField> {
                   child: Icon(
                       _obscureText ? Icons.visibility : Icons.visibility_off),
                 ),
-                enabledBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: (widget.helperText != null)
-                          ? color_theme.ColorTheme.mainTheme.colorScheme.error
-                          : color_theme.GreyShader.greyAccentLight),
-                  borderRadius: BorderRadius.circular(6)),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 12, horizontal: 16)),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: (widget.helperText != null)
+                            ? color_theme.ColorTheme.mainTheme.colorScheme.error
+                            : color_theme.GreyShader.greyAccentLight),
+                    borderRadius: BorderRadius.circular(6)),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16)),
             obscureText: _obscureText,
           )),
       TextButton(
@@ -210,65 +206,66 @@ class PhoneNumberState extends State<PhoneNumber> {
       Row(
         children: [
           Expanded(
-            flex: 1,
-            child: SizedBox(
-              height: 48,
-              child: TextFormField(
-                controller: _countryCodeController = TextEditingController(text: '+60'),
-                keyboardType: TextInputType.number,
-                onChanged: (text) {
-                  widget.onTextChanged?.call(text);
-                },
-                decoration: InputDecoration(
-                  hintText: _countryCodeController.text,
-                  labelStyle: text_style.TextTheme.body1(FontWeight.w400),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: (widget.helperText != null)
-                          ? color_theme.ColorTheme.mainTheme.colorScheme.error
-                          : color_theme.GreyShader.greyAccentLight,
+              flex: 1,
+              child: SizedBox(
+                height: 48,
+                child: TextFormField(
+                  controller: _countryCodeController =
+                      TextEditingController(text: '+60'),
+                  keyboardType: TextInputType.number,
+                  onChanged: (text) {
+                    widget.onTextChanged?.call(text);
+                  },
+                  decoration: InputDecoration(
+                    hintText: _countryCodeController.text,
+                    labelStyle: text_style.TextTheme.body1(FontWeight.w400),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: (widget.helperText != null)
+                            ? color_theme.ColorTheme.mainTheme.colorScheme.error
+                            : color_theme.GreyShader.greyAccentLight,
+                      ),
+                      borderRadius: BorderRadius.circular(6),
                     ),
-                    borderRadius: BorderRadius.circular(6),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 16),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12, horizontal: 16),
                 ),
-              ),
-            )),
-            const SizedBox(width: 8),
-            Expanded(
-            flex: 4,
-            child: SizedBox(
-              height: 48,
-              child: TextFormField(
-                controller: _phoneNumberController,
-                keyboardType: TextInputType.number,
-                onChanged: (text) {
-                  widget.onTextChanged?.call(text);
-                },
-                decoration: InputDecoration(
-                  hintText: 'Enter your phone number',
-                  labelStyle: text_style.TextTheme.body1(FontWeight.w400),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: (widget.helperText != null)
-                          ? color_theme.ColorTheme.mainTheme.colorScheme.error
-                          : color_theme.GreyShader.greyAccentLight,
+              )),
+          const SizedBox(width: 8),
+          Expanded(
+              flex: 4,
+              child: SizedBox(
+                height: 48,
+                child: TextFormField(
+                  controller: _phoneNumberController,
+                  keyboardType: TextInputType.number,
+                  onChanged: (text) {
+                    widget.onTextChanged?.call(text);
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Enter your phone number',
+                    labelStyle: text_style.TextTheme.body1(FontWeight.w400),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: (widget.helperText != null)
+                            ? color_theme.ColorTheme.mainTheme.colorScheme.error
+                            : color_theme.GreyShader.greyAccentLight,
+                      ),
+                      borderRadius: BorderRadius.circular(6),
                     ),
-                    borderRadius: BorderRadius.circular(6),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 16),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12, horizontal: 16),
                 ),
-              ),
-            )),
+              )),
         ],
       ),
       Text(
-      widget.helperText ?? '',
-      style: text_style.TextTheme.description(null).copyWith(
-          color: color_theme.ColorTheme.mainTheme.colorScheme.error),
-    ),
+        widget.helperText ?? '',
+        style: text_style.TextTheme.description(null).copyWith(
+            color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+      ),
     ]);
   }
 }
