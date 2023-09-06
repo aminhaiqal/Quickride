@@ -9,30 +9,25 @@ class PrimaryButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final double? width;
 
-  const PrimaryButton({required this.label, required this.width, this.onPressed, Key? key})
+  const PrimaryButton(
+      {required this.label, required this.width, this.onPressed, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        height: 56,
-        width: width,
-        decoration: BoxDecoration(
-          color: const Color(0xFF212121),
-          borderRadius: BorderRadius.circular(8),
+    return ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(width!, 56),
+          backgroundColor: theme.ColorTheme.mainTheme.colorScheme.onBackground,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
-        padding: const EdgeInsets.symmetric(vertical: 16),
         child: Center(
-          child: Text(
-            label,
-            style: textStyle.TextTheme.body1(null).copyWith(
-              color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
-            )
-          )
-        )
-        )
-    );
+            child: Text(label,
+                style: textStyle.TextTheme.body1(null).copyWith(
+                  color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
+                ))));
   }
 }

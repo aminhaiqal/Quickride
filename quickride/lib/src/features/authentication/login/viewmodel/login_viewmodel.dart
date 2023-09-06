@@ -6,7 +6,7 @@ class LoginViewModel with ChangeNotifier {
   String email = '';
   String password = '';
 
-  void setUsername(String value) {
+  void setEmail(String value) {
     email = value;
     notifyListeners();
   }

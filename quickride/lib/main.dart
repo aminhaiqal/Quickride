@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quickride/src/core/base_view.dart';
+import 'package:quickride/src/features/authentication/register/view/register_view.dart';
 import 'package:quickride/src/utils/firebase_options.dart';
 import 'package:quickride/src/features/authentication/login/view/login_view.dart';
 import 'package:quickride/src/utils/text_style.dart' as text_theme;
@@ -32,7 +33,7 @@ class MyAppState extends State<MyApp> {
         routes: {
           '': (context) => const Splash(),
           '/login': (context) => const Login(),
-          '/register': (context) => const Login(),
+          '/register': (context) => const Register(),
         },
         home: const Splash());
   }
@@ -66,14 +67,14 @@ class Splash extends StatelessWidget {
               width: 380,
               aspectRatio: 1 / 1,
             ),
-            const callToAction()
+            const CallToAction()
           ],
         )));
   }
 }
 
-class callToAction extends StatelessWidget {
-  const callToAction({Key? key}) : super(key: key);
+class CallToAction extends StatelessWidget {
+  const CallToAction({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,18 +103,26 @@ class callToAction extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(context, '/register');
         },
+        // change to Elevated Button
         child: Container(
             margin: const EdgeInsets.only(bottom: 24.0),
-            height: 54,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: theme.ColorTheme.mainTheme.colorScheme.primary,
+            child: ElevatedButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/register');
+        },
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(0, 56),
+          backgroundColor: theme.ColorTheme.mainTheme.colorScheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
+        ),
+        child: Center(
+            child: Text('Get Started',
+                style: text_theme.TextTheme.headline3(null).copyWith(
+                  color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
+                )))),
             ),
-            child: Center(
-                child: Text('Get Started',
-                    style: text_theme.TextTheme.headline3(null).copyWith(
-                      color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
-                    )))),
       ),
       RichText(
           text: TextSpan(children: <TextSpan>[

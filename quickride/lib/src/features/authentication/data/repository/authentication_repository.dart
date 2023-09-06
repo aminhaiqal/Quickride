@@ -13,7 +13,8 @@ class AuthenticationRepository {
   // Firebase Authentication Sign Up 
   static Future<String?> FirebaseSignUp(user_model.User user, String password) async {
     try {
-      await auth.createUserWithEmailAndPassword(email: user.email, password: password);
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(email: user.email, password: password);
+      user.uid = userCredential.user!.uid;
       firebase_repo.UserCollection().addUser(user);
       return 'Sign up successful';
     } on FirebaseAuthException catch (e) {

@@ -5,24 +5,28 @@ import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/input_validation.dart' as input_validation;
 import 'package:quickride/src/utils/color_theme.dart' as color_theme;
 
+import '../register/viewmodel/register_viewmodel.dart';
+
 // ignore: must_be_immutable
-class LoginCredential extends StatefulWidget {
-  final LoginViewModel viewModel;
-  LoginCredential({Key? key, required this.viewModel}) : super(key: key);
+class RegisterCredential extends StatefulWidget {
+  final RegisterViewModel viewModel;
+  RegisterCredential({Key? key, required this.viewModel}) : super(key: key);
 
   @override
-  LoginCredentialState createState() => LoginCredentialState();
+  RegisterCredentialState createState() => RegisterCredentialState();
   String? emailErrorMessage;
   GlobalKey<FormState> emailKey = GlobalKey<FormState>();
   GlobalKey<FormState> passwordKey = GlobalKey<FormState>();
 }
 
-class LoginCredentialState extends State<LoginCredential> {
+class RegisterCredentialState extends State<RegisterCredential> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Flex(
+      direction: Axis.vertical,
       children: [
-        Form(
+        Expanded(
+          child: Form(
             key: widget.emailKey, // Assign the email field key
             child: text_field.TextField(
               label: 'Email',
@@ -31,7 +35,7 @@ class LoginCredentialState extends State<LoginCredential> {
                 LoginViewModel().setEmail(text);
               },
               helperText: widget.emailErrorMessage,
-            )),
+            ))),
         const SizedBox(height: 4),
         Form(
             key: widget.passwordKey, // Assign the password field key
@@ -51,7 +55,7 @@ class LoginCredentialState extends State<LoginCredential> {
             label: 'Sign In',
             width: 380,
             onPressed: () {
-              LoginViewModel viewModel = widget.viewModel;
+              RegisterViewModel viewModel = widget.viewModel;
               String? emailError =
                   input_validation.validateEmail(viewModel.email);
               List<String?> passwordErrors =

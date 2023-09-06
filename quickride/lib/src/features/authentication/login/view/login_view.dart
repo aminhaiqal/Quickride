@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quickride/src/core/base_view.dart';
@@ -110,13 +111,16 @@ class Login extends StatelessWidget {
                                         .colorScheme.onBackground
                                         .withOpacity(0.5))),
                         TextSpan(
+                          recognizer: TapGestureRecognizer()..onTap = () {
+                              Navigator.pushNamed(context, '/register');
+                            },
                             text: 'Sign Up',
                             style: text_style.TextTheme.description(
                                     FontWeight.w500)
                                 .copyWith(
                                     color: theme.ColorTheme.mainTheme
                                         .colorScheme.primary))
-                      ]))),
+                      ])))
                 ])),
               );
             })));

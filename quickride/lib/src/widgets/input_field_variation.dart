@@ -20,11 +20,10 @@ class TextField extends StatefulWidget {
       : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _TextFieldState createState() => _TextFieldState();
+  TextFieldState createState() => TextFieldState();
 }
 
-class _TextFieldState extends State<TextField> {
+class TextFieldState extends State<TextField> {
   final TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -95,11 +94,10 @@ class PasswordTextField extends StatefulWidget {
       : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _PasswordTextFieldState createState() => _PasswordTextFieldState();
+  PasswordTextFieldState createState() => PasswordTextFieldState();
 }
 
-class _PasswordTextFieldState extends State<PasswordTextField> {
+class PasswordTextFieldState extends State<PasswordTextField> {
   bool _obscureText = true;
   final TextEditingController _textEditingController = TextEditingController();
 
