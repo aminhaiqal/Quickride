@@ -1,14 +1,11 @@
-// ignore_for_file: library_prefixes, no_leading_underscores_for_local_identifiers, avoid_print, library_private_types_in_public_api, camel_case_types
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quickride/src/core/base_view.dart';
 import 'package:quickride/src/utils/firebase_options.dart';
 import 'package:quickride/src/features/authentication/login/view/login_view.dart';
-import 'package:quickride/src/utils/text_style.dart' as textTheme;
+import 'package:quickride/src/utils/text_style.dart' as text_theme;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
-import 'package:quickride/src/widgets/appBar.dart';
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 import 'package:quickride/src/widgets/image_retriever.dart';
 
@@ -22,10 +19,10 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,9 +54,12 @@ class Splash extends StatelessWidget {
             child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(bottom: 32),
-              child: const CustomAppBar(title: 'Quickride'),
-            ),
+                margin: const EdgeInsets.only(bottom: 32),
+                child: Center(
+                    child: Text('Quickride',
+                        style: text_theme.TextTheme.headline2(null).copyWith(
+                          color: theme.ColorTheme.mainTheme.colorScheme.surface,
+                        )))),
             ImageWidget(
               imageUrlFuture:
                   firebase.AssetsFolder().getDownloadURL('tesla.png'),
@@ -85,7 +85,7 @@ class callToAction extends StatelessWidget {
             alignment: Alignment.center,
             child: Text('Make travelling by car most comfortable',
                 textAlign: TextAlign.center,
-                style: textTheme.TextTheme.headline1(null).copyWith(
+                style: text_theme.TextTheme.headline1(null).copyWith(
                   color: theme.ColorTheme.mainTheme.colorScheme.surface,
                 ))),
       ),
@@ -94,7 +94,7 @@ class callToAction extends StatelessWidget {
           child: Text(
               'Enjoy seamless ride experience without worrying about any obstacles.',
               textAlign: TextAlign.center,
-              style: textTheme.TextTheme.headline3(FontWeight.w400).copyWith(
+              style: text_theme.TextTheme.headline3(FontWeight.w400).copyWith(
                 color: theme.ColorTheme.mainTheme.colorScheme.surface
                     .withOpacity(0.5),
               ))),
@@ -111,29 +111,26 @@ class callToAction extends StatelessWidget {
             ),
             child: Center(
                 child: Text('Get Started',
-                    style: textTheme.TextTheme.headline3(null).copyWith(
+                    style: text_theme.TextTheme.headline3(null).copyWith(
                       color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
                     )))),
       ),
       RichText(
-          text: TextSpan(
-              children: <TextSpan>[
-            TextSpan(
-                text: 'Already have an account? ',
-                style: textTheme.TextTheme.description(FontWeight.w400)
-                    .copyWith(
-                        color: theme.ColorTheme.mainTheme.colorScheme.surface
-                            .withOpacity(0.5))),
-            TextSpan(
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.pushNamed(context, '/login');
-                  },
-                text: 'Sign In',
-                style: textTheme.TextTheme.description(FontWeight.w500)
-                    .copyWith(
-                        color: theme.ColorTheme.mainTheme.colorScheme.primary))
-          ]))
+          text: TextSpan(children: <TextSpan>[
+        TextSpan(
+            text: 'Already have an account? ',
+            style: text_theme.TextTheme.description(FontWeight.w400).copyWith(
+                color: theme.ColorTheme.mainTheme.colorScheme.surface
+                    .withOpacity(0.5))),
+        TextSpan(
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.pushNamed(context, '/login');
+              },
+            text: 'Sign In',
+            style: text_theme.TextTheme.description(FontWeight.w500).copyWith(
+                color: theme.ColorTheme.mainTheme.colorScheme.primary))
+      ]))
     ]));
   }
 }
