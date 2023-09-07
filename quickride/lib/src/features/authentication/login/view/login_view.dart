@@ -84,8 +84,7 @@ class Login extends StatelessWidget {
                               onTap: () {
                                 auth_repo.AuthenticationRepository.signInWithFacebook();
                               },
-                            ),
-                          ),
+                            )),
                           const SizedBox(width: 16),
                           Flexible(
                             flex: 1,
@@ -95,8 +94,7 @@ class Login extends StatelessWidget {
                               onTap: () {
                                 auth_repo.AuthenticationRepository.signInWithGoogle();
                               },
-                            ),
-                          )
+                            ))
                         ]),
                   ),
                   Container(
