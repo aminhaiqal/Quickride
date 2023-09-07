@@ -4,7 +4,7 @@ import '../login/viewmodel/login_viewmodel.dart';
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/color_theme.dart' as color_theme;
 import 'package:quickride/src/utils/text_style.dart' as text_style;
-import '../data/repository/exception.dart';
+import '../data/repository/exception.dart' as exception;
 
 class LoginCredential extends StatefulWidget {
   final LoginViewModel viewModel;
@@ -16,9 +16,10 @@ class LoginCredential extends StatefulWidget {
 
 class LoginCredentialState extends State<LoginCredential> {
   bool _obscureText = true;
-  String emailErrorMessage = '', passwordErrorMessage = '', helperText = '';
-  final GlobalKey<FormState> _emailKey = GlobalKey<FormState>(), _passwordKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController(), _passwordController = TextEditingController();
+  String helperText = '';
+
+  final TextEditingController _emailController = TextEditingController(),
+      _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -37,14 +38,19 @@ class LoginCredentialState extends State<LoginCredential> {
       ),
       const SizedBox(height: 4),
       Form(
-        key: _emailKey,
-        child: TextFormField(
-          controller: _emailController,
-          decoration: input_decoration.buildEmailInputDecoration(
-              label: 'Email',
-              helperText: helperText,
-              prefixIcon: Icons.email_rounded),
+          child: TextFormField(
+            controller: _emailController,
+            decoration: input_decoration.buildEmailInputDecoration(
+                label: 'Email',
+                helperText: helperText,
+                prefixIcon: Icons.email_rounded),
           )),
+          const SizedBox(height: 4),
+          Text(
+        helperText,
+        style: text_style.TextTheme.description(null)
+            .copyWith(color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+      ),
       const SizedBox(height: 24),
       Text(
         'Password',
@@ -53,45 +59,34 @@ class LoginCredentialState extends State<LoginCredential> {
       ),
       const SizedBox(height: 4),
       Form(
-        key: _passwordKey,
-        child: TextFormField(
-          controller: _passwordController,
-          obscureText: _obscureText,
-          decoration: input_decoration.buildPasswordInputDecoration(
-              label: 'Password',
-              helperText: helperText,
-              prefixIcon: Icons.lock_rounded,
-              obscureText: _obscureText,
-              onSuffixIconPressed: () => setState(() {
-                    _obscureText = !_obscureText;
-                  })),
+          child: TextFormField(
+            controller: _passwordController,
+            obscureText: _obscureText,
+            decoration: input_decoration.buildPasswordInputDecoration(
+                label: 'Password',
+                helperText: helperText,
+                prefixIcon: Icons.lock_rounded,
+                obscureText: _obscureText,
+                onSuffixIconPressed: () => setState(() {
+                      _obscureText = !_obscureText;
+                    })),
           )),
       const SizedBox(height: 48),
       action_button.PrimaryButton(
           label: 'Sign In',
           width: MediaQuery.of(context).size.width,
           onPressed: () {
-            /*validateAndSetError(
-              viewModel.email,
-              validateEmail,
-              widget._emailKey, // Global key for email field
-              widget.emailErrorMessage,
-              updateErrorMessage,
-              context,
-            );
-            validateAndSetError(
-              viewModel.password,
-              validatePassword,
-              widget.passwordKey,
-              widget.passwordErrorMessage,
-              setState,
-              context,
-            );*/
-
+            try {
+              exception.validateEmail(_emailController.text);
+            } catch (e) {
+             setState(() {
+                helperText = e.toString();
+              });
+            }
             // save email and password to viewmodel
             //widget.viewModel.email = _emailController.text;
             //widget.viewModel.password = _passwordController.text;
-          })  
+          })
     ]);
   }
 }

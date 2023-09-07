@@ -1,24 +1,3 @@
-import 'package:flutter/material.dart';
-
-// Validator function
-void validateAndSetError(
-  String value,
-  Function validator,
-  GlobalKey<FormState> globalKey,
-  String errorMessage,
-  Function(String) setError,
-  BuildContext context,
-) {
-  try {
-    validator(value);
-    setError('');
-    globalKey.currentState?.validate();
-  } catch (e) {
-    if (e is CustomValidationException) {
-      setError(e.message);
-    }
-  }
-}
 
 // Exceptions
 class CustomValidationException implements Exception {
@@ -27,7 +6,7 @@ class CustomValidationException implements Exception {
   CustomValidationException(this.message);
 
   @override
-  String toString() => 'ValidationException: $message';
+  String toString() => message;
 }
 
 void validateEmail(String value) {
