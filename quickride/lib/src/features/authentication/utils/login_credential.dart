@@ -78,6 +78,7 @@ class LoginCredentialState extends State<LoginCredential> {
           onPressed: () {
             try {
               exception.validateEmail(_emailController.text);
+              widget.viewModel.email = _emailController.text;
             } catch (e) {
              setState(() {
                 emailErrorMessage = e.toString();
@@ -85,6 +86,7 @@ class LoginCredentialState extends State<LoginCredential> {
             }
             try {
               exception.validatePassword(_passwordController.text);
+              widget.viewModel.password = _passwordController.text;
             } catch (e) {
              setState(() {
                 passwordErrorMessage = e.toString();
