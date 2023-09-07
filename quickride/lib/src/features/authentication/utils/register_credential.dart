@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quickride/src/widgets/input_field_variation.dart' as text_field;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/color_theme.dart' as color_theme;
 
@@ -35,7 +34,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
               helperText: widget.emailErrorMessage,
             )),*/
         const SizedBox(height: 4),
-        Form(
+        /*Form(
             key: widget.phoneNumberKey, // Assign the phone number field key
             child: text_field.PhoneNumber(
               label: 'Phone Number',
@@ -44,7 +43,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
               },
               helperText: widget.emailErrorMessage,
             )),
-        /*Form(
+        Form(
             key: widget.emailKey, // Assign the phone number field key
             child: text_field.TextField(
               label: 'Email',
@@ -53,7 +52,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
                 RegisterViewModel().setEmail(text);
               },
               helperText: widget.emailErrorMessage,
-            )),*/
+            )),
         Form(
             key: widget.passwordKey, // Assign the password field key
             child: text_field.PasswordTextField(
@@ -66,7 +65,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
               onTextChanged: (text) {
                 RegisterViewModel().setPassword(text);
               },
-            )),
+            )),*/
         const SizedBox(height: 48),
         action_button.PrimaryButton(
             label: 'Sign Up',

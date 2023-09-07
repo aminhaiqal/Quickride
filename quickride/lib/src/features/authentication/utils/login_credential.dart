@@ -1,66 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:quickride/src/widgets/input_field_variation.dart' as text_field;
+import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
 import '../login/viewmodel/login_viewmodel.dart';
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/color_theme.dart' as color_theme;
+import 'package:quickride/src/utils/text_style.dart' as text_style;
 import '../data/repository/exception.dart';
 
-// ignore: must_be_immutable
 class LoginCredential extends StatefulWidget {
   final LoginViewModel viewModel;
-  LoginCredential({Key? key, required this.viewModel}) : super(key: key);
+  const LoginCredential({Key? key, required this.viewModel}) : super(key: key);
 
   @override
   LoginCredentialState createState() => LoginCredentialState();
-  String emailErrorMessage = '';
-  String passwordErrorMessage = '';
-  final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
-  GlobalKey<FormState> passwordKey = GlobalKey<FormState>();
 }
 
 class LoginCredentialState extends State<LoginCredential> {
-  void updateErrorMessage(String errorMessage) {
-    setState(() {
-      widget.emailErrorMessage = errorMessage;
-    });
+  bool _obscureText = true;
+  String emailErrorMessage = '', passwordErrorMessage = '', helperText = '';
+  final GlobalKey<FormState> _emailKey = GlobalKey<FormState>(), _passwordKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController(), _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    LoginViewModel viewModel = widget.viewModel;
-
-    return Column(children: [
-      // Back to basic
-      Form(
-          key: widget._emailKey, // Assign the email field key
-          child: text_field.TextField(
-            label: 'Email',
-            prefixIcon: const Icon(Icons.email_rounded),
-            onValueUpdated: (value) {
-              viewModel.setEmail(value);
-              print('model: ${viewModel.email}');
-            },
-            helperText: widget.emailErrorMessage,
-          )),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        'Email',
+        style: text_style.TextTheme.description(null)
+            .copyWith(color: color_theme.GreyShader.greyAccent),
+      ),
       const SizedBox(height: 4),
       Form(
-          key: widget.passwordKey, // Assign the password field key
-          child: text_field.PasswordTextField(
-            label: 'Password',
-            prefixIcon: const Icon(Icons.lock),
-            errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: color_theme.ColorTheme.mainTheme.colorScheme.error)),
-            onTextChanged: (text) {
-              LoginViewModel().setPassword(text);
-            },
+        key: _emailKey,
+        child: TextFormField(
+          controller: _emailController,
+          decoration: input_decoration.buildEmailInputDecoration(
+              label: 'Email',
+              helperText: helperText,
+              prefixIcon: Icons.email_rounded),
+          )),
+      const SizedBox(height: 24),
+      Text(
+        'Password',
+        style: text_style.TextTheme.description(null)
+            .copyWith(color: color_theme.GreyShader.greyAccent),
+      ),
+      const SizedBox(height: 4),
+      Form(
+        key: _passwordKey,
+        child: TextFormField(
+          controller: _passwordController,
+          obscureText: _obscureText,
+          decoration: input_decoration.buildPasswordInputDecoration(
+              label: 'Password',
+              helperText: helperText,
+              prefixIcon: Icons.lock_rounded,
+              obscureText: _obscureText,
+              onSuffixIconPressed: () => setState(() {
+                    _obscureText = !_obscureText;
+                  })),
           )),
       const SizedBox(height: 48),
       action_button.PrimaryButton(
           label: 'Sign In',
-          width: 380,
+          width: MediaQuery.of(context).size.width,
           onPressed: () {
-            validateAndSetError(
+            /*validateAndSetError(
               viewModel.email,
               validateEmail,
               widget._emailKey, // Global key for email field
@@ -68,7 +79,7 @@ class LoginCredentialState extends State<LoginCredential> {
               updateErrorMessage,
               context,
             );
-            /*validateAndSetError(
+            validateAndSetError(
               viewModel.password,
               validatePassword,
               widget.passwordKey,
@@ -76,7 +87,11 @@ class LoginCredentialState extends State<LoginCredential> {
               setState,
               context,
             );*/
-          })
+
+            // save email and password to viewmodel
+            //widget.viewModel.email = _emailController.text;
+            //widget.viewModel.password = _passwordController.text;
+          })  
     ]);
   }
 }
