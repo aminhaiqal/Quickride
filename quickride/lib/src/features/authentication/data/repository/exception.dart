@@ -10,7 +10,6 @@ void validateAndSetError(
   BuildContext context,
 ) {
   try {
-    print(value);
     validator(value);
     setError('');
     globalKey.currentState?.validate();

@@ -67,10 +67,8 @@ class AuthenticationRepository {
       final AccessToken? result =
           (await FacebookAuth.instance.login()) as AccessToken?;
       if (result != null) {
-        // Create a credential from the access token
         final OAuthCredential facebookAuthCredential =
             FacebookAuthProvider.credential(result.token);
-        // Once signed in, return the UserCredential
         final UserCredential authResult =
             await _auth.signInWithCredential(facebookAuthCredential);
         final User? user = authResult.user;
@@ -92,13 +90,11 @@ class AuthenticationRepository {
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
-        // Create a new credential
         final OAuthCredential googleAuthCredential =
             GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken,
         );
-        // Once signed in, return the UserCredential
         final UserCredential authResult =
             await _auth.signInWithCredential(googleAuthCredential);
         final User? user = authResult.user;
