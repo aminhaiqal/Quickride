@@ -7,6 +7,7 @@ import 'package:quickride/src/utils/color_theme.dart' as theme;
 import '../../utils/auth_method.dart';
 import '../viewmodel/login_viewmodel.dart';
 import '../../utils/login_credential.dart';
+import 'package:quickride/src/features/authentication/data/repository/authentication_repository.dart' as auth_repo;
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -81,7 +82,7 @@ class Login extends StatelessWidget {
                               label: 'Facebook',
                               imageUrl: 'facebook.png',
                               onTap: () {
-                                viewModel.facebookLogin();
+                                auth_repo.AuthenticationRepository.signInWithFacebook();
                               },
                             ),
                           ),
@@ -92,7 +93,7 @@ class Login extends StatelessWidget {
                               label: 'Google',
                               imageUrl: 'google.png',
                               onTap: () {
-                                viewModel.googleLogin();
+                                auth_repo.AuthenticationRepository.signInWithGoogle();
                               },
                             ),
                           )
