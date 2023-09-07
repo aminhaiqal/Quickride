@@ -16,7 +16,7 @@ class LoginCredential extends StatefulWidget {
 
 class LoginCredentialState extends State<LoginCredential> {
   bool _obscureText = true;
-  String helperText = '';
+  String emailErrorMessage = '', passwordErrorMessage = '';
 
   final TextEditingController _emailController = TextEditingController(),
       _passwordController = TextEditingController();
@@ -42,12 +42,12 @@ class LoginCredentialState extends State<LoginCredential> {
             controller: _emailController,
             decoration: input_decoration.buildEmailInputDecoration(
                 label: 'Email',
-                helperText: helperText,
+                helperText: emailErrorMessage,
                 prefixIcon: Icons.email_rounded),
           )),
           const SizedBox(height: 4),
           Text(
-        helperText,
+        emailErrorMessage,
         style: text_style.TextTheme.description(null)
             .copyWith(color: color_theme.ColorTheme.mainTheme.colorScheme.error),
       ),
@@ -64,7 +64,7 @@ class LoginCredentialState extends State<LoginCredential> {
             obscureText: _obscureText,
             decoration: input_decoration.buildPasswordInputDecoration(
                 label: 'Password',
-                helperText: helperText,
+                helperText: passwordErrorMessage,
                 prefixIcon: Icons.lock_rounded,
                 obscureText: _obscureText,
                 onSuffixIconPressed: () => setState(() {
@@ -80,12 +80,16 @@ class LoginCredentialState extends State<LoginCredential> {
               exception.validateEmail(_emailController.text);
             } catch (e) {
              setState(() {
-                helperText = e.toString();
+                emailErrorMessage = e.toString();
               });
             }
-            // save email and password to viewmodel
-            //widget.viewModel.email = _emailController.text;
-            //widget.viewModel.password = _passwordController.text;
+            try {
+              exception.validatePassword(_passwordController.text);
+            } catch (e) {
+             setState(() {
+                passwordErrorMessage = e.toString();
+              });
+            }
           })
     ]);
   }
