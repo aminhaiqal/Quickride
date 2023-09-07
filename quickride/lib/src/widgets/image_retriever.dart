@@ -1,12 +1,16 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:quickride/src/utils/image_ratio.dart';
 
 class ImageWidget extends StatefulWidget {
   final Future<String?> imageUrlFuture;
-  int width, height;
+  double width;
+  double? aspectRatio;
 
-  ImageWidget({Key? key, required this.imageUrlFuture, this.width = 50, this.height = 50}) : super(key: key);
+  ImageWidget(
+      {Key? key, required this.imageUrlFuture, required this.width, this.aspectRatio})
+      : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -33,11 +37,10 @@ class _ImageWidgetState extends State<ImageWidget> {
   Widget build(BuildContext context) {
     return Center(
       child: _imageUrl != null
-          ? Image.network(
-              _imageUrl as String,
-              fit: BoxFit.cover,
-              cacheHeight: widget.height,
-              cacheWidth: widget.width,
+          ? AspectRatioImage(
+              customWidth: widget.width,
+              imageUrl: _imageUrl as String,
+              aspectRatio: widget.aspectRatio!,
             )
           : const CircularProgressIndicator(),
     );
