@@ -27,15 +27,28 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Quickride',
-        theme: theme.ColorTheme.mainTheme,
-        initialRoute: '/',
-        routes: {
-          '': (context) => const Splash(),
-          '/login': (context) => const Login(),
-          '/register': (context) => const Register(),
-        },
-        home: const Splash());
+      title: 'Quickride',
+      theme: theme.ColorTheme.mainTheme,
+      home: BaseView(
+          backgroundGradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.026, 1],
+            colors: [Color(0xFF222222), Color(0xFF121212)],
+          ).colors[0],
+          child: const Splash()),
+      initialRoute: '/',
+      routes: {
+        '/login': (context) => BaseView(
+            backgroundGradient:
+                theme.ColorTheme.mainTheme.colorScheme.background,
+            child: const Login()),
+        '/register': (context) => BaseView(
+            backgroundGradient:
+                theme.ColorTheme.mainTheme.colorScheme.background,
+            child: const Register()),
+      },
+    );
   }
 }
 
@@ -44,14 +57,7 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView(
-        backgroundGradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.026, 1],
-          colors: [Color(0xFF222222), Color(0xFF121212)],
-        ).colors[0],
-        child: SingleChildScrollView(
+    return SingleChildScrollView(
             child: Column(
           children: [
             Container(
@@ -69,7 +75,7 @@ class Splash extends StatelessWidget {
             ),
             const CallToAction()
           ],
-        )));
+        ));
   }
 }
 

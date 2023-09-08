@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickride/src/core/base_view.dart';
 import 'package:quickride/src/utils/text_style.dart' as text_style;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
 import '../../utils/auth_method.dart';
@@ -15,9 +14,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView(
-        backgroundGradient: theme.ColorTheme.mainTheme.colorScheme.background,
-        child: ChangeNotifierProvider<LoginViewModel>(
+    return ChangeNotifierProvider<LoginViewModel>(
             create: (_) => LoginViewModel(),
             child: Consumer<LoginViewModel>(builder: (context, viewModel, _) {
               return SingleChildScrollView(
@@ -122,6 +119,6 @@ class Login extends StatelessWidget {
                       ])))
                 ])),
               );
-            })));
+            }));
   }
 }

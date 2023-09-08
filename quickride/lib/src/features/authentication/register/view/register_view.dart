@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickride/src/core/base_view.dart';
 import 'package:quickride/src/utils/text_style.dart' as text_style;
 import 'package:quickride/src/utils/color_theme.dart' as theme;
 import '../../utils/register_credential.dart';
@@ -13,8 +12,7 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView(
-        child: ChangeNotifierProvider<RegisterViewModel>(
+    return ChangeNotifierProvider<RegisterViewModel>(
             create: (_) => RegisterViewModel(),
             child: Consumer<RegisterViewModel>(
                 builder: (context, viewModel, child) {
@@ -61,6 +59,6 @@ class Register extends StatelessWidget {
                       ])))
                 ]),
               ));
-            })));
+            }));
   }
 }
