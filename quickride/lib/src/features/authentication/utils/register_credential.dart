@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
-import 'package:quickride/src/utils/color_theme.dart' as color_theme;
-import 'package:quickride/src/utils/text_style.dart' as text_style;
+import 'package:quickride/src/utils/shared_resources/color_theme.dart' as color_theme;
+import 'package:quickride/src/utils/shared_resources/text_style.dart' as text_style;
 import '../data/repository/exception.dart' as exception;
 import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
 import '../register/viewmodel/register_viewmodel.dart';

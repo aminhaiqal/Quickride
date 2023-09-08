@@ -1,8 +1,8 @@
 // ignore_for_file: file_names, library_prefixes
 
 import 'package:flutter/material.dart';
-import 'package:quickride/src/utils/text_style.dart' as textTheme;
-import 'package:quickride/src/utils/color_theme.dart' as theme;
+import 'package:quickride/src/utils/shared_resources/text_style.dart' as textTheme;
+import 'package:quickride/src/utils/shared_resources/color_theme.dart' as theme;
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quickride/src/utils/text_style.dart' as text_style;
-import 'package:quickride/src/utils/color_theme.dart' as color_theme;
+import 'package:quickride/src/utils/shared_resources/text_style.dart' as text_style;
+import 'package:quickride/src/utils/shared_resources/color_theme.dart' as color_theme;
 
 InputDecoration buildEmailInputDecoration({
   String label = '', helperText = '',
