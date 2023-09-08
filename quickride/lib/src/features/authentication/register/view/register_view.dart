@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickride/src/utils/shared_resources/text_style.dart' as text_style;
-import 'package:quickride/src/utils/shared_resources/color_theme.dart' as theme;
+import 'package:quickride/src/utils/shared.dart' as shared;
 import '../../utils/register_credential.dart';
 import '../viewmodel/register_viewmodel.dart';
 
@@ -24,10 +23,10 @@ class Register extends StatelessWidget {
                       child: Column(
                         children: [
                           Text('Sign Up',
-                              style: text_style.TextTheme.headline2(
+                              style: shared.TextTheme.headline2(
                                   FontWeight.w600)),
                           Text('Create your account',
-                              style: text_style.TextTheme.description(null)
+                              style: shared.TextTheme.description(null)
                                   .copyWith(color: const Color(0xFF8C8C8C)))
                         ],
                       )),
@@ -40,10 +39,10 @@ class Register extends StatelessWidget {
                           text: TextSpan(children: <TextSpan>[
                         TextSpan(
                             text: 'Already have an account? ',
-                            style: text_style.TextTheme.description(
+                            style: shared.TextTheme.description(
                                     FontWeight.w400)
                                 .copyWith(
-                                    color: theme.ColorTheme.mainTheme
+                                    color: shared.ColorTheme.mainTheme
                                         .colorScheme.onBackground
                                         .withOpacity(0.5))),
                         TextSpan(
@@ -51,10 +50,10 @@ class Register extends StatelessWidget {
                               Navigator.pushNamed(context, '/login');
                             },
                             text: 'Sign In',
-                            style: text_style.TextTheme.description(
+                            style: shared.TextTheme.description(
                                     FontWeight.w500)
                                 .copyWith(
-                                    color: theme.ColorTheme.mainTheme
+                                    color: shared.ColorTheme.mainTheme
                                         .colorScheme.primary))
                       ])))
                 ]),

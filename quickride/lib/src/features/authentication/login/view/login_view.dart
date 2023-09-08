@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickride/src/utils/shared_resources/text_style.dart' as text_style;
-import 'package:quickride/src/utils/shared_resources/color_theme.dart' as theme;
+import 'package:quickride/src/utils/shared.dart' as shared;
 import '../../utils/auth_method.dart';
 import '../viewmodel/login_viewmodel.dart';
 import '../../utils/login_credential.dart';
@@ -25,10 +24,10 @@ class Login extends StatelessWidget {
                       child: Column(
                         children: [
                           Text('Sign In',
-                              style: text_style.TextTheme.headline2(
+                              style: shared.TextTheme.headline2(
                                   FontWeight.w600)),
                           Text('Access to your account',
-                              style: text_style.TextTheme.description(null)
+                              style: shared.TextTheme.description(null)
                                   .copyWith(color: const Color(0xFF8C8C8C)))
                         ],
                       )),
@@ -52,7 +51,7 @@ class Login extends StatelessWidget {
                           Flexible(
                               flex: 1,
                               child: Text('or Sign In with',
-                                  style: text_style.TextTheme.description(
+                                  style: shared.TextTheme.description(
                                           FontWeight.w500)
                                       .copyWith(
                                           color:
@@ -100,10 +99,10 @@ class Login extends StatelessWidget {
                           text: TextSpan(children: <TextSpan>[
                         TextSpan(
                             text: 'Create an account? ',
-                            style: text_style.TextTheme.description(
+                            style: shared.TextTheme.description(
                                     FontWeight.w400)
                                 .copyWith(
-                                    color: theme.ColorTheme.mainTheme
+                                    color: shared.ColorTheme.mainTheme
                                         .colorScheme.onBackground
                                         .withOpacity(0.5))),
                         TextSpan(
@@ -111,10 +110,10 @@ class Login extends StatelessWidget {
                               Navigator.pushNamed(context, '/register');
                             },
                             text: 'Sign Up',
-                            style: text_style.TextTheme.description(
+                            style: shared.TextTheme.description(
                                     FontWeight.w500)
                                 .copyWith(
-                                    color: theme.ColorTheme.mainTheme
+                                    color: shared.ColorTheme.mainTheme
                                         .colorScheme.primary))
                       ])))
                 ])),

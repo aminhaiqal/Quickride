@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
-import 'package:quickride/src/utils/shared_resources/color_theme.dart' as color_theme;
-import 'package:quickride/src/utils/shared_resources/text_style.dart' as text_style;
+import 'package:quickride/src/utils/shared.dart' as shared;
 import '../data/repository/exception.dart' as exception;
 import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
 import '../register/viewmodel/register_viewmodel.dart';
@@ -36,8 +35,8 @@ class RegisterCredentialState extends State<RegisterCredential> {
       children: [
         Text(
         'Username',
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.GreyShader.greyAccent),
+        style: shared.TextTheme.description(null)
+            .copyWith(color: shared.GreyShader.greyAccent),
       ),
       const SizedBox(height: 4),
         Form(
@@ -51,14 +50,14 @@ class RegisterCredentialState extends State<RegisterCredential> {
         const SizedBox(height: 4),
         Text(
           usernameErrorMessage,
-          style: text_style.TextTheme.description(null).copyWith(
-              color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+          style: shared.TextTheme.description(null).copyWith(
+              color: shared.ColorTheme.mainTheme.colorScheme.error),
         ),
         const SizedBox(height: 24),
         Text(
           'Phone Number',
-          style: text_style.TextTheme.description(null)
-              .copyWith(color: color_theme.GreyShader.greyAccent),
+          style: shared.TextTheme.description(null)
+              .copyWith(color: shared.GreyShader.greyAccent),
         ),
       const SizedBox(height: 4),
         Form(
@@ -71,14 +70,14 @@ class RegisterCredentialState extends State<RegisterCredential> {
         const SizedBox(height: 4),
         Text(
           phoneNumberErrorMessage,
-          style: text_style.TextTheme.description(null).copyWith(
-              color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+          style: shared.TextTheme.description(null).copyWith(
+              color: shared.ColorTheme.mainTheme.colorScheme.error),
         ),
         const SizedBox(height: 24),
         Text(
         'Email',
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.GreyShader.greyAccent),
+        style: shared.TextTheme.description(null)
+            .copyWith(color: shared.GreyShader.greyAccent),
       ),
       const SizedBox(height: 4),
       Form(
@@ -92,14 +91,14 @@ class RegisterCredentialState extends State<RegisterCredential> {
           const SizedBox(height: 4),
           Text(
         emailErrorMessage,
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+        style: shared.TextTheme.description(null)
+            .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
       ),
       const SizedBox(height: 24),
       Text(
         'Password',
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.GreyShader.greyAccent),
+        style: shared.TextTheme.description(null)
+            .copyWith(color: shared.GreyShader.greyAccent),
       ),
       const SizedBox(height: 4),
       Form(
@@ -118,8 +117,8 @@ class RegisterCredentialState extends State<RegisterCredential> {
           const SizedBox(height: 4),
           Text(
         passwordErrorMessage,
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+        style: shared.TextTheme.description(null)
+            .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
       ),
 
         const SizedBox(height: 48),
