@@ -17,7 +17,6 @@ class LoginCredential extends StatefulWidget {
 class LoginCredentialState extends State<LoginCredential> {
   bool _obscureText = true;
   String emailErrorMessage = '', passwordErrorMessage = '';
-
   final TextEditingController _emailController = TextEditingController(),
       _passwordController = TextEditingController();
 
@@ -71,6 +70,12 @@ class LoginCredentialState extends State<LoginCredential> {
                       _obscureText = !_obscureText;
                     })),
           )),
+          const SizedBox(height: 4),
+          Text(
+        passwordErrorMessage,
+        style: text_style.TextTheme.description(null)
+            .copyWith(color: color_theme.ColorTheme.mainTheme.colorScheme.error),
+      ),
       const SizedBox(height: 48),
       action_button.PrimaryButton(
           label: 'Sign In',
