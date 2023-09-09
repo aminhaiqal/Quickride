@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quickride/src/features/authentication/utils/input_decoration.dart'
     as input_decoration;
 import '../../../utils/validator.dart';
-import '../viewmodel/auth_viewmodel.dart'
-    show AuthViewModel, ValidationException;
+import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/shared.dart' as shared;
 
@@ -17,7 +16,7 @@ class LoginCredential extends StatefulWidget {
 
 class LoginCredentialState extends State<LoginCredential> {
   bool _obscureText = true;
-  String emailErrorMessage = '', passwordErrorMessage = '';
+  String errorMessage = '';
   final TextEditingController _emailController = TextEditingController(),
       _passwordController = TextEditingController();
 
@@ -42,16 +41,16 @@ class LoginCredentialState extends State<LoginCredential> {
         controller: _emailController,
         decoration: input_decoration.buildEmailInputDecoration(
             label: 'Email',
-            helperText: emailErrorMessage,
+            helperText: errorMessage,
             prefixIcon: Icons.email_rounded),
       )),
       const SizedBox(height: 4),
       Text(
-        emailErrorMessage,
+        errorMessage,
         style: shared.TextTheme.description(null)
             .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
       ),
-      const SizedBox(height: 24),
+      const SizedBox(height: 8),
       Text(
         'Password',
         style: shared.TextTheme.description(null)
@@ -64,40 +63,24 @@ class LoginCredentialState extends State<LoginCredential> {
         obscureText: _obscureText,
         decoration: input_decoration.buildPasswordInputDecoration(
             label: 'Password',
-            helperText: passwordErrorMessage,
             prefixIcon: Icons.lock_rounded,
             obscureText: _obscureText,
             onSuffixIconPressed: () => setState(() {
                   _obscureText = !_obscureText;
                 })),
       )),
-      const SizedBox(height: 4),
-      Text(
-        passwordErrorMessage,
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
-      ),
       const SizedBox(height: 48),
       action_button.PrimaryButton(
           label: 'Sign In',
           width: MediaQuery.of(context).size.width,
           onPressed: () {
-            emailErrorMessage = '';
-            passwordErrorMessage = '';
-
+            errorMessage = '';
             validateAndSetField(
               _emailController.text,
               () => ValidationException.validateEmail(_emailController.text),
               (value) => widget.viewModel.email = value,
-              (error) => setState(() => emailErrorMessage = error),
-            );
-            validateAndSetField(
-              _passwordController.text,
-              () => ValidationException.validatePassword(_passwordController.text),
-              (value) => widget.viewModel.password = value,
-              (error) => setState(() => passwordErrorMessage = error),
-            );
-            if (emailErrorMessage == '' && passwordErrorMessage == '') {
+              (error) => setState(() => errorMessage = error));
+            if (errorMessage == '') {
               widget.viewModel.signIn();
             }
           })

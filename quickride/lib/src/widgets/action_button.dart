@@ -1,8 +1,5 @@
-// ignore_for_file: library_prefixes
-
 import 'package:flutter/material.dart';
-import 'package:quickride/src/utils/shared_resources/text_style.dart' as textStyle;
-import 'package:quickride/src/utils/shared_resources/color_theme.dart' as theme;
+import 'package:quickride/src/utils/shared.dart' as shared;
 
 class PrimaryButton extends StatelessWidget {
   final String label;
@@ -19,15 +16,15 @@ class PrimaryButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           minimumSize: Size(width!, 56),
-          backgroundColor: theme.ColorTheme.mainTheme.colorScheme.onBackground,
+          backgroundColor: shared.ColorTheme.mainTheme.colorScheme.onBackground,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
         ),
         child: Center(
             child: Text(label,
-                style: textStyle.TextTheme.body1(null).copyWith(
-                  color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
+                style: shared.TextTheme.body1(null).copyWith(
+                  color: shared.ColorTheme.mainTheme.colorScheme.onPrimary,
                 ))));
   }
 }

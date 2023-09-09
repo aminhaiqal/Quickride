@@ -6,6 +6,11 @@ class ValidationException implements Exception {
   @override
   String toString() => message;
 
+  static void validateLoginCredential(String email, String password) {
+    validateEmail(email);
+    validatePassword(password);
+  }
+
   static void validateUsername(String value) {
     if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
       throw ValidationException(
