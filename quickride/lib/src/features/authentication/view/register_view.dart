@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quickride/src/utils/shared.dart' as shared;
-import '../../utils/register_credential.dart';
-import '../viewmodel/register_viewmodel.dart';
+import '../utils/register_credential.dart';
+import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 
 class Register extends StatelessWidget {
   const Register({Key? key}) : super(key: key);
@@ -11,9 +11,9 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<RegisterViewModel>(
-            create: (_) => RegisterViewModel(),
-            child: Consumer<RegisterViewModel>(
+    return ChangeNotifierProvider<AuthViewModel>(
+            create: (_) => AuthViewModel(),
+            child: Consumer<AuthViewModel>(
                 builder: (context, viewModel, child) {
               return SingleChildScrollView(
                   child: Center(

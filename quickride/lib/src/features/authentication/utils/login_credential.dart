@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
-import '../login/viewmodel/login_viewmodel.dart';
+import 'package:quickride/src/features/authentication/utils/input_decoration.dart'
+    as input_decoration;
+import '../../../utils/validator.dart';
+import '../viewmodel/auth_viewmodel.dart'
+    show AuthViewModel, ValidationException;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/shared.dart' as shared;
-import '../data/repository/exception.dart' as exception;
 
 class LoginCredential extends StatefulWidget {
-  final LoginViewModel viewModel;
+  final AuthViewModel viewModel;
   const LoginCredential({Key? key, required this.viewModel}) : super(key: key);
 
   @override
@@ -37,14 +39,14 @@ class LoginCredentialState extends State<LoginCredential> {
       const SizedBox(height: 4),
       Form(
           child: TextFormField(
-            controller: _emailController,
-            decoration: input_decoration.buildEmailInputDecoration(
-                label: 'Email',
-                helperText: emailErrorMessage,
-                prefixIcon: Icons.email_rounded),
-          )),
-          const SizedBox(height: 4),
-          Text(
+        controller: _emailController,
+        decoration: input_decoration.buildEmailInputDecoration(
+            label: 'Email',
+            helperText: emailErrorMessage,
+            prefixIcon: Icons.email_rounded),
+      )),
+      const SizedBox(height: 4),
+      Text(
         emailErrorMessage,
         style: shared.TextTheme.description(null)
             .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
@@ -58,19 +60,19 @@ class LoginCredentialState extends State<LoginCredential> {
       const SizedBox(height: 4),
       Form(
           child: TextFormField(
-            controller: _passwordController,
+        controller: _passwordController,
+        obscureText: _obscureText,
+        decoration: input_decoration.buildPasswordInputDecoration(
+            label: 'Password',
+            helperText: passwordErrorMessage,
+            prefixIcon: Icons.lock_rounded,
             obscureText: _obscureText,
-            decoration: input_decoration.buildPasswordInputDecoration(
-                label: 'Password',
-                helperText: passwordErrorMessage,
-                prefixIcon: Icons.lock_rounded,
-                obscureText: _obscureText,
-                onSuffixIconPressed: () => setState(() {
-                      _obscureText = !_obscureText;
-                    })),
-          )),
-          const SizedBox(height: 4),
-          Text(
+            onSuffixIconPressed: () => setState(() {
+                  _obscureText = !_obscureText;
+                })),
+      )),
+      const SizedBox(height: 4),
+      Text(
         passwordErrorMessage,
         style: shared.TextTheme.description(null)
             .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
@@ -80,21 +82,23 @@ class LoginCredentialState extends State<LoginCredential> {
           label: 'Sign In',
           width: MediaQuery.of(context).size.width,
           onPressed: () {
-            try {
-              exception.validateEmail(_emailController.text);
-              widget.viewModel.email = _emailController.text;
-            } catch (e) {
-             setState(() {
-                emailErrorMessage = e.toString();
-              });
-            }
-            try {
-              exception.validatePassword(_passwordController.text);
-              widget.viewModel.password = _passwordController.text;
-            } catch (e) {
-             setState(() {
-                passwordErrorMessage = e.toString();
-              });
+            validateAndSetField(
+              _emailController.text,
+              () => ValidationException.validateEmail(_emailController.text),
+              (value) => widget.viewModel.email = value,
+              (error) => setState(() => emailErrorMessage = error),
+            );
+            validateAndSetField(
+              _passwordController.text,
+              () => ValidationException.validatePassword(_passwordController.text),
+              (value) => widget.viewModel.password = value,
+              (error) => setState(() => passwordErrorMessage = error),
+            );
+            //print('email: ${widget.viewModel.email}');
+            //print('password: ${widget.viewModel.password}');
+            
+            if (emailErrorMessage == '' && passwordErrorMessage == '') {
+              widget.viewModel.signIn();
             }
           })
     ]);

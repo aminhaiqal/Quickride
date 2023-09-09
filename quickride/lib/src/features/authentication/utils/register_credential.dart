@@ -3,10 +3,10 @@ import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/shared.dart' as shared;
 import '../data/repository/exception.dart' as exception;
 import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
-import '../register/viewmodel/register_viewmodel.dart';
+import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 
 class RegisterCredential extends StatefulWidget {
-  final RegisterViewModel viewModel;
+  final AuthViewModel viewModel;
   const RegisterCredential({Key? key, required this.viewModel}) : super(key: key);
 
   @override
@@ -126,7 +126,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
             label: 'Sign Up',
             width: 380,
             onPressed: () {
-              RegisterViewModel viewModel = widget.viewModel;
+              AuthViewModel viewModel = widget.viewModel;
             }),
       ],
     );

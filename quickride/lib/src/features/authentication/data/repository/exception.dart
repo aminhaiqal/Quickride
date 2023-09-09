@@ -1,45 +1,37 @@
-
-// Exceptions
-class CustomValidationException implements Exception {
+class ValidationException implements Exception {
   final String message;
 
-  CustomValidationException(this.message);
+  ValidationException(this.message);
 
   @override
   String toString() => message;
-}
 
-void validateEmail(String value) {
-  if (value.isEmpty) {
-    throw CustomValidationException('Email is required');
-  } else if (!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-      .hasMatch(value)) {
-    throw CustomValidationException('Please enter a valid email');
+  static void validateUsername(String value) {
+    if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
+      throw ValidationException(
+          'Username must contain only letters and numbers');
+    }
   }
-}
 
-void validatePassword(String value) {
-  if (value.isEmpty) {
-    throw CustomValidationException('Password is required');
-  } else {
+  static void validateEmail(String value) {
+    if (!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)) {
+      throw ValidationException('Please enter a valid email');
+    }
+  }
+
+  static void validatePassword(String value) {
     // contain at least 8 characters
     if (value.length < 8) {
-      throw CustomValidationException(
-          'Password must contain at least 8 characters');
+      throw ValidationException('Password must contain at least 8 characters');
     }
     // contain upper and lower case letters
     if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])').hasMatch(value)) {
-      throw CustomValidationException(
+      throw ValidationException(
           'Password must contain upper and lower case letters');
     }
     // contain numbers
     if (!RegExp(r'^(?=.*?[0-9])').hasMatch(value)) {
-      throw CustomValidationException('Password must contain numbers');
-    }
-    // contain special characters
-    if (!RegExp(r'^(?=.*?[!@#\$&*~])').hasMatch(value)) {
-      throw CustomValidationException(
-          'Password must contain special characters');
+      throw ValidationException('Password must contain numbers');
     }
   }
 }

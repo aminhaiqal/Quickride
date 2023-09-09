@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quickride/src/utils/shared.dart' as shared;
-import '../../utils/auth_method.dart';
-import '../viewmodel/login_viewmodel.dart';
-import '../../utils/login_credential.dart';
+import '../utils/auth_method.dart';
+import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
+import '../utils/login_credential.dart';
 import 'package:quickride/src/features/authentication/data/repository/authentication_repository.dart' as auth_repo;
 
 class Login extends StatelessWidget {
@@ -13,9 +13,9 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<LoginViewModel>(
-            create: (_) => LoginViewModel(),
-            child: Consumer<LoginViewModel>(builder: (context, viewModel, _) {
+    return ChangeNotifierProvider<AuthViewModel>(
+            create: (_) => AuthViewModel(),
+            child: Consumer<AuthViewModel>(builder: (context, viewModel, _) {
               return SingleChildScrollView(
                 child: Center(
                     child: Column(children: <Widget>[
