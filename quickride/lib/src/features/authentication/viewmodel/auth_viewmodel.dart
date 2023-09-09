@@ -52,6 +52,7 @@ class AuthViewModel with ChangeNotifier {
     notifyListeners();
     try {
       await auth_repo.AuthenticationRepository.firebaseSignIn(email, password);
+
     } catch (e) {
       print('error: $e');
       rethrow;

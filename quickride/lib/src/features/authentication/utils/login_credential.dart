@@ -82,6 +82,9 @@ class LoginCredentialState extends State<LoginCredential> {
           label: 'Sign In',
           width: MediaQuery.of(context).size.width,
           onPressed: () {
+            emailErrorMessage = '';
+            passwordErrorMessage = '';
+
             validateAndSetField(
               _emailController.text,
               () => ValidationException.validateEmail(_emailController.text),
@@ -94,9 +97,6 @@ class LoginCredentialState extends State<LoginCredential> {
               (value) => widget.viewModel.password = value,
               (error) => setState(() => passwordErrorMessage = error),
             );
-            //print('email: ${widget.viewModel.email}');
-            //print('password: ${widget.viewModel.password}');
-            
             if (emailErrorMessage == '' && passwordErrorMessage == '') {
               widget.viewModel.signIn();
             }

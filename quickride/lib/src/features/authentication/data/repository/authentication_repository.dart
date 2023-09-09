@@ -35,13 +35,13 @@ class AuthenticationRepository {
   // Firebase Authentication Sign In
   static Future<String?> firebaseSignIn(String email, String password) async {
     try {
-      final UserCredential userCredential = await _auth
-          .signInWithEmailAndPassword(email: email, password: password);
-      userCredential.user!.getIdToken().then((value) async {
+      final UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      final User? user = userCredential.user;
+      /*userCredential.user!.getIdToken().then((value) async {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', value!);
-      });
-      return null;
+      });*/
+      return 'Sign in successful';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return 'No user found for that email';
