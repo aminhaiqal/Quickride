@@ -31,11 +31,9 @@ class Login extends StatelessWidget {
                                   .copyWith(color: const Color(0xFF8C8C8C)))
                         ],
                       )),
+                  LoginCredential(viewModel: viewModel),
                   Container(
-                      margin: const EdgeInsets.only(bottom: 24),
-                      child: LoginCredential(viewModel: viewModel)),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 24),
+                      margin: const EdgeInsets.symmetric(vertical: 16),
                       child: Flex(
                         direction: Axis.horizontal,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -66,8 +64,7 @@ class Login extends StatelessWidget {
                               ))
                         ],
                       )),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 24),
+                  SizedBox(
                     child: Flex(
                         direction: Axis.horizontal,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -94,7 +91,7 @@ class Login extends StatelessWidget {
                         ]),
                   ),
                   Container(
-                      margin: const EdgeInsets.only(bottom: 24),
+                      margin: const EdgeInsets.only(top: 32),
                       child: RichText(
                           text: TextSpan(children: <TextSpan>[
                         TextSpan(

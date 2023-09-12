@@ -1,6 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:quickride/src/features/authentication/utils/input_decoration.dart'
-    as input_decoration;
+import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
 import '../../../utils/validator.dart';
 import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
@@ -30,46 +30,67 @@ class LoginCredentialState extends State<LoginCredential> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        'Email',
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.GreyShader.greyAccent),
-      ),
-      const SizedBox(height: 4),
-      Form(
-          child: TextFormField(
-        controller: _emailController,
-        decoration: input_decoration.buildEmailInputDecoration(
-            label: 'Email',
-            helperText: errorMessage,
-            prefixIcon: Icons.email_rounded),
-      )),
-      const SizedBox(height: 4),
-      Text(
-        errorMessage,
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
-      ),
-      const SizedBox(height: 8),
-      Text(
-        'Password',
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.GreyShader.greyAccent),
-      ),
-      const SizedBox(height: 4),
-      Form(
-          child: TextFormField(
-        controller: _passwordController,
-        obscureText: _obscureText,
-        decoration: input_decoration.buildPasswordInputDecoration(
-            label: 'Password',
-            prefixIcon: Icons.lock_rounded,
-            obscureText: _obscureText,
-            onSuffixIconPressed: () => setState(() {
-                  _obscureText = !_obscureText;
-                })),
-      )),
-      const SizedBox(height: 48),
+        Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Email',
+                  style: shared.TextTheme.description(null)
+                      .copyWith(color: shared.GreyShader.greyAccent),
+                ),
+                const SizedBox(height: 4),
+                Form(
+                    child: TextFormField(
+                  controller: _emailController,
+                  decoration: input_decoration.buildEmailInputDecoration(
+                      label: 'Email',
+                      helperText: errorMessage,
+                      prefixIcon: Icons.email_rounded),
+                )),
+              ],
+            ),
+          ),
+      Container(
+          margin: const EdgeInsets.only(bottom: 56),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Password',
+                style: shared.TextTheme.description(null)
+                    .copyWith(color: shared.GreyShader.greyAccent),
+              ),
+              Container(
+                  margin: const EdgeInsets.symmetric(vertical: 4),
+                  child: Form(
+                      child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: _obscureText,
+                          decoration:
+                              input_decoration.buildPasswordInputDecoration(
+                                  label: 'Password',
+                                  prefixIcon: Icons.lock_rounded,
+                                  obscureText: _obscureText,
+                                  onSuffixIconPressed: () => setState(() {
+                                        _obscureText = !_obscureText;
+                                      }))))),
+              RichText(
+                  text: TextSpan(children: <TextSpan>[
+                TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        widget.viewModel.resetPassword();
+                      },
+                    text: 'Forgot Password?',
+                    style: shared.TextTheme.description(FontWeight.w500)
+                        .copyWith(
+                            color: shared.ColorTheme.mainTheme.colorScheme.primary))
+              ]))
+            ],
+          )),
+
       action_button.PrimaryButton(
           label: 'Sign In',
           width: MediaQuery.of(context).size.width,

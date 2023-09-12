@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
+import '../../../utils/validator.dart';
+import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/shared.dart' as shared;
-import '../data/repository/exception.dart' as exception;
-import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
-import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 
 class RegisterCredential extends StatefulWidget {
   final AuthViewModel viewModel;
@@ -24,6 +24,8 @@ class RegisterCredentialState extends State<RegisterCredential> {
 
   @override
   void dispose() {
+    _usernameController.dispose();
+    _phoneNumberController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -33,6 +35,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Component 1
         Text(
         'Username',
         style: shared.TextTheme.description(null)
@@ -53,7 +56,9 @@ class RegisterCredentialState extends State<RegisterCredential> {
           style: shared.TextTheme.description(null).copyWith(
               color: shared.ColorTheme.mainTheme.colorScheme.error),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 8),
+
+        // Component 2
         Text(
           'Phone Number',
           style: shared.TextTheme.description(null)

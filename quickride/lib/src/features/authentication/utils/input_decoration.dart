@@ -38,7 +38,7 @@ InputDecoration buildPasswordInputDecoration({
     prefixIcon: Icon(prefixIcon),
     suffixIcon: GestureDetector(
       onTap: onSuffixIconPressed,
-      child: Icon(obscureText ? Icons.visibility : Icons.visibility_off),
+      child: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
     ),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
