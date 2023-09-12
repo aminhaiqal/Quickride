@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
+import 'package:quickride/src/features/authentication/utils/input_decoration.dart'
+    as input_decoration;
 import '../../../utils/validator.dart';
 import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
@@ -7,24 +8,29 @@ import 'package:quickride/src/utils/shared.dart' as shared;
 
 class RegisterCredential extends StatefulWidget {
   final AuthViewModel viewModel;
-  const RegisterCredential({Key? key, required this.viewModel}) : super(key: key);
+  const RegisterCredential({Key? key, required this.viewModel})
+      : super(key: key);
 
   @override
   RegisterCredentialState createState() => RegisterCredentialState();
 }
-  
 
 class RegisterCredentialState extends State<RegisterCredential> {
   bool _obscureText = true;
-  String usernameErrorMessage = '', phoneNumberErrorMessage = '', emailErrorMessage = '', passwordErrorMessage = '';
-  final TextEditingController _usernameController = TextEditingController(),
+  String usernameErrorMessage = '',
+      phoneNumberErrorMessage = '',
+      emailErrorMessage = '',
+      passwordErrorMessage = '';
+  final TextEditingController _firstNameController = TextEditingController(),
+      _lastNameController = TextEditingController(),
       _phoneNumberController = TextEditingController(),
       _emailController = TextEditingController(),
       _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     _phoneNumberController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -34,104 +40,119 @@ class RegisterCredentialState extends State<RegisterCredential> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Component 1
-        Text(
-        'Username',
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.GreyShader.greyAccent),
-      ),
-      const SizedBox(height: 4),
-        Form(
-            child: TextFormField(
-          controller: _usernameController,
-          decoration: input_decoration.buildEmailInputDecoration(
-              label: 'Username',
-              helperText: usernameErrorMessage,
-              prefixIcon: Icons.person_rounded),
-        )),
-        const SizedBox(height: 4),
-        Text(
-          usernameErrorMessage,
-          style: shared.TextTheme.description(null).copyWith(
-              color: shared.ColorTheme.mainTheme.colorScheme.error),
-        ),
-        const SizedBox(height: 8),
-
-        // Component 2
-        Text(
-          'Phone Number',
-          style: shared.TextTheme.description(null)
-              .copyWith(color: shared.GreyShader.greyAccent),
-        ),
-      const SizedBox(height: 4),
-        Form(
-            child: TextFormField(
-          controller: _phoneNumberController,
-          decoration: input_decoration.buildEmailInputDecoration(
-              label: 'Phone Number',
-              helperText: phoneNumberErrorMessage),
-        )),
-        const SizedBox(height: 4),
-        Text(
-          phoneNumberErrorMessage,
-          style: shared.TextTheme.description(null).copyWith(
-              color: shared.ColorTheme.mainTheme.colorScheme.error),
-        ),
-        const SizedBox(height: 24),
-        Text(
-        'Email',
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.GreyShader.greyAccent),
-      ),
-      const SizedBox(height: 4),
-      Form(
-          child: TextFormField(
-            controller: _emailController,
-            decoration: input_decoration.buildEmailInputDecoration(
-                label: 'Email',
-                helperText: emailErrorMessage,
-                prefixIcon: Icons.email_rounded),
-          )),
-          const SizedBox(height: 4),
-          Text(
-        emailErrorMessage,
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
-      ),
-      const SizedBox(height: 24),
-      Text(
-        'Password',
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.GreyShader.greyAccent),
-      ),
-      const SizedBox(height: 4),
-      Form(
-          child: TextFormField(
-            controller: _passwordController,
-            obscureText: _obscureText,
-            decoration: input_decoration.buildPasswordInputDecoration(
-                label: 'Password',
-                helperText: passwordErrorMessage,
-                prefixIcon: Icons.lock_rounded,
-                obscureText: _obscureText,
-                onSuffixIconPressed: () => setState(() {
-                      _obscureText = !_obscureText;
-                    })),
-          )),
-          const SizedBox(height: 4),
-          Text(
-        passwordErrorMessage,
-        style: shared.TextTheme.description(null)
-            .copyWith(color: shared.ColorTheme.mainTheme.colorScheme.error),
-      ),
-
-        const SizedBox(height: 48),
+        Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Full Name',
+                  style: shared.TextTheme.description(null)
+                      .copyWith(color: shared.GreyShader.greyAccent),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Flexible(
+                        flex: 1,
+                        child: Form(
+                            child: TextFormField(
+                          controller: _firstNameController,
+                          decoration:
+                              input_decoration.buildNameInputDecoration(
+                                  label: 'First Name',
+                                  helperText: usernameErrorMessage),
+                        ))),
+                    const SizedBox(width: 16),
+                    Flexible(
+                        flex: 1,
+                        child: Form(
+                            child: TextFormField(
+                          controller: _lastNameController,
+                          decoration:
+                              input_decoration.buildNameInputDecoration(
+                                  label: 'Last Name',
+                                  helperText: usernameErrorMessage),
+                        ))),
+                  ],
+                )
+              ],
+            )),
+        Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Phone Number',
+                  style: shared.TextTheme.description(null)
+                      .copyWith(color: shared.GreyShader.greyAccent),
+                ),
+                const SizedBox(height: 4),
+                Form(
+                    child: TextFormField(
+                  controller: _phoneNumberController,
+                  decoration: input_decoration.buildEmailInputDecoration(
+                      label: 'Phone Number',
+                      helperText: phoneNumberErrorMessage,
+                      prefixIcon: Icons.phone_rounded),
+                )),
+              ],
+            )),
+        Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Email',
+                  style: shared.TextTheme.description(null)
+                      .copyWith(color: shared.GreyShader.greyAccent),
+                ),
+                const SizedBox(height: 4),
+                Form(
+                    child: TextFormField(
+                  controller: _emailController,
+                  decoration: input_decoration.buildEmailInputDecoration(
+                      label: 'Email',
+                      helperText: emailErrorMessage,
+                      prefixIcon: Icons.email_rounded),
+                )),
+              ],
+            )),
+        Container(
+            margin: const EdgeInsets.only(bottom: 56),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Password',
+                  style: shared.TextTheme.description(null)
+                      .copyWith(color: shared.GreyShader.greyAccent),
+                ),
+                const SizedBox(height: 4),
+                Form(
+                    child: TextFormField(
+                  controller: _passwordController,
+                  obscureText: _obscureText,
+                  decoration: input_decoration.buildPasswordInputDecoration(
+                      label: 'Password',
+                      helperText: passwordErrorMessage,
+                      prefixIcon: Icons.lock_rounded,
+                      obscureText: _obscureText,
+                      onSuffixIconPressed: () => setState(() {
+                            _obscureText = !_obscureText;
+                          })),
+                )),
+              ],
+            )),
         action_button.PrimaryButton(
             label: 'Sign Up',
             width: 380,
             onPressed: () {
-              AuthViewModel viewModel = widget.viewModel;
+              widget.viewModel.signUp();
             }),
       ],
     );

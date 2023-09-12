@@ -30,11 +30,9 @@ class Register extends StatelessWidget {
                                   .copyWith(color: const Color(0xFF8C8C8C)))
                         ],
                       )),
+                  RegisterCredential(viewModel: viewModel),
                   Container(
-                      margin: const EdgeInsets.only(bottom: 24),
-                      child: RegisterCredential(viewModel: viewModel)),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 24),
+                      margin: const EdgeInsets.only(top: 16),
                       child: RichText(
                           text: TextSpan(children: <TextSpan>[
                         TextSpan(
