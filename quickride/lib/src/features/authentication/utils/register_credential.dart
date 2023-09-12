@@ -140,13 +140,20 @@ class RegisterCredentialState extends State<RegisterCredential> {
             label: 'Sign Up',
             isLoading: widget.viewModel.isLoading,
             onPressed: () {
-                widget.viewModel.username = '${_firstNameController.text} ${_lastNameController.text}';
-                widget.viewModel.phoneNumber = _phoneNumberController.text;
-                widget.viewModel.password = _passwordController.text;
-                widget.viewModel.email = _emailController.text;
+              setState(() {
+                widget.viewModel.isLoading = true;
+              });
+              widget.viewModel.username = '${_firstNameController.text} ${_lastNameController.text}';
+              widget.viewModel.phoneNumber = _phoneNumberController.text;
+              widget.viewModel.password = _passwordController.text;
+              widget.viewModel.email = _emailController.text;
 
-                widget.viewModel.signUp();
-              }),
+              widget.viewModel.isSignUpFormValid
+                  ? widget.viewModel.signUp()
+                  : widget.viewModel.isLoading = false;
+
+              widget.viewModel.signUp();
+            }),
       ],
     );
   }

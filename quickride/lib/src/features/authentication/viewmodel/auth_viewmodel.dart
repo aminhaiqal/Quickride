@@ -11,6 +11,11 @@ class AuthViewModel with ChangeNotifier {
   String password = '';
   bool isLoading = false;
 
+  void setIsLoading(bool value) {
+    isLoading = value;
+    notifyListeners();
+  }
+
   void setUsername(String value) {
     username = value;
     notifyListeners();
@@ -30,6 +35,14 @@ class AuthViewModel with ChangeNotifier {
     password = value;
     notifyListeners();
   }
+
+  bool get isSignInFormValid => email.isNotEmpty && password.isNotEmpty;
+
+  bool get isSignUpFormValid =>
+      username.isNotEmpty &&
+      email.isNotEmpty &&
+      phoneNumber.isNotEmpty &&
+      password.isNotEmpty;
 
   Future<void> signUp() async {
     isLoading = true;
