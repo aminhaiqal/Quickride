@@ -15,7 +15,7 @@ class LoginCredential extends StatefulWidget {
 }
 
 class LoginCredentialState extends State<LoginCredential> {
-  bool _obscureText = true;
+  bool _obscureText = true, _isLoading = false;
   String errorMessage = '';
   final TextEditingController _emailController = TextEditingController(),
       _passwordController = TextEditingController();
@@ -93,9 +93,10 @@ class LoginCredentialState extends State<LoginCredential> {
 
       action_button.PrimaryButton(
           label: 'Sign In',
-          width: MediaQuery.of(context).size.width,
+          isLoading: _isLoading,
           onPressed: () {
-            errorMessage = '';
+
+            /*errorMessage = '';
             validateAndSetField(
               _emailController.text,
               () => ValidationException.validateEmail(_emailController.text),
@@ -103,7 +104,7 @@ class LoginCredentialState extends State<LoginCredential> {
               (error) => setState(() => errorMessage = error));
             if (errorMessage == '') {
               widget.viewModel.signIn();
-            }
+            }*/
           })
     ]);
   }

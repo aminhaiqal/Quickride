@@ -138,7 +138,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
             )),
         action_button.PrimaryButton(
             label: 'Sign Up',
-            width: 380,
+            isLoading: widget.viewModel.isLoading,
             onPressed: () {
                 widget.viewModel.username = '${_firstNameController.text} ${_lastNameController.text}';
                 widget.viewModel.phoneNumber = _phoneNumberController.text;
