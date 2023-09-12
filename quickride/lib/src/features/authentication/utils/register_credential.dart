@@ -17,10 +17,7 @@ class RegisterCredential extends StatefulWidget {
 
 class RegisterCredentialState extends State<RegisterCredential> {
   bool _obscureText = true;
-  String usernameErrorMessage = '',
-      phoneNumberErrorMessage = '',
-      emailErrorMessage = '',
-      passwordErrorMessage = '';
+  String errorMessage = '';
   final TextEditingController _firstNameController = TextEditingController(),
       _lastNameController = TextEditingController(),
       _phoneNumberController = TextEditingController(),
@@ -60,10 +57,8 @@ class RegisterCredentialState extends State<RegisterCredential> {
                         child: Form(
                             child: TextFormField(
                           controller: _firstNameController,
-                          decoration:
-                              input_decoration.buildNameInputDecoration(
-                                  label: 'First Name',
-                                  helperText: usernameErrorMessage),
+                          decoration: input_decoration.buildNameInputDecoration(
+                              label: 'First Name'),
                         ))),
                     const SizedBox(width: 16),
                     Flexible(
@@ -71,10 +66,8 @@ class RegisterCredentialState extends State<RegisterCredential> {
                         child: Form(
                             child: TextFormField(
                           controller: _lastNameController,
-                          decoration:
-                              input_decoration.buildNameInputDecoration(
-                                  label: 'Last Name',
-                                  helperText: usernameErrorMessage),
+                          decoration: input_decoration.buildNameInputDecoration(
+                              label: 'Last Name'),
                         ))),
                   ],
                 )
@@ -95,9 +88,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
                     child: TextFormField(
                   controller: _phoneNumberController,
                   decoration: input_decoration.buildEmailInputDecoration(
-                      label: 'Phone Number',
-                      helperText: phoneNumberErrorMessage,
-                      prefixIcon: Icons.phone_rounded),
+                      label: 'Phone Number', prefixIcon: Icons.phone_rounded),
                 )),
               ],
             )),
@@ -116,9 +107,7 @@ class RegisterCredentialState extends State<RegisterCredential> {
                     child: TextFormField(
                   controller: _emailController,
                   decoration: input_decoration.buildEmailInputDecoration(
-                      label: 'Email',
-                      helperText: emailErrorMessage,
-                      prefixIcon: Icons.email_rounded),
+                      label: 'Email', prefixIcon: Icons.email_rounded),
                 )),
               ],
             )),
@@ -139,7 +128,6 @@ class RegisterCredentialState extends State<RegisterCredential> {
                   obscureText: _obscureText,
                   decoration: input_decoration.buildPasswordInputDecoration(
                       label: 'Password',
-                      helperText: passwordErrorMessage,
                       prefixIcon: Icons.lock_rounded,
                       obscureText: _obscureText,
                       onSuffixIconPressed: () => setState(() {
@@ -152,8 +140,13 @@ class RegisterCredentialState extends State<RegisterCredential> {
             label: 'Sign Up',
             width: 380,
             onPressed: () {
-              widget.viewModel.signUp();
-            }),
+                widget.viewModel.username = '${_firstNameController.text} ${_lastNameController.text}';
+                widget.viewModel.phoneNumber = _phoneNumberController.text;
+                widget.viewModel.password = _passwordController.text;
+                widget.viewModel.email = _emailController.text;
+
+                widget.viewModel.signUp();
+              }),
       ],
     );
   }
