@@ -1,13 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quickride/src/features/authentication/utils/input_decoration.dart' as input_decoration;
-import '../login/viewmodel/login_viewmodel.dart';
+import '../../../utils/validator.dart';
+import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
-import 'package:quickride/src/utils/color_theme.dart' as color_theme;
-import 'package:quickride/src/utils/text_style.dart' as text_style;
-import '../data/repository/exception.dart' as exception;
+import 'package:quickride/src/utils/shared.dart' as shared;
 
 class LoginCredential extends StatefulWidget {
-  final LoginViewModel viewModel;
+  final AuthViewModel viewModel;
   const LoginCredential({Key? key, required this.viewModel}) : super(key: key);
 
   @override
@@ -16,8 +16,7 @@ class LoginCredential extends StatefulWidget {
 
 class LoginCredentialState extends State<LoginCredential> {
   bool _obscureText = true;
-  String emailErrorMessage = '', passwordErrorMessage = '';
-
+  String errorMessage = '';
   final TextEditingController _emailController = TextEditingController(),
       _passwordController = TextEditingController();
 
@@ -31,67 +30,86 @@ class LoginCredentialState extends State<LoginCredential> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        'Email',
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.GreyShader.greyAccent),
-      ),
-      const SizedBox(height: 4),
-      Form(
-          child: TextFormField(
-            controller: _emailController,
-            decoration: input_decoration.buildEmailInputDecoration(
-                label: 'Email',
-                helperText: emailErrorMessage,
-                prefixIcon: Icons.email_rounded),
+        Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Email',
+                  style: shared.TextTheme.description(null)
+                      .copyWith(color: shared.GreyShader.greyAccent),
+                ),
+                const SizedBox(height: 4),
+                Form(
+                    child: TextFormField(
+                  controller: _emailController,
+                  decoration: input_decoration.buildEmailInputDecoration(
+                      label: 'Email',
+                      helperText: errorMessage,
+                      prefixIcon: Icons.email_rounded),
+                )),
+              ],
+            ),
+          ),
+      Container(
+          margin: const EdgeInsets.only(bottom: 56),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Password',
+                style: shared.TextTheme.description(null)
+                    .copyWith(color: shared.GreyShader.greyAccent),
+              ),
+              Container(
+                  margin: const EdgeInsets.symmetric(vertical: 4),
+                  child: Form(
+                      child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: _obscureText,
+                          decoration:
+                              input_decoration.buildPasswordInputDecoration(
+                                  label: 'Password',
+                                  prefixIcon: Icons.lock_rounded,
+                                  obscureText: _obscureText,
+                                  onSuffixIconPressed: () => setState(() {
+                                        _obscureText = !_obscureText;
+                                      }))))),
+              RichText(
+                  text: TextSpan(children: <TextSpan>[
+                TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        widget.viewModel.resetPassword();
+                      },
+                    text: 'Forgot Password?',
+                    style: shared.TextTheme.description(FontWeight.w500)
+                        .copyWith(
+                            color: shared.ColorTheme.mainTheme.colorScheme.primary))
+              ]))
+            ],
           )),
-          const SizedBox(height: 4),
-          Text(
-        emailErrorMessage,
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.ColorTheme.mainTheme.colorScheme.error),
-      ),
-      const SizedBox(height: 24),
-      Text(
-        'Password',
-        style: text_style.TextTheme.description(null)
-            .copyWith(color: color_theme.GreyShader.greyAccent),
-      ),
-      const SizedBox(height: 4),
-      Form(
-          child: TextFormField(
-            controller: _passwordController,
-            obscureText: _obscureText,
-            decoration: input_decoration.buildPasswordInputDecoration(
-                label: 'Password',
-                helperText: passwordErrorMessage,
-                prefixIcon: Icons.lock_rounded,
-                obscureText: _obscureText,
-                onSuffixIconPressed: () => setState(() {
-                      _obscureText = !_obscureText;
-                    })),
-          )),
-      const SizedBox(height: 48),
+
       action_button.PrimaryButton(
           label: 'Sign In',
-          width: MediaQuery.of(context).size.width,
+          isLoading: widget.viewModel.isLoading,
           onPressed: () {
-            try {
-              exception.validateEmail(_emailController.text);
-              widget.viewModel.email = _emailController.text;
-            } catch (e) {
-             setState(() {
-                emailErrorMessage = e.toString();
-              });
-            }
-            try {
-              exception.validatePassword(_passwordController.text);
-              widget.viewModel.password = _passwordController.text;
-            } catch (e) {
-             setState(() {
-                passwordErrorMessage = e.toString();
-              });
-            }
+            errorMessage = '';
+            setState(() {
+              widget.viewModel.isLoading = true;
+            });
+            validateAndSetField(
+              _emailController.text,
+              () => ValidationException.validateEmail(_emailController.text),
+              (value) => widget.viewModel.email = value,
+              (error) => setState(() => errorMessage = error));
+
+            widget.viewModel.isSignInFormValid
+                ? widget.viewModel.signIn()
+                : setState(() {
+                    widget.viewModel.isLoading = false;
+                  });
           })
     ]);
   }

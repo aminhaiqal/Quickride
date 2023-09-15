@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
-import 'package:quickride/src/utils/text_style.dart' as text_style;
+import 'package:quickride/src/utils/shared.dart' as shared;
 import 'package:quickride/src/widgets/image_retriever.dart';
 
 class AuthMethodButton extends StatelessWidget {
@@ -42,7 +42,7 @@ class AuthMethodButton extends StatelessWidget {
                 const SizedBox(width: 16),
                 Text(
                   label,
-                  style: text_style.TextTheme.description(FontWeight.w500),
+                  style: shared.TextTheme.description(FontWeight.w500),
                 )
               ],
             ))));

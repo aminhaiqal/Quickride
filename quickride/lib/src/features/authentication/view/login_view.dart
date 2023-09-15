@@ -1,12 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickride/src/core/base_view.dart';
-import 'package:quickride/src/utils/text_style.dart' as text_style;
-import 'package:quickride/src/utils/color_theme.dart' as theme;
-import '../../utils/auth_method.dart';
-import '../viewmodel/login_viewmodel.dart';
-import '../../utils/login_credential.dart';
+import 'package:quickride/src/utils/shared.dart' as shared;
+import '../utils/auth_method.dart';
+import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
+import '../utils/login_credential.dart';
 import 'package:quickride/src/features/authentication/data/repository/authentication_repository.dart' as auth_repo;
 
 class Login extends StatelessWidget {
@@ -15,11 +13,9 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView(
-        backgroundGradient: theme.ColorTheme.mainTheme.colorScheme.background,
-        child: ChangeNotifierProvider<LoginViewModel>(
-            create: (_) => LoginViewModel(),
-            child: Consumer<LoginViewModel>(builder: (context, viewModel, _) {
+    return ChangeNotifierProvider<AuthViewModel>(
+            create: (_) => AuthViewModel(),
+            child: Consumer<AuthViewModel>(builder: (context, viewModel, _) {
               return SingleChildScrollView(
                 child: Center(
                     child: Column(children: <Widget>[
@@ -28,18 +24,16 @@ class Login extends StatelessWidget {
                       child: Column(
                         children: [
                           Text('Sign In',
-                              style: text_style.TextTheme.headline2(
+                              style: shared.TextTheme.headline2(
                                   FontWeight.w600)),
                           Text('Access to your account',
-                              style: text_style.TextTheme.description(null)
+                              style: shared.TextTheme.description(null)
                                   .copyWith(color: const Color(0xFF8C8C8C)))
                         ],
                       )),
+                  LoginCredential(viewModel: viewModel),
                   Container(
-                      margin: const EdgeInsets.only(bottom: 24),
-                      child: LoginCredential(viewModel: viewModel)),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 24),
+                      margin: const EdgeInsets.symmetric(vertical: 16),
                       child: Flex(
                         direction: Axis.horizontal,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +49,7 @@ class Login extends StatelessWidget {
                           Flexible(
                               flex: 1,
                               child: Text('or Sign In with',
-                                  style: text_style.TextTheme.description(
+                                  style: shared.TextTheme.description(
                                           FontWeight.w500)
                                       .copyWith(
                                           color:
@@ -70,8 +64,7 @@ class Login extends StatelessWidget {
                               ))
                         ],
                       )),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 24),
+                  SizedBox(
                     child: Flex(
                         direction: Axis.horizontal,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -98,15 +91,15 @@ class Login extends StatelessWidget {
                         ]),
                   ),
                   Container(
-                      margin: const EdgeInsets.only(bottom: 24),
+                      margin: const EdgeInsets.only(top: 32),
                       child: RichText(
                           text: TextSpan(children: <TextSpan>[
                         TextSpan(
                             text: 'Create an account? ',
-                            style: text_style.TextTheme.description(
+                            style: shared.TextTheme.description(
                                     FontWeight.w400)
                                 .copyWith(
-                                    color: theme.ColorTheme.mainTheme
+                                    color: shared.ColorTheme.mainTheme
                                         .colorScheme.onBackground
                                         .withOpacity(0.5))),
                         TextSpan(
@@ -114,14 +107,14 @@ class Login extends StatelessWidget {
                               Navigator.pushNamed(context, '/register');
                             },
                             text: 'Sign Up',
-                            style: text_style.TextTheme.description(
+                            style: shared.TextTheme.description(
                                     FontWeight.w500)
                                 .copyWith(
-                                    color: theme.ColorTheme.mainTheme
+                                    color: shared.ColorTheme.mainTheme
                                         .colorScheme.primary))
                       ])))
                 ])),
               );
-            })));
+            }));
   }
 }

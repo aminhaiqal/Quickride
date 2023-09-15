@@ -1,33 +1,40 @@
-// ignore_for_file: library_prefixes
-
 import 'package:flutter/material.dart';
-import 'package:quickride/src/utils/text_style.dart' as textStyle;
-import 'package:quickride/src/utils/color_theme.dart' as theme;
+import 'package:quickride/src/utils/shared.dart' as shared;
 
 class PrimaryButton extends StatelessWidget {
   final String label;
+  final bool isLoading;
   final VoidCallback? onPressed;
-  final double? width;
 
   const PrimaryButton(
-      {required this.label, required this.width, this.onPressed, Key? key})
+      {required this.label, required this.isLoading, this.onPressed, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(width!, 56),
-          backgroundColor: theme.ColorTheme.mainTheme.colorScheme.onBackground,
+          backgroundColor: shared.ColorTheme.mainTheme.colorScheme.onBackground,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        child: Center(
-            child: Text(label,
-                style: textStyle.TextTheme.body1(null).copyWith(
-                  color: theme.ColorTheme.mainTheme.colorScheme.onPrimary,
-                ))));
+        child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Center(
+                child: isLoading
+                    ? CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          shared.ColorTheme.mainTheme.colorScheme.surface,
+                        ),
+                        backgroundColor:
+                            shared.ColorTheme.mainTheme.colorScheme.primary,
+                      )
+                    : Text(isLoading ? 'Loading' : label,
+                        style: shared.TextTheme.body1(null).copyWith(
+                          color:
+                              shared.ColorTheme.mainTheme.colorScheme.onPrimary,
+                        )))));
   }
 }

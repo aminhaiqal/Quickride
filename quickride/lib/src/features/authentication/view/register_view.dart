@@ -1,11 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickride/src/core/base_view.dart';
-import 'package:quickride/src/utils/text_style.dart' as text_style;
-import 'package:quickride/src/utils/color_theme.dart' as theme;
-import '../../utils/register_credential.dart';
-import '../viewmodel/register_viewmodel.dart';
+import 'package:quickride/src/utils/shared.dart' as shared;
+import '../utils/register_credential.dart';
+import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 
 class Register extends StatelessWidget {
   const Register({Key? key}) : super(key: key);
@@ -13,10 +11,9 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView(
-        child: ChangeNotifierProvider<RegisterViewModel>(
-            create: (_) => RegisterViewModel(),
-            child: Consumer<RegisterViewModel>(
+    return ChangeNotifierProvider<AuthViewModel>(
+            create: (_) => AuthViewModel(),
+            child: Consumer<AuthViewModel>(
                 builder: (context, viewModel, child) {
               return SingleChildScrollView(
                   child: Center(
@@ -26,26 +23,24 @@ class Register extends StatelessWidget {
                       child: Column(
                         children: [
                           Text('Sign Up',
-                              style: text_style.TextTheme.headline2(
+                              style: shared.TextTheme.headline2(
                                   FontWeight.w600)),
                           Text('Create your account',
-                              style: text_style.TextTheme.description(null)
+                              style: shared.TextTheme.description(null)
                                   .copyWith(color: const Color(0xFF8C8C8C)))
                         ],
                       )),
+                  RegisterCredential(viewModel: viewModel),
                   Container(
-                      margin: const EdgeInsets.only(bottom: 24),
-                      child: RegisterCredential(viewModel: viewModel)),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 24),
+                      margin: const EdgeInsets.only(top: 16),
                       child: RichText(
                           text: TextSpan(children: <TextSpan>[
                         TextSpan(
                             text: 'Already have an account? ',
-                            style: text_style.TextTheme.description(
+                            style: shared.TextTheme.description(
                                     FontWeight.w400)
                                 .copyWith(
-                                    color: theme.ColorTheme.mainTheme
+                                    color: shared.ColorTheme.mainTheme
                                         .colorScheme.onBackground
                                         .withOpacity(0.5))),
                         TextSpan(
@@ -53,14 +48,14 @@ class Register extends StatelessWidget {
                               Navigator.pushNamed(context, '/login');
                             },
                             text: 'Sign In',
-                            style: text_style.TextTheme.description(
+                            style: shared.TextTheme.description(
                                     FontWeight.w500)
                                 .copyWith(
-                                    color: theme.ColorTheme.mainTheme
+                                    color: shared.ColorTheme.mainTheme
                                         .colorScheme.primary))
                       ])))
                 ]),
               ));
-            })));
+            }));
   }
 }
