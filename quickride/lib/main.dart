@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:quickride/src/core/base_view.dart';
 import 'package:quickride/src/features/authentication/view/register_view.dart';
 import 'package:quickride/src/utils/firebase_options.dart';
 import 'package:quickride/src/features/authentication/view/login_view.dart';
+import 'package:quickride/src/features/ride-booking/view/homepage_view.dart';
 import 'package:quickride/src/utils/shared.dart' as shared;
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 import 'package:quickride/src/widgets/image_retriever.dart';
@@ -21,10 +23,26 @@ class MyApp extends StatefulWidget {
 
   @override
   MyAppState createState() => MyAppState();
-  
 }
 
 class MyAppState extends State<MyApp> {
+  final Location location = Location();
+  LocationData? currentLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentLocation();
+  }
+
+  Future<void> getCurrentLocation() async {
+    try {
+      currentLocation = await location.getLocation();
+    } catch (e) {
+      print("Error getting location: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,6 +66,10 @@ class MyAppState extends State<MyApp> {
             backgroundGradient:
                 shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Register()),
+        '/homepage':(context) => BaseView(
+            backgroundGradient:
+                shared.ColorTheme.mainTheme.colorScheme.background,
+            child: const Homepage()),
       },
     );
   }
