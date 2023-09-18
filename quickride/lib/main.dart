@@ -10,11 +10,12 @@ import 'package:quickride/src/features/ride-booking/view/homepage_view.dart';
 import 'package:quickride/src/utils/shared.dart' as shared;
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 import 'package:quickride/src/widgets/image_retriever.dart';
+import 'package:quickride/src/widgets/appBar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
+
   runApp(const MyApp());
 }
 
@@ -66,7 +67,10 @@ class MyAppState extends State<MyApp> {
             backgroundGradient:
                 shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Register()),
-        '/homepage':(context) => BaseView(
+        '/homepage': (context) => BaseView(
+            customAppBar: const CustomAppBar(
+              title: 'Quickride'
+            ),
             backgroundGradient:
                 shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Homepage()),
@@ -81,24 +85,23 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-            child: Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.only(bottom: 32),
-                child: Center(
-                    child: Text('Quickride',
-                        style: shared.TextTheme.headline2(null).copyWith(
-                          color: shared.ColorTheme.mainTheme.colorScheme.surface,
-                        )))),
-            ImageWidget(
-              imageUrlFuture:
-                  firebase.AssetsFolder().getDownloadURL('tesla.png'),
-              width: 380,
-              aspectRatio: 1 / 1,
-            ),
-            const CallToAction()
-          ],
-        ));
+        child: Column(
+      children: [
+        Container(
+            margin: const EdgeInsets.only(bottom: 32),
+            child: Center(
+                child: Text('Quickride',
+                    style: shared.TextTheme.headline2(null).copyWith(
+                      color: shared.ColorTheme.mainTheme.colorScheme.surface,
+                    )))),
+        ImageWidget(
+          imageUrlFuture: firebase.AssetsFolder().getDownloadURL('tesla.png'),
+          width: 380,
+          aspectRatio: 1 / 1,
+        ),
+        const CallToAction()
+      ],
+    ));
   }
 }
 
@@ -134,24 +137,26 @@ class CallToAction extends StatelessWidget {
         },
         // change to Elevated Button
         child: Container(
-            margin: const EdgeInsets.only(bottom: 24.0),
-            child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/register');
-        },
-        style: ElevatedButton.styleFrom(
-          minimumSize: const Size(0, 56),
-          backgroundColor: shared.ColorTheme.mainTheme.colorScheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
+          margin: const EdgeInsets.only(bottom: 24.0),
+          child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/register');
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(0, 56),
+                backgroundColor:
+                    shared.ColorTheme.mainTheme.colorScheme.primary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+              ),
+              child: Center(
+                  child: Text('Get Started',
+                      style: shared.TextTheme.headline3(null).copyWith(
+                        color:
+                            shared.ColorTheme.mainTheme.colorScheme.onPrimary,
+                      )))),
         ),
-        child: Center(
-            child: Text('Get Started',
-                style: shared.TextTheme.headline3(null).copyWith(
-                  color: shared.ColorTheme.mainTheme.colorScheme.onPrimary,
-                )))),
-            ),
       ),
       RichText(
           text: TextSpan(children: <TextSpan>[

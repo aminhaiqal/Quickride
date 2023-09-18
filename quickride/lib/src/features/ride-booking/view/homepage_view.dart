@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quickride/src/utils/shared.dart' as shared;
 import '../viewmodel/booking_viewmodel.dart' show BookingViewModel;
 
 class Homepage extends StatelessWidget {
@@ -16,7 +15,10 @@ class Homepage extends StatelessWidget {
           child: Center(
             child: Column(
               children: <Widget>[
-                
+                // Search Function
+                // Closest Driver
+                // Service Type
+                // Available Drivers
               ],
             ),
           ),
