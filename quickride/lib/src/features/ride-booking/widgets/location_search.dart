@@ -5,14 +5,20 @@ class LocationSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 228,
-      decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        children: const [
-          Text('Location Search')
-        ],
-      ),
+    return Column(
+      children: [
+        Stack(children: [
+          Container(
+              height: 157,
+              width: 370,
+              color: const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.026, 1],
+                colors: [Color(0xFF222222), Color(0xFF121212)],
+              ).colors[0])
+        ])
+      ],
     );
   }
 }
