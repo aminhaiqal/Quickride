@@ -152,7 +152,9 @@ class RegisterCredentialState extends State<RegisterCredential> {
                   ? widget.viewModel.signUp()
                   : widget.viewModel.isLoading = false;
 
-              widget.viewModel.signUp();
+              if (widget.viewModel.isSignUpFormValid) {
+                Navigator.pushNamed(context, '/homepage');
+              }
             }),
       ],
     );

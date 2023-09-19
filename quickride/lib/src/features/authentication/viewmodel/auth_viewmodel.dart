@@ -44,7 +44,7 @@ class AuthViewModel with ChangeNotifier {
       phoneNumber.isNotEmpty &&
       password.isNotEmpty;
 
-  Future<void> signUp() async {
+  Future<bool> signUp() async {
     isLoading = true;
     notifyListeners();
     try {
@@ -52,6 +52,7 @@ class AuthViewModel with ChangeNotifier {
           user_model.User(
               username: username, email: email, phoneNumber: phoneNumber),
           password);
+      return true;
     } catch (e) {
       rethrow;
     } finally {
