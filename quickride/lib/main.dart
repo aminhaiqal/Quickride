@@ -10,7 +10,6 @@ import 'package:quickride/src/features/ride-booking/view/homepage_view.dart';
 import 'package:quickride/src/utils/shared.dart' as shared;
 import 'package:quickride/src/utils/firebase_repository.dart' as firebase;
 import 'package:quickride/src/widgets/image_retriever.dart';
-import 'package:quickride/src/widgets/appBar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,15 +48,15 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Quickride',
       theme: shared.ColorTheme.mainTheme,
-      home: BaseView(
+      /*home: BaseView(
           backgroundGradient: const LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             stops: [0.026, 1],
             colors: [Color(0xFF222222), Color(0xFF121212)],
           ).colors[0],
-          child: const Splash()),
-      initialRoute: '/',
+          child: const Splash()),*/
+      initialRoute: '/homepage',
       routes: {
         '/login': (context) => BaseView(
             backgroundGradient:
@@ -68,9 +67,6 @@ class MyAppState extends State<MyApp> {
                 shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Register()),
         '/homepage': (context) => BaseView(
-            customAppBar: const CustomAppBar(
-              title: 'Quickride'
-            ),
             backgroundGradient:
                 shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Homepage()),
