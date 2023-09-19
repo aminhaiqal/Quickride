@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/booking_viewmodel.dart' show BookingViewModel;
+import '../widgets/location_search.dart' show LocationSearch;
 
 class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class Homepage extends StatelessWidget {
           child: Center(
             child: Column(
               children: <Widget>[
-                // Search Function
+                LocationSearch(),
                 // Closest Driver
                 // Service Type
                 // Available Drivers
