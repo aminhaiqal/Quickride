@@ -59,16 +59,15 @@ class MyAppState extends State<MyApp> {
       initialRoute: '/homepage',
       routes: {
         '/login': (context) => BaseView(
-            backgroundGradient:
-                shared.ColorTheme.mainTheme.colorScheme.background,
+            backgroundGradient: shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Login()),
         '/register': (context) => BaseView(
-            backgroundGradient:
-                shared.ColorTheme.mainTheme.colorScheme.background,
+            backgroundGradient: shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Register()),
         '/homepage': (context) => BaseView(
-            backgroundGradient:
-                shared.ColorTheme.mainTheme.colorScheme.background,
+            marginHorizontal: 0,
+            marginTop: 0,
+            backgroundGradient: shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Homepage()),
       },
     );
