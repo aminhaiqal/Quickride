@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quickride/src/features/ride-booking/widgets/closest_driver.dart';
 import '../viewmodel/booking_viewmodel.dart' show BookingViewModel;
-import '../widgets/location_search.dart' show LocationSearch;
+import '../widgets/location_block.dart';
 import 'package:quickride/src/utils/shared.dart' as shared;
 
 class Homepage extends StatelessWidget {
@@ -36,12 +37,15 @@ class Homepage extends StatelessWidget {
                               color: shared
                                   .ColorTheme.mainTheme.colorScheme.surface,
                             )))),
-                LocationSearch(),
+                const LocationBlock(),
               ],
-            )
+            ),
+            Padding(
+                padding: const EdgeInsets.only(top: 32.0),
+                child: ClosestDriver())
           ],
         ))
-            
+
             // Closest Driver
             // Service Type
             // Available Drivers
