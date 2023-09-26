@@ -5,6 +5,8 @@ import '../viewmodel/booking_viewmodel.dart' show BookingViewModel;
 import '../widgets/location_block.dart';
 import 'package:quickride/src/utils/shared.dart' as shared;
 
+import '../widgets/service_type.dart';
+
 class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
   static String routeName = '/login';
@@ -40,14 +42,25 @@ class Homepage extends StatelessWidget {
                 const LocationBlock(),
               ],
             ),
+            const Padding(
+                padding: EdgeInsets.only(top: 32.0),
+                child: ClosestDriver()),
             Padding(
-                padding: const EdgeInsets.only(top: 32.0),
-                child: ClosestDriver())
+              padding: const EdgeInsets.symmetric(vertical: 32.0),
+              child: Column(
+                children: [
+                  Text('Services',
+                  style: shared.TextTheme.body1(null).copyWith(
+                    color: shared.ColorTheme.mainTheme.colorScheme.onSurface,
+                  )),
+                  const SizedBox(height: 16.0),
+                  ServiceType()
+                ]
+              )
+              )
           ],
         ))
 
-            // Closest Driver
-            // Service Type
             // Available Drivers
             );
       }),
