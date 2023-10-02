@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:quickride/src/core/base_view.dart';
+import 'package:quickride/src/widgets/custom_navbar.dart';
 import 'package:quickride/src/features/authentication/view/register_view.dart';
 import 'package:quickride/src/utils/firebase_options.dart';
 import 'package:quickride/src/features/authentication/view/login_view.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   final Location location = Location();
   LocationData? currentLocation;
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -39,6 +41,7 @@ class MyAppState extends State<MyApp> {
     try {
       currentLocation = await location.getLocation();
     } catch (e) {
+      // ignore: avoid_print
       print("Error getting location: $e");
     }
   }
@@ -48,6 +51,23 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Quickride',
       theme: shared.ColorTheme.mainTheme,
+      initialRoute: '/homepage',
+      routes: {
+        '/login': (context) => const Login(),
+        '/register': (context) => const Register(),
+        '/homepage': (context) => const Homepage(),
+      },
+      home: Scaffold(
+        body: _buildBody(),
+        bottomNavigationBar: CustomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ),
+      ),
       /*home: BaseView(
           backgroundGradient: const LinearGradient(
             begin: Alignment.topCenter,
@@ -55,8 +75,8 @@ class MyAppState extends State<MyApp> {
             stops: [0.026, 1],
             colors: [Color(0xFF222222), Color(0xFF121212)],
           ).colors[0],
-          child: const Splash()),*/
-      initialRoute: '/homepage',
+          child: const Splash()),
+      
       routes: {
         '/login': (context) => BaseView(
             backgroundGradient: shared.ColorTheme.mainTheme.colorScheme.background,
@@ -69,8 +89,23 @@ class MyAppState extends State<MyApp> {
             marginTop: 0,
             backgroundGradient: shared.ColorTheme.mainTheme.colorScheme.background,
             child: const Homepage()),
-      },
+      },*/
     );
+  }
+
+  Widget _buildBody() {
+    switch (_currentIndex) {
+        case 0:
+          return const Homepage();
+        case 1:
+          return const Booking();
+        case 2:
+          return const Trips();
+        case 3:
+          return const User();
+        default:
+          return const Homepage();
+      }
   }
 }
 

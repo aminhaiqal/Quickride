@@ -53,6 +53,7 @@ dependencies:
   location: ^5.0.3
   permission_handler: ^11.0.0
   graphql_flutter: ^5.1.2
+  bootstrap_icons: ^1.11.1
 
 dev_dependencies:
   flutter_test:
