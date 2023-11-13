@@ -4,7 +4,7 @@ class TextToLoadingAnimation extends StatelessWidget {
   final bool isLoading;
   final String text;
 
-  const TextToLoadingAnimation({Key? key, required this.isLoading, required this.text}) : super(key: key);
+  const TextToLoadingAnimation({super.key, required this.isLoading, required this.text});
 
   @override
   Widget build(BuildContext context) {

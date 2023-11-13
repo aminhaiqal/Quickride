@@ -6,7 +6,7 @@ import '../utils/register_credential.dart';
 import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 
 class Register extends StatelessWidget {
-  const Register({Key? key}) : super(key: key);
+  const Register({super.key});
   static String routeName = '/register';
 
   @override

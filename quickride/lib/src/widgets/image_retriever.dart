@@ -9,8 +9,7 @@ class ImageWidget extends StatefulWidget {
   double? aspectRatio;
 
   ImageWidget(
-      {Key? key, required this.imageUrlFuture, required this.width, this.aspectRatio})
-      : super(key: key);
+      {super.key, required this.imageUrlFuture, required this.width, this.aspectRatio});
 
   @override
   // ignore: library_private_types_in_public_api

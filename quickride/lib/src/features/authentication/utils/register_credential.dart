@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quickride/src/features/authentication/utils/input_decoration.dart'
     as input_decoration;
-import '../../../utils/validator.dart';
 import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
 import 'package:quickride/src/utils/shared.dart' as shared;
