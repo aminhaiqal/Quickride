@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TextTheme {
   static TextStyle headline1(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
     
-    return GoogleFonts.poppins(
-      fontSize: 32,
+    return TextStyle(
+      fontFamily: 'Satoshi',
+      fontSize: 34,
       fontWeight: fontWeight,
     );
   }
@@ -14,7 +14,8 @@ class TextTheme {
   static TextStyle headline2(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
 
-    return GoogleFonts.poppins(
+    return TextStyle(
+      fontFamily: 'Satoshi',
       fontSize: 20,
       fontWeight: fontWeight,
     );
@@ -23,8 +24,9 @@ class TextTheme {
   static TextStyle headline3(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
 
-    return GoogleFonts.poppins(
-      fontSize: 18,
+    return TextStyle(
+      fontFamily: 'Satoshi',
+      fontSize: 17,
       fontWeight: fontWeight,
     );
   }
@@ -32,7 +34,8 @@ class TextTheme {
   static TextStyle body1(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w500;
 
-    return GoogleFonts.poppins(
+    return TextStyle(
+      fontFamily: 'Satoshi',
       fontSize: 16,
       fontWeight: fontWeight,
     );
@@ -41,8 +44,9 @@ class TextTheme {
   static TextStyle description(FontWeight? fontWeight) {
     fontWeight ??= FontWeight.w400;
 
-    return GoogleFonts.poppins(
-      fontSize: 14,
+    return TextStyle(
+      fontFamily: 'Satoshi',
+      fontSize: 17,
       fontWeight: fontWeight,
     );
   }
