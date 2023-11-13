@@ -89,8 +89,20 @@ assets:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
+fonts:
+  - family: Satoshi
+    fonts:
+      - asset: assets/fonts/Satoshi/Satoshi-Black.otf
+      - asset: assets/fonts/Satoshi/Satoshi-BlackItalic.otf
+      - asset: assets/fonts/Satoshi/Satoshi-Bold.otf
+      - asset: assets/fonts/Satoshi/Satoshi-BoldItalic.otf
+      - asset: assets/fonts/Satoshi/Satoshi-Italic.otf
+      - asset: assets/fonts/Satoshi/Satoshi-Light.otf
+      - asset: assets/fonts/Satoshi/Satoshi-LightItalic.otf
+      - asset: assets/fonts/Satoshi/Satoshi-Medium.otf
+      - asset: assets/fonts/Satoshi/Satoshi-MediumItalic.otf
+      - asset: assets/fonts/Satoshi/Satoshi-Regular.otf
+      
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf

@@ -12,7 +12,7 @@ import 'package:quickride/src/widgets/image_retriever.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
+
   runApp(const MyApp());
 }
 
@@ -21,15 +21,17 @@ class MyApp extends StatefulWidget {
 
   @override
   MyAppState createState() => MyAppState();
-  
 }
 
 class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    final theme = shared.ColorTheme.mainTheme;
+    final backgroundGradient = theme.colorScheme.background;
+
     return MaterialApp(
       title: 'Quickride',
-      theme: shared.ColorTheme.mainTheme,
+      theme: theme,
       home: BaseView(
           backgroundGradient: const LinearGradient(
             begin: Alignment.topCenter,
@@ -41,13 +43,9 @@ class MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/login': (context) => BaseView(
-            backgroundGradient:
-                shared.ColorTheme.mainTheme.colorScheme.background,
-            child: const Login()),
+            backgroundGradient: backgroundGradient, child: const Login()),
         '/register': (context) => BaseView(
-            backgroundGradient:
-                shared.ColorTheme.mainTheme.colorScheme.background,
-            child: const Register()),
+            backgroundGradient: backgroundGradient, child: const Register()),
       },
     );
   }
@@ -59,32 +57,40 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-            child: Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.only(bottom: 32),
-                child: Center(
-                    child: Text('Quickride',
-                        style: shared.TextTheme.headline2(null).copyWith(
-                          color: shared.ColorTheme.mainTheme.colorScheme.surface,
-                        )))),
-            ImageWidget(
-              imageUrlFuture:
-                  firebase.AssetsFolder().getDownloadURL('tesla.png'),
-              width: 380,
-              aspectRatio: 1 / 1,
-            ),
-            const CallToAction()
-          ],
-        ));
+        child: Column(
+      children: [
+        Container(
+            margin: const EdgeInsets.only(bottom: 32),
+            child: Center(
+                child: Text('Quickride',
+                    style: shared.TextTheme.headline2(null).copyWith(
+                      color: shared.ColorTheme.mainTheme.colorScheme.surface,
+                    )))),
+        ImageWidget(
+          imageUrlFuture: firebase.AssetsFolder().getDownloadURL('tesla.png'),
+          width: 380,
+          aspectRatio: 1 / 1,
+        ),
+        const CallToAction()
+      ],
+    ));
   }
 }
 
 class CallToAction extends StatelessWidget {
   const CallToAction({super.key});
 
+  void navigateTo(BuildContext context, String route) {
+    Navigator.pushNamed(context, route);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = shared.ColorTheme.mainTheme;
+    final surfaceColor = theme.colorScheme.surface;
+    final primaryColor = theme.colorScheme.primary;
+    final onPrimaryColor = theme.colorScheme.onPrimary;
+
     return Center(
         child: Column(children: [
       Container(
@@ -94,7 +100,7 @@ class CallToAction extends StatelessWidget {
             child: Text('Make travelling by car most comfortable',
                 textAlign: TextAlign.center,
                 style: shared.TextTheme.headline1(null).copyWith(
-                  color: shared.ColorTheme.mainTheme.colorScheme.surface,
+                  color: surfaceColor,
                 ))),
       ),
       Container(
@@ -103,50 +109,67 @@ class CallToAction extends StatelessWidget {
               'Enjoy seamless ride experience without worrying about any obstacles.',
               textAlign: TextAlign.center,
               style: shared.TextTheme.headline3(FontWeight.w400).copyWith(
-                color: shared.ColorTheme.mainTheme.colorScheme.surface
-                    .withOpacity(0.5),
+                color: surfaceColor.withOpacity(0.5),
               ))),
       GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, '/register');
-        },
-        // change to Elevated Button
-        child: Container(
-            margin: const EdgeInsets.only(bottom: 24.0),
-            child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/register');
-        },
-        style: ElevatedButton.styleFrom(
-          minimumSize: const Size(0, 56),
-          backgroundColor: shared.ColorTheme.mainTheme.colorScheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
+        onTap: () => navigateTo(context, '/register'),
+        child: CustomElevatedButton(
+          onPressed: () => navigateTo(context, '/register'),
+          backgroundColor: primaryColor,
+          textColor: onPrimaryColor,
+          text: 'Get Started',
         ),
-        child: Center(
-            child: Text('Get Started',
-                style: shared.TextTheme.headline3(null).copyWith(
-                  color: shared.ColorTheme.mainTheme.colorScheme.onPrimary,
-                )))),
-            ),
       ),
       RichText(
           text: TextSpan(children: <TextSpan>[
         TextSpan(
             text: 'Already have an account? ',
-            style: shared.TextTheme.description(FontWeight.w400).copyWith(
-                color: shared.ColorTheme.mainTheme.colorScheme.surface
-                    .withOpacity(0.5))),
+            style: shared.TextTheme.description(FontWeight.w400)
+                .copyWith(color: surfaceColor.withOpacity(0.5))),
         TextSpan(
             recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                Navigator.pushNamed(context, '/login');
-              },
+              ..onTap = () => navigateTo(context, '/login'),
             text: 'Sign In',
-            style: shared.TextTheme.description(FontWeight.w500).copyWith(
-                color: shared.ColorTheme.mainTheme.colorScheme.primary))
+            style: shared.TextTheme.description(FontWeight.w500)
+                .copyWith(color: primaryColor))
       ]))
     ]));
+  }
+}
+
+class CustomElevatedButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final Color backgroundColor;
+  final Color textColor;
+  final String text;
+
+  const CustomElevatedButton({
+    required this.onPressed,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.text,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(0, 56),
+        backgroundColor: backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6),
+        ),
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: shared.TextTheme.headline3(null).copyWith(
+            color: textColor,
+          ),
+        ),
+      ),
+    );
   }
 }
