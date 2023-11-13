@@ -133,15 +133,19 @@ class RegisterCredentialState extends State<RegisterCredential> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      children: [
-        buildNameFields(),
-        buildPhoneNumberField(),
-        buildEmailField(),
-        buildPasswordField(),
-        buildSignUpButton(),
-      ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            buildNameFields(),
+            buildPhoneNumberField(),
+            buildEmailField(),
+            buildPasswordField(),
+            buildSignUpButton(),
+          ],
+        ),
+      ),
     );
   }
 }
