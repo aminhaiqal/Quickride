@@ -3,7 +3,6 @@ import 'package:quickride/src/features/authentication/utils/input_decoration.dar
     as input_decoration;
 import '../viewmodel/auth_viewmodel.dart' show AuthViewModel;
 import 'package:quickride/src/widgets/action_button.dart' as action_button;
-import 'package:quickride/src/utils/shared.dart' as shared;
 
 class RegisterCredential extends StatefulWidget {
   final AuthViewModel viewModel;
@@ -15,12 +14,11 @@ class RegisterCredential extends StatefulWidget {
 
 class RegisterCredentialState extends State<RegisterCredential> {
   bool _obscureText = true;
-  String errorMessage = '';
-  final TextEditingController _firstNameController = TextEditingController(),
-      _lastNameController = TextEditingController(),
-      _phoneNumberController = TextEditingController(),
-      _emailController = TextEditingController(),
-      _passwordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -32,126 +30,117 @@ class RegisterCredentialState extends State<RegisterCredential> {
     super.dispose();
   }
 
+  Widget buildTextField({
+    required TextEditingController controller,
+    required String label,
+    String helperText = '',
+    IconData? prefixIcon,
+    IconData? suffixIcon,
+    VoidCallback? onSuffixIconPressed,
+  }) {
+    return TextFormField(
+      controller: controller,
+      obscureText: _obscureText && suffixIcon == Icons.visibility_off,
+      decoration: input_decoration.buildInputDecoration(
+        label: label,
+        helperText: helperText,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        onSuffixIconPressed: onSuffixIconPressed,
+      ),
+    );
+  }
+
+  Widget buildNameFields() {
+    return Row(
+      children: [
+        Flexible(
+          flex: 1,
+          child: buildTextField(
+            controller: _firstNameController,
+            label: 'First Name',
+          ),
+        ),
+        const SizedBox(width: 16),
+        Flexible(
+          flex: 1,
+          child: buildTextField(
+            controller: _lastNameController,
+            label: 'Last Name',
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildPhoneNumberField() {
+    return buildTextField(
+      controller: _phoneNumberController,
+      label: 'Phone Number',
+      prefixIcon: Icons.phone_rounded,
+    );
+  }
+
+  Widget buildEmailField() {
+    return buildTextField(
+      controller: _emailController,
+      label: 'Email',
+      prefixIcon: Icons.email_rounded,
+    );
+  }
+
+  Widget buildPasswordField() {
+    return buildTextField(
+      controller: _passwordController,
+      label: 'Password',
+      helperText: 'Password must be at least 8 characters long',
+      prefixIcon: Icons.lock_rounded,
+      suffixIcon: _obscureText ? Icons.visibility : Icons.visibility_off,
+      onSuffixIconPressed: () {
+        setState(() {
+          _obscureText = !_obscureText;
+        });
+      },
+    );
+  }
+
+  Widget buildSignUpButton() {
+    return action_button.PrimaryButton(
+      label: 'Sign Up',
+      isLoading: widget.viewModel.isLoading,
+      onPressed: _handleSignUp,
+    );
+  }
+
+  void _handleSignUp() {
+    setState(() {
+      widget.viewModel.isLoading = true;
+    });
+
+    widget.viewModel.username = '${_firstNameController.text} ${_lastNameController.text}';
+    widget.viewModel.phoneNumber = _phoneNumberController.text;
+    widget.viewModel.password = _passwordController.text;
+    widget.viewModel.email = _emailController.text;
+
+    if (widget.viewModel.isSignUpFormValid) {
+      widget.viewModel.signUp();
+    } else {
+      setState(() {
+        widget.viewModel.isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       children: [
-        Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Full Name',
-                  style: shared.TextTheme.description(null)
-                      .copyWith(color: shared.GreyShader.greyAccent),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Flexible(
-                        flex: 1,
-                        child: Form(
-                            child: TextFormField(
-                          controller: _firstNameController,
-                          decoration: input_decoration.buildNameInputDecoration(
-                              label: 'First Name'),
-                        ))),
-                    const SizedBox(width: 16),
-                    Flexible(
-                        flex: 1,
-                        child: Form(
-                            child: TextFormField(
-                          controller: _lastNameController,
-                          decoration: input_decoration.buildNameInputDecoration(
-                              label: 'Last Name'),
-                        ))),
-                  ],
-                )
-              ],
-            )),
-        Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Phone Number',
-                  style: shared.TextTheme.description(null)
-                      .copyWith(color: shared.GreyShader.greyAccent),
-                ),
-                const SizedBox(height: 4),
-                Form(
-                    child: TextFormField(
-                  controller: _phoneNumberController,
-                  decoration: input_decoration.buildEmailInputDecoration(
-                      label: 'Phone Number', prefixIcon: Icons.phone_rounded),
-                )),
-              ],
-            )),
-        Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Email',
-                  style: shared.TextTheme.description(null)
-                      .copyWith(color: shared.GreyShader.greyAccent),
-                ),
-                const SizedBox(height: 4),
-                Form(
-                    child: TextFormField(
-                  controller: _emailController,
-                  decoration: input_decoration.buildEmailInputDecoration(
-                      label: 'Email', prefixIcon: Icons.email_rounded),
-                )),
-              ],
-            )),
-        Container(
-            margin: const EdgeInsets.only(bottom: 56),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Password',
-                  style: shared.TextTheme.description(null)
-                      .copyWith(color: shared.GreyShader.greyAccent),
-                ),
-                const SizedBox(height: 4),
-                Form(
-                    child: TextFormField(
-                  controller: _passwordController,
-                  obscureText: _obscureText,
-                  decoration: input_decoration.buildPasswordInputDecoration(
-                      label: 'Password',
-                      prefixIcon: Icons.lock_rounded,
-                      obscureText: _obscureText,
-                      onSuffixIconPressed: () => setState(() {
-                            _obscureText = !_obscureText;
-                          })),
-                )),
-              ],
-            )),
-        action_button.PrimaryButton(
-            label: 'Sign Up',
-            isLoading: widget.viewModel.isLoading,
-            onPressed: () {
-              setState(() {
-                widget.viewModel.isLoading = true;
-              });
-              widget.viewModel.username = '${_firstNameController.text} ${_lastNameController.text}';
-              widget.viewModel.phoneNumber = _phoneNumberController.text;
-              widget.viewModel.password = _passwordController.text;
-              widget.viewModel.email = _emailController.text;
-
-              widget.viewModel.isSignUpFormValid
-                  ? widget.viewModel.signUp()
-                  : widget.viewModel.isLoading = false;
-
-              widget.viewModel.signUp();
-            }),
+        buildNameFields(),
+        buildPhoneNumberField(),
+        buildEmailField(),
+        buildPasswordField(),
+        buildSignUpButton(),
       ],
     );
   }
