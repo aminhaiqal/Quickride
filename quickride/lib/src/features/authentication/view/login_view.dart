@@ -8,7 +8,7 @@ import '../utils/login_credential.dart';
 import 'package:quickride/src/features/authentication/data/repository/authentication_repository.dart' as auth_repo;
 
 class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
   static String routeName = '/login';
 
   @override

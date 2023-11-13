@@ -8,8 +8,7 @@ import 'package:quickride/src/utils/shared.dart' as shared;
 
 class RegisterCredential extends StatefulWidget {
   final AuthViewModel viewModel;
-  const RegisterCredential({Key? key, required this.viewModel})
-      : super(key: key);
+  const RegisterCredential({super.key, required this.viewModel});
 
   @override
   RegisterCredentialState createState() => RegisterCredentialState();

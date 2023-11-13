@@ -54,7 +54,7 @@ class MyAppState extends State<MyApp> {
 }
 
 class Splash extends StatelessWidget {
-  const Splash({Key? key}) : super(key: key);
+  const Splash({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class Splash extends StatelessWidget {
 }
 
 class CallToAction extends StatelessWidget {
-  const CallToAction({Key? key}) : super(key: key);
+  const CallToAction({super.key});
 
   @override
   Widget build(BuildContext context) {
